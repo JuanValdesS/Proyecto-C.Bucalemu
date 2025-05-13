@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("C_Bucalemu"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+17f542c1b556d413507c51fb85d0c30bcc684d04"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("C_Bucalemu"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("C_Bucalemu"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

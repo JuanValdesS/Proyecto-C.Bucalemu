@@ -1,7 +1,8 @@
 ﻿Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
-Imports System.Diagnostics.Eventing.Reader
 Imports System.Net
+Imports System.Diagnostics.Eventing.Reader
+
 
 Public Class Autorizar
 
@@ -26,8 +27,6 @@ Public Class Autorizar
                 Exit Sub
             End If
 
-            ' Mostrar la cantidad de solicitudes como validación
-            MsgBox("Cantidad de solicitudes: " & comprasRaw.Count)
 
             ' Limpiar y configurar el DataGridView
             ConfigurarEstiloDataGridView()
@@ -39,19 +38,24 @@ Public Class Autorizar
             dgAutorizar.Columns.Add("ID", "ID de Solicitud")
             dgAutorizar.Columns.Add("Materiales", "Materiales")
             dgAutorizar.Columns.Add("Fecha", "Fecha de Ingreso")
+            dgAutorizar.Columns.Add("Estado", "Estado")
 
             Dim contador As Integer = 1
 
             For Each solicitud In comprasRaw
-                Dim solicitudID As String = solicitud.Key
-                Dim solicitudDatos As JObject = solicitud.Value
 
-                Dim materialesTexto As New List(Of String)
+                Dim solicitudID As String = solicitud.Key 'solicitud_n
+                Dim solicitudDatos As JObject = solicitud.Value
+                Dim materialesTexto As New List(Of String) 'aqui se guarda la info del material,medida,unidad,etc
                 Dim fecha As String = ""
+                Dim estado As String = ""
 
                 For Each propiedad In solicitudDatos.Properties()
+                    'MsgBox(propiedad.Name) 'aqui muestra el numero del material, puede ser 0,1,2,3,.. y por ultimo siempre esta el estado
+                    'MsgBox(IsNumeric(propiedad.Name)) 'si encuentraun numero marca true
                     If IsNumeric(propiedad.Name) Then
                         Dim datosMaterial As JObject = JObject.Parse(propiedad.Value.ToString())
+                        'MsgBox(datosMaterial.ToString()) 'aqui muestra el material, cantidad, unidad, medida y fecha
                         Dim nombreMaterial As String = datosMaterial("Material").ToString().Trim()
                         Dim cantidad As String = datosMaterial("Cantidad").ToString()
                         Dim unidad As String = datosMaterial("Unidad").ToString()
@@ -60,13 +64,16 @@ Public Class Autorizar
 
                         materialesTexto.Add($"{nombreMaterial} {medida}{unidadMedida} {cantidad} {unidad}")
                         fecha = datosMaterial("Fecha").ToString()
+                    ElseIf propiedad.Name = "Estado" Then
+                        estado = propiedad.Value.ToString()
                     End If
                 Next
 
                 If materialesTexto.Count > 0 Then
                     Dim materialesTextoTexto As String = String.Join(", ", materialesTexto)
+                    'MsgBox(materialesTextoTexto.ToString) ' esto muestra el contenido de la solicitud 
                     Dim solicitudNombre As String = "Solicitud " + contador.ToString()
-                    dgAutorizar.Rows.Add(solicitudID, solicitudNombre, materialesTextoTexto, fecha)
+                    dgAutorizar.Rows.Add(solicitudID, solicitudNombre, materialesTextoTexto, fecha, estado)
                     contador += 1
                 End If
             Next
@@ -96,7 +103,7 @@ Public Class Autorizar
 
             ' Borde de celda y alineación
             .CellBorderStyle = DataGridViewCellBorderStyle.Single
-            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+            .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
 
             ' Ajustar tamaño de columnas automáticamente
             .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
@@ -131,7 +138,6 @@ Public Class Autorizar
         ' Obtener la solicitud seleccionada
         Dim row As DataGridViewRow = dgAutorizar.SelectedRows(0)
         Dim solicitudID As String = row.Cells("RealID").Value.ToString()
-        ' Dim listaMateriales As JArray = comprasData(solicitudID)
 
         ' URL de Firebase para Inventario
         Dim firebaseInventarioUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Inventario.json"
@@ -164,11 +170,12 @@ Public Class Autorizar
                 For Each item In inventarioData
 
                     Dim datosMaterial As JObject = item.Value
-                    MsgBox(datosMaterial("Material").ToString())
+                    'MsgBox(datosMaterial("Material").ToString())
 
                     If datosMaterial("Material").ToString() = nombreMedida AndAlso datosMaterial("unidad").ToString() = unidad Then
                         ' Actualizar la cantidad
                         datosMaterial("cantidad") = (Integer.Parse(datosMaterial("cantidad").ToString()) + Cantidad).ToString()
+                        datosMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
                         materialEncontrado = True
                         Exit For
                     End If
@@ -225,7 +232,8 @@ Public Class Autorizar
         Dim solicitudID As String = row.Cells("RealID").Value.ToString()
         Dim firebaseComprasUrl As String = $"https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Compras/{solicitudID}.json"
         Try
-            Dim client As New WebClient()
+            Dim client As  .
+                New WebClient()
             client.UploadString(firebaseComprasUrl, "DELETE", String.Empty)
             ' Eliminar la fila del DataGridView y recargar la lista actualizada
             dgAutorizar.Rows.Remove(row)

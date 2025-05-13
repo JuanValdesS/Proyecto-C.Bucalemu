@@ -1,7 +1,20 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Juan\\Desktop\\Proyecto Constructora Bucalemu\\Proyecto-Constructora-Bucalemu\\C_Bucalemu\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\diego\\documents\\proyecto-c.bucalemu\\c_bucalemu\\autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\diego\\documents\\proyecto-c.bucalemu\\c_bucalemu\\autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\diego\\documents\\proyecto-c.bucalemu\\c_bucalemu\\compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,52 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Autorizar.vb",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
+              "RelativeDocumentMoniker": "Autorizar.vb",
+              "ToolTip": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
+              "RelativeToolTip": "Autorizar.vb",
+              "ViewState": "AgIAAMgAAAAAAAAAAAAgwOsAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-05-13T23:15:54.09Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Autorizar.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
+              "RelativeDocumentMoniker": "Autorizar.vb",
+              "ToolTip": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Autorizar.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-05-13T23:15:51.757Z",
+              "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Compras.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb",
+              "RelativeDocumentMoniker": "Compras.vb",
+              "ToolTip": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Compras.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-05-13T22:47:49.601Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }
