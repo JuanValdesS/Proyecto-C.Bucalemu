@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Autorizar.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Compras.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Cubicacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GestionarReportes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Inventario.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Login.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Menú.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Modificar_material.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Registro.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Reportes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
