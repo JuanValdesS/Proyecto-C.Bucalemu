@@ -232,8 +232,7 @@ Public Class Autorizar
         Dim solicitudID As String = row.Cells("RealID").Value.ToString()
         Dim firebaseComprasUrl As String = $"https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Compras/{solicitudID}.json"
         Try
-            Dim client As  .
-                New WebClient()
+            Dim client As New WebClient()
             client.UploadString(firebaseComprasUrl, "DELETE", String.Empty)
             ' Eliminar la fila del DataGridView y recargar la lista actualizada
             dgAutorizar.Rows.Remove(row)

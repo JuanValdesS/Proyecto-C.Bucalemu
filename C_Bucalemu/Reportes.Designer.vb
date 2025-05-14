@@ -33,7 +33,8 @@ Partial Class Reportes
         ' 
         ' btn_reporte
         ' 
-        btn_reporte.BackColor = Color.LightSteelBlue
+        btn_reporte.BackColor = Color.CornflowerBlue
+        btn_reporte.Cursor = Cursors.Hand
         btn_reporte.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_reporte.Location = New Point(127, 267)
         btn_reporte.Name = "btn_reporte"
@@ -45,6 +46,7 @@ Partial Class Reportes
         ' txtObservacion
         ' 
         txtObservacion.BackColor = Color.AliceBlue
+        txtObservacion.Cursor = Cursors.IBeam
         txtObservacion.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtObservacion.Location = New Point(46, 113)
         txtObservacion.Multiline = True
@@ -59,6 +61,7 @@ Partial Class Reportes
         Button1.BackColor = Color.Transparent
         Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
         Button1.BackgroundImageLayout = ImageLayout.Stretch
+        Button1.Cursor = Cursors.Hand
         Button1.FlatStyle = FlatStyle.Popup
         Button1.Location = New Point(166, 383)
         Button1.Name = "Button1"
@@ -69,7 +72,7 @@ Partial Class Reportes
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.LightSteelBlue
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(46, 20)
         Label1.Name = "Label1"
@@ -79,7 +82,8 @@ Partial Class Reportes
         ' 
         ' btn_greportes
         ' 
-        btn_greportes.BackColor = Color.LightSteelBlue
+        btn_greportes.BackColor = Color.CornflowerBlue
+        btn_greportes.Cursor = Cursors.Hand
         btn_greportes.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_greportes.Location = New Point(127, 320)
         btn_greportes.Name = "btn_greportes"
@@ -91,6 +95,7 @@ Partial Class Reportes
         ' txtTitulo
         ' 
         txtTitulo.BackColor = Color.AliceBlue
+        txtTitulo.Cursor = Cursors.IBeam
         txtTitulo.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtTitulo.Location = New Point(46, 67)
         txtTitulo.Name = "txtTitulo"

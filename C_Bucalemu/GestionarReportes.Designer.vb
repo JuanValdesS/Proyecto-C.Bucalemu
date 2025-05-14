@@ -44,7 +44,7 @@ Partial Class GestionarReportes
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.LightSteelBlue
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.Location = New Point(55, 27)
         Label1.Name = "Label1"
@@ -54,7 +54,8 @@ Partial Class GestionarReportes
         ' 
         ' btn_reporte
         ' 
-        btn_reporte.BackColor = Color.LightSteelBlue
+        btn_reporte.BackColor = Color.CornflowerBlue
+        btn_reporte.Cursor = Cursors.Hand
         btn_reporte.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_reporte.Location = New Point(601, 79)
         btn_reporte.Name = "btn_reporte"
@@ -66,6 +67,7 @@ Partial Class GestionarReportes
         ' btn_eliminar
         ' 
         btn_eliminar.BackColor = Color.IndianRed
+        btn_eliminar.Cursor = Cursors.Hand
         btn_eliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_eliminar.Location = New Point(601, 132)
         btn_eliminar.Name = "btn_eliminar"
@@ -79,6 +81,7 @@ Partial Class GestionarReportes
         Button2.BackColor = Color.Transparent
         Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), Image)
         Button2.BackgroundImageLayout = ImageLayout.Stretch
+        Button2.Cursor = Cursors.Hand
         Button2.FlatStyle = FlatStyle.Popup
         Button2.Location = New Point(638, 185)
         Button2.Name = "Button2"
@@ -90,6 +93,7 @@ Partial Class GestionarReportes
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = Color.CornflowerBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(800, 450)

@@ -47,20 +47,22 @@ Partial Class mod_material
         ' 
         ' btnAgregar
         ' 
-        btnAgregar.BackColor = Color.LightSteelBlue
+        btnAgregar.BackColor = Color.CornflowerBlue
+        btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnAgregar.ForeColor = SystemColors.ActiveCaptionText
         btnAgregar.Location = New Point(125, 189)
         btnAgregar.Name = "btnAgregar"
-        btnAgregar.Size = New Size(141, 42)
+        btnAgregar.Size = New Size(179, 42)
         btnAgregar.TabIndex = 0
-        btnAgregar.Text = "Agregar"
+        btnAgregar.Text = "Agregar Material"
         ToolTip1.SetToolTip(btnAgregar, "Para agregar material asegurese de llenar todos los campos")
         btnAgregar.UseVisualStyleBackColor = False
         ' 
         ' txtMaterial
         ' 
         txtMaterial.BackColor = Color.AliceBlue
+        txtMaterial.Cursor = Cursors.IBeam
         txtMaterial.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtMaterial.Location = New Point(125, 72)
         txtMaterial.Name = "txtMaterial"
@@ -72,7 +74,7 @@ Partial Class mod_material
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.LightSteelBlue
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.ForeColor = SystemColors.ActiveCaptionText
         Label1.Location = New Point(125, 19)
@@ -84,7 +86,7 @@ Partial Class mod_material
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.BackColor = Color.LightSteelBlue
+        Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label2.ForeColor = SystemColors.ActiveCaptionText
         Label2.Location = New Point(125, 118)
@@ -112,6 +114,7 @@ Partial Class mod_material
         btn_regresar.BackColor = Color.Transparent
         btn_regresar.BackgroundImage = CType(resources.GetObject("btn_regresar.BackgroundImage"), Image)
         btn_regresar.BackgroundImageLayout = ImageLayout.Stretch
+        btn_regresar.Cursor = Cursors.Hand
         btn_regresar.FlatStyle = FlatStyle.Popup
         btn_regresar.ImageAlign = ContentAlignment.BottomCenter
         btn_regresar.Location = New Point(641, 31)
@@ -120,13 +123,12 @@ Partial Class mod_material
         btn_regresar.TabIndex = 6
         btn_regresar.TabStop = False
         btn_regresar.Tag = "Regresar al menú"
-        ToolTip1.SetToolTip(btn_regresar, "Volver al menú")
         btn_regresar.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.BackColor = Color.LightSteelBlue
+        Label3.BackColor = Color.CornflowerBlue
         Label3.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label3.ForeColor = SystemColors.ActiveCaptionText
         Label3.Location = New Point(225, 118)
@@ -161,11 +163,12 @@ Partial Class mod_material
         ' btn_retirar
         ' 
         btn_retirar.BackColor = Color.IndianRed
+        btn_retirar.Cursor = Cursors.Hand
         btn_retirar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btn_retirar.ForeColor = SystemColors.ActiveCaptionText
         btn_retirar.Location = New Point(429, 189)
         btn_retirar.Name = "btn_retirar"
-        btn_retirar.Size = New Size(148, 42)
+        btn_retirar.Size = New Size(163, 42)
         btn_retirar.TabIndex = 10
         btn_retirar.Text = "Retirar Material"
         ToolTip1.SetToolTip(btn_retirar, "Para retirar material, asegurese de llenar todos los campos.")
@@ -173,7 +176,8 @@ Partial Class mod_material
         ' 
         ' Button1
         ' 
-        Button1.BackColor = Color.LightSteelBlue
+        Button1.BackColor = Color.CornflowerBlue
+        Button1.Cursor = Cursors.Hand
         Button1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Button1.Location = New Point(235, 521)
         Button1.Name = "Button1"
@@ -186,6 +190,7 @@ Partial Class mod_material
         ' 
         CheckBox1.AutoSize = True
         CheckBox1.BackColor = Color.Transparent
+        CheckBox1.Cursor = Cursors.Hand
         CheckBox1.Font = New Font("Segoe UI Symbol", 7.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         CheckBox1.ForeColor = Color.Black
         CheckBox1.Location = New Point(429, 80)
@@ -211,7 +216,7 @@ Partial Class mod_material
         ' lbl_medida
         ' 
         lbl_medida.AutoSize = True
-        lbl_medida.BackColor = Color.LightSteelBlue
+        lbl_medida.BackColor = Color.CornflowerBlue
         lbl_medida.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lbl_medida.ForeColor = SystemColors.ActiveCaptionText
         lbl_medida.Location = New Point(429, 118)
@@ -242,6 +247,7 @@ Partial Class mod_material
         ' nMedidas
         ' 
         nMedidas.BackColor = Color.AliceBlue
+        nMedidas.Cursor = Cursors.IBeam
         nMedidas.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         nMedidas.Location = New Point(429, 144)
         nMedidas.Name = "nMedidas"
@@ -273,7 +279,6 @@ Partial Class mod_material
         Controls.Add(Label1)
         Controls.Add(txtMaterial)
         Controls.Add(btnAgregar)
-        Cursor = Cursors.Hand
         Font = New Font("Segoe UI Symbol", 7.8F)
         ForeColor = SystemColors.ActiveCaptionText
         Icon = CType(resources.GetObject("$this.Icon"), Icon)

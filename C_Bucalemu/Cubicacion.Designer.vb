@@ -45,63 +45,72 @@ Partial Class Cubicacion
         ' 
         ' cmbMaterial
         ' 
-        cmbMaterial.BackColor = Color.Honeydew
-        cmbMaterial.Font = New Font("Segoe UI Symbol", 9F)
+        cmbMaterial.BackColor = Color.AliceBlue
+        cmbMaterial.Font = New Font("Arial", 7.8F)
         cmbMaterial.FormattingEnabled = True
         cmbMaterial.Items.AddRange(New Object() {"Agua", "Arena", "Cemento", "Clavos", "Grava", "Madera", "Ladrillos", "Ripio"})
-        cmbMaterial.Location = New Point(112, 75)
+        cmbMaterial.Location = New Point(98, 64)
+        cmbMaterial.Margin = New Padding(3, 2, 3, 2)
         cmbMaterial.Name = "cmbMaterial"
-        cmbMaterial.Size = New Size(124, 28)
+        cmbMaterial.Size = New Size(109, 24)
         cmbMaterial.TabIndex = 0
         ' 
         ' cmbTipoCubica
         ' 
-        cmbTipoCubica.BackColor = Color.Honeydew
-        cmbTipoCubica.Font = New Font("Segoe UI Symbol", 9F)
+        cmbTipoCubica.BackColor = Color.AliceBlue
+        cmbTipoCubica.Font = New Font("Arial", 7.8F)
         cmbTipoCubica.FormattingEnabled = True
-        cmbTipoCubica.Location = New Point(278, 75)
+        cmbTipoCubica.Location = New Point(243, 64)
+        cmbTipoCubica.Margin = New Padding(3, 2, 3, 2)
         cmbTipoCubica.Name = "cmbTipoCubica"
-        cmbTipoCubica.Size = New Size(202, 28)
+        cmbTipoCubica.Size = New Size(177, 24)
         cmbTipoCubica.TabIndex = 1
         ' 
         ' txtLargo
         ' 
-        txtLargo.BackColor = Color.Honeydew
-        txtLargo.Font = New Font("Segoe UI Symbol", 9F)
-        txtLargo.Location = New Point(115, 192)
+        txtLargo.BackColor = Color.AliceBlue
+        txtLargo.Cursor = Cursors.IBeam
+        txtLargo.Font = New Font("Arial", 7.8F)
+        txtLargo.Location = New Point(98, 157)
+        txtLargo.Margin = New Padding(3, 2, 3, 2)
         txtLargo.Name = "txtLargo"
         txtLargo.PlaceholderText = "Largo del material"
-        txtLargo.Size = New Size(129, 27)
+        txtLargo.Size = New Size(113, 22)
         txtLargo.TabIndex = 2
         ' 
         ' txtAncho
         ' 
-        txtAncho.BackColor = Color.Honeydew
-        txtAncho.Font = New Font("Segoe UI Symbol", 9F)
-        txtAncho.Location = New Point(263, 192)
+        txtAncho.BackColor = Color.AliceBlue
+        txtAncho.Cursor = Cursors.IBeam
+        txtAncho.Font = New Font("Arial", 7.8F)
+        txtAncho.Location = New Point(230, 157)
+        txtAncho.Margin = New Padding(3, 2, 3, 2)
         txtAncho.Name = "txtAncho"
         txtAncho.PlaceholderText = "Ancho del material"
-        txtAncho.Size = New Size(137, 27)
+        txtAncho.Size = New Size(120, 22)
         txtAncho.TabIndex = 3
         ' 
         ' txtAlto
         ' 
-        txtAlto.BackColor = Color.Honeydew
-        txtAlto.Font = New Font("Segoe UI Symbol", 9F)
-        txtAlto.Location = New Point(420, 192)
+        txtAlto.BackColor = Color.AliceBlue
+        txtAlto.Cursor = Cursors.IBeam
+        txtAlto.Font = New Font("Arial", 7.8F)
+        txtAlto.Location = New Point(368, 157)
+        txtAlto.Margin = New Padding(3, 2, 3, 2)
         txtAlto.Name = "txtAlto"
         txtAlto.PlaceholderText = "Alto del material"
-        txtAlto.Size = New Size(122, 27)
+        txtAlto.Size = New Size(107, 22)
         txtAlto.TabIndex = 4
         ' 
         ' btncubicar
         ' 
-        btncubicar.BackColor = Color.PaleTurquoise
+        btncubicar.BackColor = Color.CornflowerBlue
         btncubicar.Cursor = Cursors.Hand
         btncubicar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btncubicar.Location = New Point(115, 337)
+        btncubicar.Location = New Point(97, 268)
+        btncubicar.Margin = New Padding(3, 2, 3, 2)
         btncubicar.Name = "btncubicar"
-        btncubicar.Size = New Size(115, 55)
+        btncubicar.Size = New Size(101, 44)
         btncubicar.TabIndex = 5
         btncubicar.Text = "Cubicar"
         btncubicar.UseVisualStyleBackColor = False
@@ -110,7 +119,7 @@ Partial Class Cubicacion
         ' 
         lblResultado.AutoSize = True
         lblResultado.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblResultado.Location = New Point(115, 415)
+        lblResultado.Location = New Point(97, 333)
         lblResultado.Name = "lblResultado"
         lblResultado.Size = New Size(71, 20)
         lblResultado.TabIndex = 6
@@ -118,12 +127,13 @@ Partial Class Cubicacion
         ' 
         ' dgCubicacion
         ' 
-        dgCubicacion.BackgroundColor = Color.Honeydew
+        dgCubicacion.BackgroundColor = Color.AliceBlue
         dgCubicacion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgCubicacion.Location = New Point(115, 456)
+        dgCubicacion.Location = New Point(96, 365)
+        dgCubicacion.Margin = New Padding(3, 2, 3, 2)
         dgCubicacion.Name = "dgCubicacion"
         dgCubicacion.RowHeadersWidth = 51
-        dgCubicacion.Size = New Size(433, 153)
+        dgCubicacion.Size = New Size(379, 122)
         dgCubicacion.TabIndex = 7
         ' 
         ' btnRegresar
@@ -133,18 +143,19 @@ Partial Class Cubicacion
         btnRegresar.BackgroundImageLayout = ImageLayout.Stretch
         btnRegresar.Cursor = Cursors.Hand
         btnRegresar.FlatStyle = FlatStyle.Popup
-        btnRegresar.Location = New Point(263, 343)
+        btnRegresar.Location = New Point(230, 274)
+        btnRegresar.Margin = New Padding(3, 2, 3, 2)
         btnRegresar.Name = "btnRegresar"
-        btnRegresar.Size = New Size(62, 42)
+        btnRegresar.Size = New Size(54, 34)
         btnRegresar.TabIndex = 8
         btnRegresar.UseVisualStyleBackColor = False
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.PaleTurquoise
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(112, 52)
+        Label1.Location = New Point(98, 42)
         Label1.Name = "Label1"
         Label1.Size = New Size(72, 20)
         Label1.TabIndex = 9
@@ -153,9 +164,9 @@ Partial Class Cubicacion
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.BackColor = Color.PaleTurquoise
+        Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(278, 52)
+        Label2.Location = New Point(243, 42)
         Label2.Name = "Label2"
         Label2.Size = New Size(131, 20)
         Label2.TabIndex = 10
@@ -164,9 +175,9 @@ Partial Class Cubicacion
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.BackColor = Color.PaleTurquoise
+        Label3.BackColor = Color.CornflowerBlue
         Label3.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(114, 169)
+        Label3.Location = New Point(100, 135)
         Label3.Name = "Label3"
         Label3.Size = New Size(83, 20)
         Label3.TabIndex = 11
@@ -175,9 +186,9 @@ Partial Class Cubicacion
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.BackColor = Color.PaleTurquoise
+        Label4.BackColor = Color.CornflowerBlue
         Label4.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(263, 169)
+        Label4.Location = New Point(230, 135)
         Label4.Name = "Label4"
         Label4.Size = New Size(87, 20)
         Label4.TabIndex = 12
@@ -186,9 +197,9 @@ Partial Class Cubicacion
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.BackColor = Color.PaleTurquoise
+        Label5.BackColor = Color.CornflowerBlue
         Label5.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(420, 169)
+        Label5.Location = New Point(368, 135)
         Label5.Name = "Label5"
         Label5.Size = New Size(72, 20)
         Label5.TabIndex = 13
@@ -200,7 +211,7 @@ Partial Class Cubicacion
         Label6.BackColor = Color.DarkSlateGray
         Label6.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = SystemColors.MenuBar
-        Label6.Location = New Point(112, 130)
+        Label6.Location = New Point(98, 104)
         Label6.Name = "Label6"
         Label6.Size = New Size(480, 20)
         Label6.TabIndex = 14
@@ -209,9 +220,9 @@ Partial Class Cubicacion
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.BackColor = Color.PaleTurquoise
+        Label7.BackColor = Color.CornflowerBlue
         Label7.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(112, 246)
+        Label7.Location = New Point(98, 197)
         Label7.Name = "Label7"
         Label7.Size = New Size(423, 20)
         Label7.TabIndex = 16
@@ -219,22 +230,24 @@ Partial Class Cubicacion
         ' 
         ' txtCantidadUnidades
         ' 
-        txtCantidadUnidades.BackColor = Color.Honeydew
-        txtCantidadUnidades.Font = New Font("Segoe UI Symbol", 9F)
-        txtCantidadUnidades.Location = New Point(112, 269)
+        txtCantidadUnidades.BackColor = Color.AliceBlue
+        txtCantidadUnidades.Cursor = Cursors.IBeam
+        txtCantidadUnidades.Font = New Font("Arial", 7.8F)
+        txtCantidadUnidades.Location = New Point(97, 219)
+        txtCantidadUnidades.Margin = New Padding(3, 2, 3, 2)
         txtCantidadUnidades.Name = "txtCantidadUnidades"
         txtCantidadUnidades.PlaceholderText = "Cantidad"
-        txtCantidadUnidades.Size = New Size(85, 27)
+        txtCantidadUnidades.Size = New Size(75, 22)
         txtCantidadUnidades.TabIndex = 15
         ' 
         ' Cubicacion
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 16F)
         AutoScaleMode = AutoScaleMode.Font
-        BackColor = Color.Honeydew
+        BackColor = Color.AliceBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(678, 664)
+        ClientSize = New Size(593, 531)
         Controls.Add(Label7)
         Controls.Add(txtCantidadUnidades)
         Controls.Add(Label6)
@@ -252,7 +265,9 @@ Partial Class Cubicacion
         Controls.Add(txtLargo)
         Controls.Add(cmbTipoCubica)
         Controls.Add(cmbMaterial)
+        Font = New Font("Arial", 7.8F)
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "Cubicacion"
         Text = "Cubicacion"
         CType(dgCubicacion, ComponentModel.ISupportInitialize).EndInit()

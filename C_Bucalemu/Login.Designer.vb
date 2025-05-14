@@ -33,7 +33,7 @@ Partial Class Login
         ' 
         ' btnLogin
         ' 
-        btnLogin.BackColor = Color.LightSteelBlue
+        btnLogin.BackColor = Color.CornflowerBlue
         btnLogin.Cursor = Cursors.Hand
         btnLogin.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnLogin.Location = New Point(157, 212)
@@ -47,7 +47,7 @@ Partial Class Login
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.LightSteelBlue
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.ForeColor = SystemColors.Desktop
         Label1.Location = New Point(157, 51)
@@ -59,7 +59,7 @@ Partial Class Login
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.BackColor = Color.LightSteelBlue
+        Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label2.Location = New Point(157, 138)
         Label2.Name = "Label2"
@@ -97,6 +97,7 @@ Partial Class Login
         CheckBox1.AutoSize = True
         CheckBox1.BackColor = Color.Transparent
         CheckBox1.BackgroundImageLayout = ImageLayout.Stretch
+        CheckBox1.Cursor = Cursors.Hand
         CheckBox1.Font = New Font("Segoe UI Symbol", 7.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         CheckBox1.ForeColor = Color.White
         CheckBox1.Location = New Point(366, 162)

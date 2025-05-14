@@ -68,22 +68,37 @@ Public Class Inventario
                     DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
-                Dim contador As Integer = 1 ' Para numerar las filas
+                ' Crear lista para almacenar temporalmente los materiales
+                Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
-                ' Recorrer cada elemento del inventario en el JObject
                 For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    ' Obtener los valores, con control de existencia
                     Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
                     Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
                     Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
                     Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
 
-                    ' Agregar la fila con los datos al DataGridView
-                    DataGridView1.Rows.Add(contador, nombre, cantidad, unidades, fechaIngreso)
+                    ' Solo agregar si la fecha es válida
+                    If DateTime.TryParse(fechaIngreso, Nothing) Then
+                        Dim material As New Dictionary(Of String, String) From {
+                            {"nombre", nombre},
+                            {"cantidad", cantidad},
+                            {"unidad", unidades},
+                            {"fecha", fechaIngreso}
+                        }
+                        listaMateriales.Add(material)
+                    End If
+                Next
 
-                    ' Incrementar contador para la numeración
+                ' Ordenar por fecha descendente (más reciente primero)
+                listaMateriales = listaMateriales.OrderByDescending(Function(m) DateTime.Parse(m("fecha"))).ToList()
+
+                ' Agregar filas al DataGridView
+                Dim contador As Integer = 1
+                For Each material In listaMateriales
+                    DataGridView1.Rows.Add(contador, material("nombre"), material("cantidad"), material("unidad"), material("fecha"))
                     contador += 1
                 Next
+
             End If
         Catch ex As Exception
             MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)
@@ -182,5 +197,50 @@ Public Class Inventario
 
     Private Sub btn_reestablecer_Click(sender As Object, e As EventArgs) Handles btn_reestablecer.Click
         CargarInventario()
+        txt_buscar.Clear()
+    End Sub
+    Private Sub FiltrarInventario(filtro As String)
+        Try
+            Dim respuesta = client.Get("Inventario")
+
+            If respuesta.Body IsNot "null" Then
+                Dim jsonData As JObject = JObject.Parse(respuesta.Body)
+
+                ' Limpiar y configurar nuevamente
+                ConfigurarEstiloDataGridView()
+                DataGridView1.Rows.Clear()
+                DataGridView1.Columns.Clear()
+
+                ' Redefinir columnas
+                If DataGridView1.Columns.Count = 0 Then
+                    DataGridView1.Columns.Add("ID", "N°")
+                    DataGridView1.Columns.Add("Nombre", "Nombre del Material")
+                    DataGridView1.Columns.Add("Cantidad", "Cantidad")
+                    DataGridView1.Columns.Add("Unidad", "Unidad")
+                    DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
+                End If
+
+                Dim contador As Integer = 1
+
+                For Each item As KeyValuePair(Of String, JToken) In jsonData
+                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
+                    Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
+                    Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
+                    Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
+
+                    ' Aplicar filtro
+                    If nombre.ToLower().Contains(filtro.ToLower()) Then
+                        DataGridView1.Rows.Add(contador, nombre, cantidad, unidades, fechaIngreso)
+                        contador += 1
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+            MsgBox("Error al filtrar inventario: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txt_buscar.TextChanged
+        FiltrarInventario(txt_buscar.Text)
     End Sub
 End Class

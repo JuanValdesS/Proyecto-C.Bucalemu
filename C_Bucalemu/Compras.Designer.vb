@@ -46,7 +46,8 @@ Partial Class Compras
         ' 
         ' btnAgregar
         ' 
-        btnAgregar.BackColor = SystemColors.ActiveCaption
+        btnAgregar.BackColor = Color.CornflowerBlue
+        btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnAgregar.Location = New Point(755, 158)
         btnAgregar.Margin = New Padding(3, 4, 3, 4)
@@ -59,7 +60,8 @@ Partial Class Compras
         ' 
         ' btnEliminar
         ' 
-        btnEliminar.BackColor = SystemColors.ActiveCaption
+        btnEliminar.BackColor = Color.IndianRed
+        btnEliminar.Cursor = Cursors.Hand
         btnEliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnEliminar.Location = New Point(755, 235)
         btnEliminar.Margin = New Padding(3, 4, 3, 4)
@@ -72,7 +74,8 @@ Partial Class Compras
         ' 
         ' btnSolicitar
         ' 
-        btnSolicitar.BackColor = SystemColors.ActiveCaption
+        btnSolicitar.BackColor = Color.CornflowerBlue
+        btnSolicitar.Cursor = Cursors.Hand
         btnSolicitar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnSolicitar.Location = New Point(755, 196)
         btnSolicitar.Margin = New Padding(3, 4, 3, 4)
@@ -86,6 +89,7 @@ Partial Class Compras
         ' txtMaterial
         ' 
         txtMaterial.BackColor = Color.AliceBlue
+        txtMaterial.Cursor = Cursors.IBeam
         txtMaterial.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtMaterial.Location = New Point(136, 48)
         txtMaterial.Margin = New Padding(3, 4, 3, 4)
@@ -109,7 +113,7 @@ Partial Class Compras
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.LightSteelBlue
+        Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.Location = New Point(136, 22)
         Label1.Name = "Label1"
@@ -120,7 +124,7 @@ Partial Class Compras
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.BackColor = Color.LightSteelBlue
+        Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label2.Location = New Point(136, 89)
         Label2.Name = "Label2"
@@ -130,19 +134,23 @@ Partial Class Compras
         ' 
         ' Button1
         ' 
-        Button1.BackColor = SystemColors.ActiveCaption
+        Button1.BackColor = Color.Transparent
+        Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), Image)
+        Button1.BackgroundImageLayout = ImageLayout.Stretch
+        Button1.Cursor = Cursors.Hand
+        Button1.FlatStyle = FlatStyle.Popup
         Button1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        Button1.Location = New Point(755, 391)
+        Button1.Location = New Point(766, 293)
         Button1.Margin = New Padding(3, 4, 3, 4)
         Button1.Name = "Button1"
-        Button1.Size = New Size(96, 31)
+        Button1.Size = New Size(74, 54)
         Button1.TabIndex = 8
-        Button1.Text = "Menu"
         Button1.UseVisualStyleBackColor = False
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
+        Label3.BackColor = Color.CornflowerBlue
         Label3.Location = New Point(315, 22)
         Label3.Name = "Label3"
         Label3.Size = New Size(63, 20)
@@ -180,6 +188,7 @@ Partial Class Compras
         ' 
         cbMedidas.AutoSize = True
         cbMedidas.BackColor = Color.Transparent
+        cbMedidas.Cursor = Cursors.Hand
         cbMedidas.Location = New Point(275, 114)
         cbMedidas.Margin = New Padding(3, 2, 3, 2)
         cbMedidas.Name = "cbMedidas"
@@ -205,7 +214,7 @@ Partial Class Compras
         ' lbl_medida
         ' 
         lbl_medida.AutoSize = True
-        lbl_medida.BackColor = Color.LightSteelBlue
+        lbl_medida.BackColor = Color.CornflowerBlue
         lbl_medida.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         lbl_medida.ForeColor = SystemColors.ActiveCaptionText
         lbl_medida.Location = New Point(463, 89)
@@ -221,6 +230,7 @@ Partial Class Compras
         ' nMedidas
         ' 
         nMedidas.BackColor = Color.AliceBlue
+        nMedidas.Cursor = Cursors.IBeam
         nMedidas.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         nMedidas.Location = New Point(463, 112)
         nMedidas.Margin = New Padding(3, 4, 3, 4)

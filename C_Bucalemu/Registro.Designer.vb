@@ -36,6 +36,7 @@ Partial Class Registro
         ' btn_registro
         ' 
         btn_registro.BackColor = Color.Moccasin
+        btn_registro.Cursor = Cursors.Hand
         btn_registro.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_registro.Location = New Point(205, 330)
         btn_registro.Name = "btn_registro"
@@ -46,6 +47,7 @@ Partial Class Registro
         ' 
         ' txtEmail
         ' 
+        txtEmail.Cursor = Cursors.IBeam
         txtEmail.Font = New Font("Arial Narrow", 9F)
         txtEmail.Location = New Point(205, 106)
         txtEmail.Name = "txtEmail"
@@ -55,6 +57,7 @@ Partial Class Registro
         ' 
         ' txtPassword
         ' 
+        txtPassword.Cursor = Cursors.IBeam
         txtPassword.Font = New Font("Arial Narrow", 9F)
         txtPassword.Location = New Point(205, 162)
         txtPassword.Name = "txtPassword"
@@ -75,6 +78,7 @@ Partial Class Registro
         ' 
         ' txtUsuario
         ' 
+        txtUsuario.Cursor = Cursors.IBeam
         txtUsuario.Font = New Font("Arial Narrow", 9F)
         txtUsuario.Location = New Point(205, 51)
         txtUsuario.Name = "txtUsuario"
@@ -84,6 +88,7 @@ Partial Class Registro
         ' 
         ' txtConfirmarPass
         ' 
+        txtConfirmarPass.Cursor = Cursors.IBeam
         txtConfirmarPass.Font = New Font("Arial Narrow", 9F)
         txtConfirmarPass.Location = New Point(205, 223)
         txtConfirmarPass.Name = "txtConfirmarPass"
@@ -96,6 +101,7 @@ Partial Class Registro
         ' 
         visualizarpass.AutoSize = True
         visualizarpass.BackColor = Color.Transparent
+        visualizarpass.Cursor = Cursors.Hand
         visualizarpass.Font = New Font("Arial Narrow", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         visualizarpass.ForeColor = SystemColors.HighlightText
         visualizarpass.Location = New Point(400, 162)
@@ -108,6 +114,7 @@ Partial Class Registro
         ' regresar
         ' 
         regresar.BackColor = Color.Moccasin
+        regresar.Cursor = Cursors.Hand
         regresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         regresar.Location = New Point(309, 330)
         regresar.Name = "regresar"

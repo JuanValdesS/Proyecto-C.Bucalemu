@@ -341,22 +341,37 @@ Public Class mod_material
                     DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
-                Dim contador As Integer = 1 ' Para numerar las filas
+                ' Crear lista para almacenar temporalmente los materiales
+                Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
-                ' Recorrer cada elemento del inventario en el JObject
                 For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    ' Obtener los valores, con control de existencia
                     Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
                     Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
                     Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
                     Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
 
-                    ' Agregar la fila con los datos al DataGridView
-                    DataGridView1.Rows.Add(contador, nombre, cantidad, unidades, fechaIngreso)
+                    ' Solo agregar si la fecha es válida
+                    If DateTime.TryParse(fechaIngreso, Nothing) Then
+                        Dim material As New Dictionary(Of String, String) From {
+                            {"nombre", nombre},
+                            {"cantidad", cantidad},
+                            {"unidad", unidades},
+                            {"fecha", fechaIngreso}
+                        }
+                        listaMateriales.Add(material)
+                    End If
+                Next
 
-                    ' Incrementar contador para la numeración
+                ' Ordenar por fecha descendente (más reciente primero)
+                listaMateriales = listaMateriales.OrderByDescending(Function(m) DateTime.Parse(m("fecha"))).ToList()
+
+                ' Agregar filas al DataGridView
+                Dim contador As Integer = 1
+                For Each material In listaMateriales
+                    DataGridView1.Rows.Add(contador, material("nombre"), material("cantidad"), material("unidad"), material("fecha"))
                     contador += 1
                 Next
+
             End If
         Catch ex As Exception
             MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)
