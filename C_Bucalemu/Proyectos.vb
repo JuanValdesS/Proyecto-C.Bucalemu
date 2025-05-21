@@ -21,12 +21,12 @@ Public Class Proyectos
         End If
 
         ' Obtener nombre del proyecto seleccionado
-        Dim nombreProyecto As String = DataGridView1.SelectedRows(0).Cells("Nombre").Value.ToString()
-        Dim IdProyecto As String = DataGridView1.SelectedRows(0).Cells("ID Proyecto").Value.ToString()
+        Dim nombreProyecto = DataGridView1.SelectedRows(0).Cells("Nombre").Value.ToString
+        Dim IdProyecto = DataGridView1.SelectedRows(0).Cells("ID Proyecto").Value.ToString
         sesion.IdProyectoActual = IdProyecto
         ' Crear el formulario Menú, pasándole el proyecto
-        Dim men As New Menú()
-        Me.Close()
+        Dim men As New Menú
+        Close()
         men.Show()
     End Sub
 
@@ -127,4 +127,16 @@ Public Class Proyectos
         End With
     End Sub
 
+    Private Sub btnInventario_Click(sender As Object, e As EventArgs) Handles btnInventario.Click
+        Dim Inventario As New Inventario()
+
+        Me.Close()
+        Inventario.Show()
+    End Sub
+
+    Private Sub btnGestionarInventario_Click(sender As Object, e As EventArgs) Handles btnGestionarInventario.Click
+        Dim Modificar_material As New mod_material()
+        Me.Close()
+        Modificar_material.Show()
+    End Sub
 End Class

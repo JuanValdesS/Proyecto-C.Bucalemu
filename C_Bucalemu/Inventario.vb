@@ -144,8 +144,8 @@ Public Class Inventario
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim menu As New Menú()
-        menu.Show()
+        Dim proyectos As New Proyectos()
+        proyectos.Show()
         Me.Close()
     End Sub
 

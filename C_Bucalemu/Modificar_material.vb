@@ -428,9 +428,9 @@ Public Class mod_material
     End Sub
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
-        Dim sh As New Menú()
+        Dim proyectos As New Proyectos()
         Me.Close()
-        sh.Show()
+        proyectos.Show()
     End Sub
 
     Private Sub txtbox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtbox1.SelectedIndexChanged

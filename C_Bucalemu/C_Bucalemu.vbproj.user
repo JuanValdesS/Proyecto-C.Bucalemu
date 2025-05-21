@@ -11,6 +11,12 @@
     <Compile Update="CreacionProyecto.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="GestionarInventarioProyecto.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="InventarioProyecto.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Proyectos.vb">
       <SubType>Form</SubType>
     </Compile>
