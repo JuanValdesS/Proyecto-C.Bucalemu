@@ -60,8 +60,8 @@ Public Class Login
 
                         ' Ocultar login y abrir menú principal
                         Me.Hide()
-                        Dim menu As New Menú()
-                        menu.Show()
+                        Dim pro As New Proyectos()
+                        pro.Show()
                         Exit Sub
                     Else
                         MsgBox("Contraseña incorrecta.", MsgBoxStyle.Critical, "Error")

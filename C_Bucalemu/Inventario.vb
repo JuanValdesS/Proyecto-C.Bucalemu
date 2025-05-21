@@ -12,6 +12,10 @@ Public Class Inventario
     Private client As FireSharp.Interfaces.IFirebaseClient
 
     Private Sub Inventario_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Deshabilitar el botón para que no se pueda presionar de nuevo
+        btn_reestablecer.Enabled = False
+
         ' Puede ir lógica adicional si es necesario
         Try
             client = New FireSharp.FirebaseClient(fcon)
@@ -153,6 +157,13 @@ Public Class Inventario
     End Sub
 
     Private Sub btn_total_Click(sender As Object, e As EventArgs) Handles btn_total.Click
+
+        ' Deshabilitar el botón para que no se pueda presionar de nuevo
+        btn_total.Enabled = False
+
+        'Habilitar el boton de reestablecer
+        btn_reestablecer.Enabled = True
+
         ' Crear un diccionario para almacenar los totales de materiales por nombre y unidad
         Dim totales As New Dictionary(Of String, Integer)
 
@@ -196,6 +207,13 @@ Public Class Inventario
     End Sub
 
     Private Sub btn_reestablecer_Click(sender As Object, e As EventArgs) Handles btn_reestablecer.Click
+
+        ' Deshabilitar el botón para que no se pueda presionar de nuevo
+        btn_reestablecer.Enabled = False
+
+        'Habilitar botón de total inventario
+        btn_total.Enabled = True
+
         CargarInventario()
         txt_buscar.Clear()
     End Sub

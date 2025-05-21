@@ -58,6 +58,7 @@ Public Class Compras
         nCantidad.Value = 0
         cbUnidad.SelectedIndex = -1
         cmMedida.SelectedIndex = -1
+        cbMedidas.Checked = False
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
