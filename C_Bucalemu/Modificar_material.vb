@@ -9,10 +9,12 @@ Public Class mod_material
 
     Private client As FireSharp.Interfaces.IFirebaseClient
     Private Sub Modificar_material_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         nMedidas.Visible = False
         cbMedida.Visible = False
         txtMaterial.Visible = False
         lbl_medida.Visible = False
+        Dim IdProyecto As String = sesion.IdProyectoActual
 
         Try
             client = New FireSharp.FirebaseClient(fcon)
@@ -29,7 +31,7 @@ Public Class mod_material
 
         'Agrega datos al combobox mediante try
         Try
-            Dim response = client.Get("Inventario")
+            Dim response = client.Get("Proyectos/" & IdProyecto & "/Inventario")
             If response.Body <> "null" Then
                 Dim inventario As Dictionary(Of String, Object) = response.ResultAs(Of Dictionary(Of String, Object))
 
@@ -64,6 +66,69 @@ Public Class mod_material
         If Not txtbox1.Items.Contains("OTRO") Then
             txtbox1.Items.Add("OTRO")
         End If
+    End Sub
+
+    Private Sub CargarInventario()
+        Try
+            Dim IdProyecto As String = sesion.IdProyectoActual
+            ' Obtener los datos desde Firebase
+            Dim respuesta = client.Get("Proyectos/" & IdProyecto & "/Inventario")
+
+            ' Verificar que la respuesta no sea nula
+            If respuesta.Body <> "null" Then
+
+                ' Convertir la respuesta a un JObject (Newtonsoft.Json.Linq)
+
+                Dim jsonData As JObject = JObject.Parse(respuesta.Body)
+
+                ' Limpiar el DataGridView antes de cargar los datos
+                ConfigurarEstiloDataGridView()
+                DataGridView1.Rows.Clear()
+                DataGridView1.Columns.Clear()
+
+                ' Definir columnas si no existen
+                If DataGridView1.Columns.Count = 0 Then
+                    DataGridView1.Columns.Add("ID", "N°")
+                    DataGridView1.Columns.Add("Nombre", "Nombre del Material")
+                    DataGridView1.Columns.Add("Cantidad", "Cantidad")
+                    DataGridView1.Columns.Add("Unidad", "Unidad")
+                    DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
+                End If
+
+                ' Crear lista para almacenar temporalmente los materiales
+                Dim listaMateriales As New List(Of Dictionary(Of String, String))
+
+                For Each item As KeyValuePair(Of String, JToken) In jsonData
+                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
+                    Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
+                    Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
+                    Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
+
+                    ' Solo agregar si la fecha es válida
+                    If DateTime.TryParse(fechaIngreso, Nothing) Then
+                        Dim material As New Dictionary(Of String, String) From {
+                            {"nombre", nombre},
+                            {"cantidad", cantidad},
+                            {"unidad", unidades},
+                            {"fecha", fechaIngreso}
+                        }
+                        listaMateriales.Add(material)
+                    End If
+                Next
+
+                ' Ordenar por fecha descendente (más reciente primero)
+                listaMateriales = listaMateriales.OrderByDescending(Function(m) DateTime.Parse(m("fecha"))).ToList()
+                ' Agregar filas al DataGridView
+                Dim contador As Integer = 1
+                For Each material In listaMateriales
+                    DataGridView1.Rows.Add(contador, material("nombre"), material("cantidad"), material("unidad"), material("fecha"))
+                    contador += 1
+                Next
+
+            End If
+        Catch ex As Exception
+            MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)
+        End Try
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
@@ -317,66 +382,6 @@ Public Class mod_material
 
     End Sub
 
-    Private Sub CargarInventario()
-        Try
-            ' Obtener los datos desde Firebase
-            Dim respuesta = client.Get("Inventario")
-
-            ' Verificar que la respuesta no sea nula
-            If respuesta.Body IsNot "null" Then
-                ' Convertir la respuesta a un JObject (Newtonsoft.Json.Linq)
-                Dim jsonData As JObject = JObject.Parse(respuesta.Body)
-
-                ' Limpiar el DataGridView antes de cargar los datos
-                ConfigurarEstiloDataGridView()
-                DataGridView1.Rows.Clear()
-                DataGridView1.Columns.Clear()
-
-                ' Definir columnas si no existen
-                If DataGridView1.Columns.Count = 0 Then
-                    DataGridView1.Columns.Add("ID", "N°")
-                    DataGridView1.Columns.Add("Nombre", "Nombre del Material")
-                    DataGridView1.Columns.Add("Cantidad", "Cantidad")
-                    DataGridView1.Columns.Add("Unidad", "Unidad")
-                    DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
-                End If
-
-                ' Crear lista para almacenar temporalmente los materiales
-                Dim listaMateriales As New List(Of Dictionary(Of String, String))
-
-                For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
-                    Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
-                    Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
-                    Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
-
-                    ' Solo agregar si la fecha es válida
-                    If DateTime.TryParse(fechaIngreso, Nothing) Then
-                        Dim material As New Dictionary(Of String, String) From {
-                            {"nombre", nombre},
-                            {"cantidad", cantidad},
-                            {"unidad", unidades},
-                            {"fecha", fechaIngreso}
-                        }
-                        listaMateriales.Add(material)
-                    End If
-                Next
-
-                ' Ordenar por fecha descendente (más reciente primero)
-                listaMateriales = listaMateriales.OrderByDescending(Function(m) DateTime.Parse(m("fecha"))).ToList()
-
-                ' Agregar filas al DataGridView
-                Dim contador As Integer = 1
-                For Each material In listaMateriales
-                    DataGridView1.Rows.Add(contador, material("nombre"), material("cantidad"), material("unidad"), material("fecha"))
-                    contador += 1
-                Next
-
-            End If
-        Catch ex As Exception
-            MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)
-        End Try
-    End Sub
 
     Private Sub ConfigurarEstiloDataGridView()
         ''Elementos que hacen que el datagrid se vea mas formal y con mas diseño

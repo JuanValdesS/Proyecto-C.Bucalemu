@@ -2,6 +2,7 @@
 Imports FireSharp.Interfaces
 Imports FireSharp.Response
 Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 Public Class CreacionProyecto
 
     Dim client As IFirebaseClient
@@ -30,6 +31,7 @@ Public Class CreacionProyecto
     End Sub
 
     Private Sub btn_crear_Click(sender As Object, e As EventArgs) Handles btn_crear.Click
+
         Dim nombreProyecto As String = txt_nombre.Text.Trim()
         Dim personal As String = cmb_personal.Text.Trim()
         Dim descripcion As String = txt_descripcion.Text.Trim()
@@ -41,26 +43,51 @@ Public Class CreacionProyecto
         End If
 
         ' Verificar si ya existe el proyecto
-        Dim response As FirebaseResponse = client.Get("Proyectos/" & nombreProyecto)
-        If response.Body <> "null" Then
-            MessageBox.Show("Ya existe un proyecto con este nombre. Usa otro.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
+        Dim proyectosResponse As FirebaseResponse = client.Get("Proyectos")
+        Dim proyectosExistentes As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(proyectosResponse.Body)
+        Dim maxId As Integer = 0
+        If proyectosExistentes IsNot Nothing Then
+            For Each kvp As KeyValuePair(Of String, Object) In proyectosExistentes
+                Dim claveProyecto As String = kvp.Key ' Ejemplo: Proyecto_1
+
+                ' Extraer número de ID
+                If claveProyecto.StartsWith("Proyecto_") Then
+                    Dim idNumericoStr As String = claveProyecto.Replace("Proyecto_", "")
+                    Dim idNumerico As Integer
+                    If Integer.TryParse(idNumericoStr, idNumerico) Then
+                        If idNumerico > maxId Then maxId = idNumerico
+                    End If
+                End If
+
+                ' Validar que el nombre no exista repetido
+                Dim datosProyecto As JObject = JObject.Parse(kvp.Value.ToString())
+                If datosProyecto("Info") IsNot Nothing AndAlso datosProyecto("Info")("Nombre") IsNot Nothing Then
+                    If datosProyecto("Info")("Nombre").ToString().ToLower() = nombreProyecto.ToLower() Then
+                        MessageBox.Show("Ya existe un proyecto con este nombre. Usa otro.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return
+                    End If
+                End If
+            Next
         End If
 
+        ' Generar el nuevo ID secuencial
+        Dim nuevoId As Integer = maxId + 1
+        Dim idProyecto As String = "Proyecto_" & nuevoId
+
         ' Crear objeto de proyecto
-        Dim proyecto As New Dictionary(Of String, Object) From {
-            {"Nombre", nombreProyecto},
-            {"Personal", personal},
-            {"Descripción", descripcion}
-        }
+        Dim infoProyecto As New Dictionary(Of String, Object) From {
+        {"Nombre", nombreProyecto},
+        {"Personal", personal},
+        {"Descripción", descripcion}
+    }
 
-        ' Guardar los datos base del proyecto
-        client.Set("Proyectos/" & nombreProyecto & "/Info", proyecto)
+        ' Guardar la información principal
+        client.Set("Proyectos/" & idProyecto & "/Info", infoProyecto)
 
-        ' Crear las subclases vacías
-        client.Set("Proyectos/" & nombreProyecto & "/Compras", New Dictionary(Of String, Object)())
-        client.Set("Proyectos/" & nombreProyecto & "/Inventario", New Dictionary(Of String, Object)())
-        client.Set("Proyectos/" & nombreProyecto & "/Reportes", New Dictionary(Of String, Object)())
+        ' Crear las subcategorías vacías
+        client.Set("Proyectos/" & idProyecto & "/Compras", New Dictionary(Of String, Object)())
+        client.Set("Proyectos/" & idProyecto & "/Inventario", New Dictionary(Of String, Object)())
+        client.Set("Proyectos/" & idProyecto & "/Reportes", New Dictionary(Of String, Object)())
 
         MessageBox.Show("Proyecto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
 

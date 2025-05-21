@@ -1,4 +1,5 @@
-﻿Imports FireSharp.Config
+﻿Imports System.IO
+Imports FireSharp.Config
 Imports FireSharp.Interfaces
 Imports FireSharp.Response
 Imports Newtonsoft.Json
@@ -11,6 +12,8 @@ Public Class Proyectos
     ' Cliente Firebase
     Private client As IFirebaseClient
 
+    Public IdProyectoActual As String
+
     Private Sub btn_ingresar_Click(sender As Object, e As EventArgs) Handles btn_ingresar.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Por favor selecciona un proyecto antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -18,8 +21,9 @@ Public Class Proyectos
         End If
 
         ' Obtener nombre del proyecto seleccionado
-        Dim nombreProyecto As String = DataGridView1.SelectedRows(0).Cells("NombreProyecto").Value.ToString()
-
+        Dim nombreProyecto As String = DataGridView1.SelectedRows(0).Cells("Nombre").Value.ToString()
+        Dim IdProyecto As String = DataGridView1.SelectedRows(0).Cells("ID Proyecto").Value.ToString()
+        sesion.IdProyectoActual = IdProyecto
         ' Crear el formulario Menú, pasándole el proyecto
         Dim men As New Menú()
         Me.Close()
@@ -66,6 +70,8 @@ Public Class Proyectos
                 Dim dt As New DataTable()
 
                 ' Columnas a mostrar en el DataGridView
+                dt.Columns.Add("ID Proyecto")
+                'dt.Columns.("ID Proyecto").Visible = False
                 dt.Columns.Add("Nombre")
                 dt.Columns.Add("Descripción")
                 dt.Columns.Add("Personal")
@@ -74,7 +80,7 @@ Public Class Proyectos
                     Dim infoResponse As FirebaseResponse = client.Get("Proyectos/" & proyectoKey & "/Info")
                     If infoResponse.Body <> "null" Then
                         Dim proyecto As Proyectos = JsonConvert.DeserializeObject(Of Proyectos)(infoResponse.Body)
-                        dt.Rows.Add(proyecto.nombre, proyecto.Descripción, proyecto.Personal)
+                        dt.Rows.Add(proyectoKey, proyecto.nombre, proyecto.Descripción, proyecto.Personal)
                     End If
                 Next
 
