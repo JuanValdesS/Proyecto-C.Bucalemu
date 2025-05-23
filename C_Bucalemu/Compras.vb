@@ -120,9 +120,6 @@ Public Class Compras
         Me.Close()
     End Sub
 
-
-
-
     Private Sub Compras_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ConfigurarEstiloDataGridView()
         dgCompras.Rows.Clear()
@@ -130,9 +127,6 @@ Public Class Compras
         cmMedida.Visible = False
         nMedidas.Visible = False
         lbl_medida.Visible = False
-
-
-
     End Sub
 
     Private Sub btnSolicitar_Click(sender As Object, e As EventArgs) Handles btnSolicitar.Click
@@ -143,7 +137,7 @@ Public Class Compras
         End If
 
         ' URL de la base de datos en Firebase (reemplaza con tu URL real)
-        Dim firebaseUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Compras"
+        Dim firebaseUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Compras"
         Dim solicitudId As String = "1"
 
         ' Enviar los datos a Firebase

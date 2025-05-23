@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj": {}
+    "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj": {}
   },
   "projects": {
-    "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj": {
+    "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj",
+        "projectUniqueName": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj",
         "projectName": "C_Bucalemu",
-        "projectPath": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj",
-        "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\diego\\Documents\\Proyecto-C.Bucalemu\\C_Bucalemu\\obj\\",
+        "projectPath": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\C_Bucalemu.vbproj",
+        "packagesPath": "C:\\Users\\Juan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Juan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],

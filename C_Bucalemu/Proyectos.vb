@@ -15,15 +15,19 @@ Public Class Proyectos
     Public IdProyectoActual As String
 
     Private Sub btn_ingresar_Click(sender As Object, e As EventArgs) Handles btn_ingresar.Click
+
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Por favor selecciona un proyecto antes de continuar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
         ' Obtener nombre del proyecto seleccionado
-        Dim nombreProyecto = DataGridView1.SelectedRows(0).Cells("Nombre").Value.ToString
-        Dim IdProyecto = DataGridView1.SelectedRows(0).Cells("ID Proyecto").Value.ToString
-        sesion.IdProyectoActual = IdProyecto
+        Dim nombreProyecto = DataGridView1.CurrentRow.Cells("Nombre").Value.ToString()
+        Dim IdProyecto = DataGridView1.CurrentRow.Cells("ID Proyecto").Value.ToString()
+
+        ' Guardar el nombre globalmente
+        IdentifyProject = IdProyecto
+
         ' Crear el formulario Menú, pasándole el proyecto
         Dim men As New Menú
         Close()

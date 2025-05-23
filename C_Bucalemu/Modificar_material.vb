@@ -14,7 +14,7 @@ Public Class mod_material
         cbMedida.Visible = False
         txtMaterial.Visible = False
         lbl_medida.Visible = False
-        Dim IdProyecto As String = sesion.IdProyectoActual
+        Dim IdProyecto As String = IdentifyProject
 
         Try
             client = New FireSharp.FirebaseClient(fcon)
@@ -70,7 +70,7 @@ Public Class mod_material
 
     Private Sub CargarInventario()
         Try
-            Dim IdProyecto As String = sesion.IdProyectoActual
+            Dim IdProyecto As String = IdentifyProject
             ' Obtener los datos desde Firebase
             Dim respuesta = client.Get("Proyectos/" & IdProyecto & "/Inventario")
 
@@ -179,7 +179,7 @@ Public Class mod_material
                 End If
 
                 ' Obtener la cantidad de materiales en Firebase para generar el número consecutivo
-                Dim response = client.Get("Inventario")
+                Dim response = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
                 Dim inventario As Dictionary(Of String, Object) = If(response.Body <> "null", response.ResultAs(Of Dictionary(Of String, Object)), New Dictionary(Of String, Object)())
 
                 ' Contar cuántos materiales con el mismo nombre ya existen en Firebase
@@ -208,8 +208,7 @@ Public Class mod_material
                 }
 
                 ' Guardar en Firebase con el nuevo ID
-                client.Set("Inventario/" & materialId, material)
-
+                client.Set("Proyectos/" & IdentifyProject & "/Inventario/" & materialId, material)
                 ' Mostrar mensaje de éxito
                 MsgBox("Material agregado correctamente", MsgBoxStyle.Information, "Éxito")
 
@@ -280,7 +279,7 @@ Public Class mod_material
                 End If
 
                 ' Obtener todos los materiales de Firebase
-                Dim response = client.Get("Inventario")
+                Dim response = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
                 If response.Body = "null" Then
                     MsgBox("No hay materiales en el inventario.", MsgBoxStyle.Exclamation, "Advertencia")
                     Exit Sub
@@ -341,12 +340,12 @@ Public Class mod_material
 
                     If stockDisponible <= cantidadRestante Then
                         ' Si el stock disponible es menor o igual a lo que se quiere retirar, eliminarlo completamente
-                        client.Delete("Inventario/" & id)
+                        client.Delete("Proyectos/" & IdentifyProject & "/Inventario/" & id)
                         cantidadRestante -= stockDisponible
                     Else
                         ' Si hay más stock del necesario, solo reducir la cantidad
                         materialData("cantidad") = stockDisponible - cantidadRestante
-                        client.Update("Inventario/" & id, materialData)
+                        client.Update("Proyectos/" & IdentifyProject & "/Inventario/" & id, materialData)
                         cantidadRestante = 0
                     End If
                 Next
@@ -428,9 +427,9 @@ Public Class mod_material
     End Sub
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
-        Dim proyectos As New Proyectos()
+        Dim men As New Menú()
         Me.Close()
-        proyectos.Show()
+        men.Show()
     End Sub
 
     Private Sub txtbox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles txtbox1.SelectedIndexChanged

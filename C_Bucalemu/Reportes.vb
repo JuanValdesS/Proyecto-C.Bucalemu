@@ -71,7 +71,9 @@ Public Class Reportes
                 {"Fecha", Date.Now.ToString("dd-MM-yyyy HH:mm:ss")}
             }
 
-            client.Set("Reportes/" & reporteid, reporte)
+            ' Guardar el reporte bajo el proyecto actual
+            client.Set("Proyectos/" & IdentifyProject & "/Reportes/" & reporteid, reporte)
+
             txtObservacion.Clear()
             txtTitulo.Clear()
             txtObservacion.Focus()

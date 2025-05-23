@@ -51,7 +51,7 @@ Public Class Inventario
     Private Sub CargarInventario()
         Try
             ' Obtener los datos desde Firebase
-            Dim respuesta = client.Get("Inventario")
+            Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
 
             ' Verificar que la respuesta no sea nula
             If respuesta.Body IsNot "null" Then
@@ -144,8 +144,8 @@ Public Class Inventario
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim proyectos As New Proyectos()
-        proyectos.Show()
+        Dim men As New Menú()
+        men.Show()
         Me.Close()
     End Sub
 
@@ -219,7 +219,8 @@ Public Class Inventario
     End Sub
     Private Sub FiltrarInventario(filtro As String)
         Try
-            Dim respuesta = client.Get("Inventario")
+            Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
+
 
             If respuesta.Body IsNot "null" Then
                 Dim jsonData As JObject = JObject.Parse(respuesta.Body)

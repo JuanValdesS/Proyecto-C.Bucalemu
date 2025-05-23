@@ -26,7 +26,7 @@ Public Class GestionarReportes
     End Sub
     Private Sub CargarReportes()
         Try
-            Dim respuesta = client.Get("Reportes")
+            Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Reportes")
 
             If String.IsNullOrEmpty(respuesta.Body) OrElse respuesta.Body = "null" Then
                 data_repo.Rows.Clear()
@@ -151,7 +151,7 @@ Public Class GestionarReportes
         }
 
             ' Actualizar el nodo en Firebase
-            client.Update("Reportes/" & reporteId, datos)
+            client.Update("Proyectos/" & IdentifyProject & "/Reportes/" & reporteId, datos)
 
             MsgBox("Reporte marcado como atendido.", MsgBoxStyle.Information, "Éxito")
             CargarReportes()
@@ -179,7 +179,7 @@ Public Class GestionarReportes
 
         Try
             ' Eliminar de Firebase
-            Dim respuesta = client.Delete("Reportes/" & reporteId)
+            Dim respuesta = client.Delete("Proyectos/" & IdentifyProject & "/Reportes/" & reporteId)
 
             ' Eliminar la fila del DataGridView
             data_repo.Rows.RemoveAt(data_repo.SelectedRows(0).Index)

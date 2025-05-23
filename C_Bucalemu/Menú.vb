@@ -1,8 +1,8 @@
 ﻿Public Class Menú
     Dim compra As New Compras()
-    Dim mod_mat As New GestionarInventarioProyecto()
+    Dim mod_mat As New mod_material()
     Dim repo As New Reportes()
-    Dim VerInventario As New InventarioProyecto()
+    Dim VerInventario As New Inventario
     Dim Autorizar As New Autorizar()
     Dim registro As New Registro()
     Dim cubi As New Cubicacion()
