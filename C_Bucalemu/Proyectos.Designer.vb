@@ -29,6 +29,8 @@ Partial Class Proyectos
         Label1 = New Label()
         btnInventario = New Button()
         btnGestionarInventario = New Button()
+        btn_eliminar = New Button()
+        btn_logout = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -40,7 +42,7 @@ Partial Class Proyectos
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
         DataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        DataGridView1.Size = New Size(722, 564)
+        DataGridView1.Size = New Size(722, 524)
         DataGridView1.TabIndex = 0
         ' 
         ' btn_ingresar
@@ -50,7 +52,7 @@ Partial Class Proyectos
         btn_ingresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btn_ingresar.Location = New Point(808, 64)
         btn_ingresar.Name = "btn_ingresar"
-        btn_ingresar.Size = New Size(123, 67)
+        btn_ingresar.Size = New Size(108, 59)
         btn_ingresar.TabIndex = 1
         btn_ingresar.Text = "Ingresar al proyecto"
         btn_ingresar.UseVisualStyleBackColor = False
@@ -60,9 +62,9 @@ Partial Class Proyectos
         btn_crear.BackColor = Color.CornflowerBlue
         btn_crear.Cursor = Cursors.Hand
         btn_crear.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btn_crear.Location = New Point(808, 156)
+        btn_crear.Location = New Point(808, 129)
         btn_crear.Name = "btn_crear"
-        btn_crear.Size = New Size(123, 67)
+        btn_crear.Size = New Size(108, 57)
         btn_crear.TabIndex = 2
         btn_crear.Text = "Crear Proyecto"
         btn_crear.UseVisualStyleBackColor = False
@@ -84,9 +86,9 @@ Partial Class Proyectos
         btnInventario.BackColor = Color.CornflowerBlue
         btnInventario.Cursor = Cursors.Hand
         btnInventario.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnInventario.Location = New Point(808, 264)
+        btnInventario.Location = New Point(808, 192)
         btnInventario.Name = "btnInventario"
-        btnInventario.Size = New Size(123, 67)
+        btnInventario.Size = New Size(108, 58)
         btnInventario.TabIndex = 5
         btnInventario.Text = "Inventario"
         btnInventario.UseVisualStyleBackColor = False
@@ -96,12 +98,36 @@ Partial Class Proyectos
         btnGestionarInventario.BackColor = Color.CornflowerBlue
         btnGestionarInventario.Cursor = Cursors.Hand
         btnGestionarInventario.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnGestionarInventario.Location = New Point(808, 371)
+        btnGestionarInventario.Location = New Point(808, 256)
         btnGestionarInventario.Name = "btnGestionarInventario"
-        btnGestionarInventario.Size = New Size(123, 67)
+        btnGestionarInventario.Size = New Size(108, 59)
         btnGestionarInventario.TabIndex = 6
         btnGestionarInventario.Text = "Gestionar Inventario"
         btnGestionarInventario.UseVisualStyleBackColor = False
+        ' 
+        ' btn_eliminar
+        ' 
+        btn_eliminar.BackColor = Color.IndianRed
+        btn_eliminar.Cursor = Cursors.Hand
+        btn_eliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
+        btn_eliminar.Location = New Point(808, 321)
+        btn_eliminar.Name = "btn_eliminar"
+        btn_eliminar.Size = New Size(108, 63)
+        btn_eliminar.TabIndex = 7
+        btn_eliminar.Text = "Eliminar proyecto"
+        btn_eliminar.UseVisualStyleBackColor = False
+        ' 
+        ' btn_logout
+        ' 
+        btn_logout.BackColor = Color.RosyBrown
+        btn_logout.Cursor = Cursors.Hand
+        btn_logout.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
+        btn_logout.Location = New Point(808, 525)
+        btn_logout.Name = "btn_logout"
+        btn_logout.Size = New Size(108, 63)
+        btn_logout.TabIndex = 8
+        btn_logout.Text = "Cerrar sesión"
+        btn_logout.UseVisualStyleBackColor = False
         ' 
         ' Proyectos
         ' 
@@ -109,7 +135,9 @@ Partial Class Proyectos
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(1002, 873)
+        ClientSize = New Size(1002, 630)
+        Controls.Add(btn_logout)
+        Controls.Add(btn_eliminar)
         Controls.Add(btnGestionarInventario)
         Controls.Add(btnInventario)
         Controls.Add(Label1)
@@ -131,4 +159,6 @@ Partial Class Proyectos
     Friend WithEvents Button1 As Button
     Friend WithEvents btnInventario As Button
     Friend WithEvents btnGestionarInventario As Button
+    Friend WithEvents btn_eliminar As Button
+    Friend WithEvents btn_logout As Button
 End Class

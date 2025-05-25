@@ -7,7 +7,7 @@ Public Class Proyectos
 
     Public Property nombre As String
     Public Property Descripción As String
-    Public Property Personal As String
+    Public Property encargado As String
 
     ' Cliente Firebase
     Private client As IFirebaseClient
@@ -29,9 +29,14 @@ Public Class Proyectos
         IdentifyProject = IdProyecto
 
         ' Crear el formulario Menú, pasándole el proyecto
-        Dim men As New Menú
-        Close()
-        men.Show()
+        If VerificarAccesoProyecto() Then
+            Dim men As New Menú
+            Me.Close()
+            men.Show()
+        Else
+            MsgBox("No tienes permisos para ingresar a este proyecto.", MsgBoxStyle.Critical, "Acceso Denegado")
+        End If
+
     End Sub
 
     Private Sub btn_crear_Click(sender As Object, e As EventArgs) Handles btn_crear.Click
@@ -50,6 +55,16 @@ Public Class Proyectos
 
         client = New FireSharp.FirebaseClient(config)
 
+        btn_eliminar.Visible = False
+
+        ' Obtener el rol del usuario autenticado
+        Dim rolUsuario As String = My.Settings.RolUsuario
+
+        ' Mostrar el botón solo si el usuario es Administrador
+        If rolUsuario = "Administrador" Then
+            btn_eliminar.Visible = True
+        End If
+
         If client Is Nothing Then
             MessageBox.Show("Error al conectar con Firebase")
             Return
@@ -67,6 +82,11 @@ Public Class Proyectos
     End Sub
     Private Sub CargarProyectos()
         Try
+            ' Limpia el DataGridView para evitar datos viejos
+            DataGridView1.DataSource = Nothing
+            DataGridView1.Rows.Clear()
+            DataGridView1.Columns.Clear()
+
             Dim response As FirebaseResponse = client.Get("Proyectos")
 
             If response.Body <> "null" Then
@@ -75,22 +95,21 @@ Public Class Proyectos
 
                 ' Columnas a mostrar en el DataGridView
                 dt.Columns.Add("ID Proyecto")
-                'dt.Columns.("ID Proyecto").Visible = False
                 dt.Columns.Add("Nombre")
                 dt.Columns.Add("Descripción")
-                dt.Columns.Add("Personal")
+                dt.Columns.Add("Encargado")
 
                 For Each proyectoKey In proyectosDict.Keys
                     Dim infoResponse As FirebaseResponse = client.Get("Proyectos/" & proyectoKey & "/Info")
                     If infoResponse.Body <> "null" Then
                         Dim proyecto As Proyectos = JsonConvert.DeserializeObject(Of Proyectos)(infoResponse.Body)
-                        dt.Rows.Add(proyectoKey, proyecto.nombre, proyecto.Descripción, proyecto.Personal)
+                        dt.Rows.Add(proyectoKey, proyecto.nombre, proyecto.Descripción, proyecto.encargado)
                     End If
                 Next
 
                 DataGridView1.DataSource = dt
             Else
-                MessageBox.Show("No se encontraron proyectos.")
+                MsgBox("No se encontraron proyectos.", MsgBoxStyle.Information, "No hay proyectos")
             End If
         Catch ex As Exception
             MessageBox.Show("Error al cargar proyectos: " & ex.Message)
@@ -130,6 +149,29 @@ Public Class Proyectos
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
         End With
     End Sub
+    Private Function VerificarAccesoProyecto() As Boolean
+        Try
+            ' Saneamos el nombre de usuario antes de buscarlo en Firebase
+            Dim usuarioSaneado As String = UsuarioRegistrado.Replace(".", "_").Replace("@", "_at_")
+
+            Dim path As String = $"Proyectos/{IdentifyProject}/Personal_autorizado"
+            Dim response As FirebaseResponse = client.Get(path)
+
+            If response.Body = "null" Then
+                Return False
+            End If
+
+            Dim personalAutorizado As Dictionary(Of String, Object) =
+            JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response.Body)
+
+            Return personalAutorizado.ContainsKey(usuarioSaneado)
+
+        Catch ex As Exception
+            MessageBox.Show("Error al verificar acceso: " & ex.Message)
+            Return False
+        End Try
+    End Function
+
 
     Private Sub btnInventario_Click(sender As Object, e As EventArgs) Handles btnInventario.Click
         Dim Inventario As New Inventario()
@@ -142,5 +184,45 @@ Public Class Proyectos
         Dim Modificar_material As New mod_material()
         Me.Close()
         Modificar_material.Show()
+    End Sub
+
+    Private Sub btn_eliminar_Click(sender As Object, e As EventArgs) Handles btn_eliminar.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Por favor selecciona un proyecto para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim nombreProyecto = DataGridView1.CurrentRow.Cells("Nombre").Value.ToString
+        Dim idProyecto = DataGridView1.CurrentRow.Cells("ID Proyecto").Value.ToString
+
+        Dim result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el proyecto '{nombreProyecto}'?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            Try
+                Dim deleteResponse = client.Delete("Proyectos/" & idProyecto)
+
+                If deleteResponse.StatusCode = Net.HttpStatusCode.OK Then
+                    MessageBox.Show("Proyecto eliminado correctamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    CargarProyectos() ' Actualiza el DataGridView
+                Else
+                    MessageBox.Show("Error al eliminar el proyecto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+            Catch ex As Exception
+                MessageBox.Show("Ocurrió un error al eliminar el proyecto: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btn_logout_Click(sender As Object, e As EventArgs) Handles btn_logout.Click
+        Dim sh As New Login()
+        ' Mostrar cuadro de mensaje con opciones Sí y No
+        Dim resultado As DialogResult = MessageBox.Show("¿Estás seguro de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        ' Si el usuario selecciona "Sí", proceder a redirigir al login
+        If resultado = DialogResult.Yes Then
+            Me.Close() ' Oculta el formulario actual
+            sh.Show() ' Muestra el formulario de login
+        End If
     End Sub
 End Class

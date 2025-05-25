@@ -19,6 +19,8 @@ Public Class Login
             Dim email = txtUsuario.Text
             Dim password = txtPassword.Text
 
+            UsuarioRegistrado = email
+
             ' Validar que los campos no estén vacíos
             If String.IsNullOrWhiteSpace(email) OrElse String.IsNullOrWhiteSpace(password) Then
                 MsgBox("Por favor, ingrese su email y contraseña.", MsgBoxStyle.Exclamation, "Adverterncia")

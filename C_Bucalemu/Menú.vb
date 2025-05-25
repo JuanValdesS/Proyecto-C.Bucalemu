@@ -72,8 +72,6 @@
 
         ' Si el usuario selecciona "Sí", proceder a redirigir al login
         If resultado = DialogResult.Yes Then
-            ' Aquí debes redirigir al formulario de login
-            ' Por ejemplo, si tu formulario de login se llama "FormLogin"
             Me.Close() ' Oculta el formulario actual
             sh.Show() ' Muestra el formulario de login
         End If
