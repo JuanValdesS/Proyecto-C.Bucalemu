@@ -1,8 +1,10 @@
 ﻿Imports System.IO
+Imports System.Xml
 Imports FireSharp.Config
 Imports FireSharp.Interfaces
 Imports FireSharp.Response
 Imports Newtonsoft.Json
+Imports Newtonsoft.Json.Linq
 Public Class Proyectos
 
     Public Property nombre As String
@@ -152,19 +154,51 @@ Public Class Proyectos
     Private Function VerificarAccesoProyecto() As Boolean
         Try
             ' Saneamos el nombre de usuario antes de buscarlo en Firebase
-            Dim usuarioSaneado As String = UsuarioRegistrado.Replace(".", "_").Replace("@", "_at_")
+            'Dim usuarioSaneado As String = UsuarioRegistrado '.Replace(".", "_").Replace("@", "_at_")
+            Dim correoUsuario As String = UsuarioRegistrado.Trim().ToLower() ' Aseguramos formato uniforme
+
+            Dim TipoIngreso As String
+            'define si ingresamos con un usuario o con un email
+            If correoUsuario.Contains("@") Then
+                TipoIngreso = "Email"
+
+            Else
+                TipoIngreso = "Usuario"
+            End If
 
             Dim path As String = $"Proyectos/{IdentifyProject}/Personal_autorizado"
             Dim response As FirebaseResponse = client.Get(path)
 
             If response.Body = "null" Then
+
                 Return False
             End If
 
-            Dim personalAutorizado As Dictionary(Of String, Object) =
-            JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response.Body)
+            ' compara por el mail
+            If TipoIngreso = "Email" Then
+                Dim personalAutorizado As Dictionary(Of String, JObject) =
+                JsonConvert.DeserializeObject(Of Dictionary(Of String, JObject))(response.Body)
+                For Each entry In personalAutorizado
+                    Dim datosUsuario As JObject = entry.Value
+                    Dim email As String = datosUsuario("Email")?.ToString().Trim().ToLower() ' Aseguramos formato uniforme
+                    If email = correoUsuario Then
+                        Return True
+                    End If
+                Next
+                'compara por el usuario
+            Else
+                Dim personalAutorizado As Dictionary(Of String, Object) =
+                JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response.Body)
+                For Each key In personalAutorizado.Keys
+                    key = key.Trim().ToLower()
+                    If key = correoUsuario Then
+                        Return True
+                    End If
+                Next
 
-            Return personalAutorizado.ContainsKey(usuarioSaneado)
+            End If
+
+            Return False
 
         Catch ex As Exception
             MessageBox.Show("Error al verificar acceso: " & ex.Message)
@@ -174,14 +208,14 @@ Public Class Proyectos
 
 
     Private Sub btnInventario_Click(sender As Object, e As EventArgs) Handles btnInventario.Click
-        Dim Inventario As New Inventario()
+        Dim Inventario As New InventarioGlobal()
 
         Me.Close()
         Inventario.Show()
     End Sub
 
     Private Sub btnGestionarInventario_Click(sender As Object, e As EventArgs) Handles btnGestionarInventario.Click
-        Dim Modificar_material As New mod_material()
+        Dim Modificar_material As New GestionarInventarioGlobal()
         Me.Close()
         Modificar_material.Show()
     End Sub

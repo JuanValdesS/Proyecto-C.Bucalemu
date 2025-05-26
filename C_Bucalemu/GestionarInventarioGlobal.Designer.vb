@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class GestionarInventarioProyecto
+Partial Class GestionarInventarioGlobal
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -22,28 +22,15 @@ Partial Class GestionarInventarioProyecto
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        btnRegresar = New Button()
         SuspendLayout()
         ' 
-        ' btnRegresar
-        ' 
-        btnRegresar.Location = New Point(646, 332)
-        btnRegresar.Name = "btnRegresar"
-        btnRegresar.Size = New Size(75, 23)
-        btnRegresar.TabIndex = 0
-        btnRegresar.Text = "Regresar"
-        btnRegresar.UseVisualStyleBackColor = True
-        ' 
-        ' GestionarInventarioProyecto
+        ' GestionarInventarioGlobal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(btnRegresar)
-        Name = "GestionarInventarioProyecto"
-        Text = "GestionarInventarioProyecto"
+        Name = "GestionarInventarioGlobal"
+        Text = "GestionarInventarioGlobal"
         ResumeLayout(False)
     End Sub
-
-    Friend WithEvents btnRegresar As Button
 End Class

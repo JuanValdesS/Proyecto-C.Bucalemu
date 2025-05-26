@@ -125,8 +125,6 @@ C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows
 C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\ref\C_Bucalemu.dll
 C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.CreacionProyecto.resources
 C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.Proyectos.resources
-C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.GestionarInventarioProyecto.resources
-C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.InventarioProyecto.resources
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\C_Bucalemu.exe
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\C_Bucalemu.dll.config
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\C_Bucalemu.deps.json
@@ -173,3 +171,5 @@ C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucal
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.pdb
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.genruntimeconfig.cache
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\ref\C_Bucalemu.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.GestionarInventarioGlobal.resources
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.InventarioGlobal.resources

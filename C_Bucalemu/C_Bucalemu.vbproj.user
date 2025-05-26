@@ -11,10 +11,10 @@
     <Compile Update="CreacionProyecto.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="GestionarInventarioProyecto.vb">
+    <Compile Update="GestionarInventarioGlobal.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="InventarioProyecto.vb">
+    <Compile Update="InventarioGlobal.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Proyectos.vb">
