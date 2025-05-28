@@ -29,6 +29,12 @@ Public Class Registro
             Dim cpassword As String = txtConfirmarPass.Text
             Dim rol As String = combo_rol.Text
 
+            'verificar si el usuario es tiene @
+            If usu.Contains("@") Then
+                MsgBox("El nombre de usuario no debe contener '@'.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
             ' Validar que los campos no estén vacíos
             If String.IsNullOrWhiteSpace(usu) OrElse String.IsNullOrWhiteSpace(email) OrElse
                String.IsNullOrWhiteSpace(password) OrElse String.IsNullOrWhiteSpace(cpassword) OrElse

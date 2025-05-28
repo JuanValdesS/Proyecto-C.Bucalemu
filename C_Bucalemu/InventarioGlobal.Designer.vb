@@ -22,49 +22,60 @@ Partial Class InventarioGlobal
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(InventarioGlobal))
         btnGestionar = New Button()
         btnRestablecer = New Button()
         btnTotal = New Button()
         btnMenu = New Button()
         dgvInventario = New DataGridView()
+        txtBuscar = New TextBox()
+        Label1 = New Label()
         CType(dgvInventario, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnGestionar
         ' 
-        btnGestionar.Location = New Point(1049, 75)
+        btnGestionar.BackColor = Color.CornflowerBlue
+        btnGestionar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnGestionar.Location = New Point(1049, 98)
         btnGestionar.Name = "btnGestionar"
         btnGestionar.Size = New Size(138, 23)
         btnGestionar.TabIndex = 0
         btnGestionar.Text = "Gestionar inventario"
-        btnGestionar.UseVisualStyleBackColor = True
+        btnGestionar.UseVisualStyleBackColor = False
         ' 
         ' btnRestablecer
         ' 
-        btnRestablecer.Location = New Point(1049, 133)
+        btnRestablecer.BackColor = Color.CornflowerBlue
+        btnRestablecer.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRestablecer.Location = New Point(1049, 156)
         btnRestablecer.Name = "btnRestablecer"
         btnRestablecer.Size = New Size(138, 23)
         btnRestablecer.TabIndex = 1
         btnRestablecer.Text = "Restablecer inventario"
-        btnRestablecer.UseVisualStyleBackColor = True
+        btnRestablecer.UseVisualStyleBackColor = False
         ' 
         ' btnTotal
         ' 
-        btnTotal.Location = New Point(1049, 104)
+        btnTotal.BackColor = Color.CornflowerBlue
+        btnTotal.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnTotal.Location = New Point(1049, 127)
         btnTotal.Name = "btnTotal"
         btnTotal.Size = New Size(138, 23)
         btnTotal.TabIndex = 2
         btnTotal.Text = "Total Material"
-        btnTotal.UseVisualStyleBackColor = True
+        btnTotal.UseVisualStyleBackColor = False
         ' 
         ' btnMenu
         ' 
-        btnMenu.Location = New Point(1049, 162)
+        btnMenu.BackColor = Color.CornflowerBlue
+        btnMenu.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMenu.Location = New Point(1049, 185)
         btnMenu.Name = "btnMenu"
         btnMenu.Size = New Size(138, 23)
         btnMenu.TabIndex = 3
         btnMenu.Text = "Menu"
-        btnMenu.UseVisualStyleBackColor = True
+        btnMenu.UseVisualStyleBackColor = False
         ' 
         ' dgvInventario
         ' 
@@ -74,11 +85,33 @@ Partial Class InventarioGlobal
         dgvInventario.Size = New Size(992, 579)
         dgvInventario.TabIndex = 4
         ' 
+        ' txtBuscar
+        ' 
+        txtBuscar.Location = New Point(24, 36)
+        txtBuscar.Name = "txtBuscar"
+        txtBuscar.Size = New Size(366, 23)
+        txtBuscar.TabIndex = 5
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(24, 9)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(73, 15)
+        Label1.TabIndex = 6
+        Label1.Text = "Inventario "
+        ' 
         ' InventarioGlobal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
+        BackColor = SystemColors.ActiveCaption
+        BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
+        BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(1236, 780)
+        Controls.Add(Label1)
+        Controls.Add(txtBuscar)
         Controls.Add(dgvInventario)
         Controls.Add(btnMenu)
         Controls.Add(btnTotal)
@@ -88,6 +121,7 @@ Partial Class InventarioGlobal
         Text = "InventarioGlobal"
         CType(dgvInventario, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
+        PerformLayout()
     End Sub
 
     Friend WithEvents btnGestionar As Button
@@ -95,4 +129,6 @@ Partial Class InventarioGlobal
     Friend WithEvents btnTotal As Button
     Friend WithEvents btnMenu As Button
     Friend WithEvents dgvInventario As DataGridView
+    Friend WithEvents txtBuscar As TextBox
+    Friend WithEvents Label1 As Label
 End Class

@@ -187,11 +187,14 @@ Public Class Proyectos
                 Next
                 'compara por el usuario
             Else
+                Dim usuarioSaneado As String = UsuarioRegistrado.Replace(".", "_").Replace("@", "_at_")
+
                 Dim personalAutorizado As Dictionary(Of String, Object) =
                 JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response.Body)
                 For Each key In personalAutorizado.Keys
+
                     key = key.Trim().ToLower()
-                    If key = correoUsuario Then
+                    If key = usuarioSaneado Then
                         Return True
                     End If
                 Next
