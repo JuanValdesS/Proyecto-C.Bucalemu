@@ -1,79 +1,96 @@
 ﻿Imports System.Globalization
+Imports FireSharp.Config
+Imports FireSharp.Interfaces
+Imports FireSharp.Response
 
 Public Class Cubicacion
-    Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click
-        Dim menu As New Menú()
-        Me.Close()
-        menu.Show()
-    End Sub
 
-    Private Sub btncubicar_Click(sender As Object, e As EventArgs) Handles btncubicar.Click
-        Try
-            Dim material As String = cmbMaterial.Text.Trim()
-            Dim tipo = cmbTipoCubica.Text.Trim()
-            Dim resultadoCubicacion As Double = 0
-            Dim descripcion As String = ""
-
-            If tipo = "Por volumen (Largo x Ancho x Alto)" Then
-                If String.IsNullOrWhiteSpace(txtLargo.Text) Or String.IsNullOrWhiteSpace(txtAncho.Text) Or String.IsNullOrWhiteSpace(txtAlto.Text) Then
-                    MsgBox("Por favor, completa todos los campos.", MsgBoxStyle.Exclamation, "Advertencia")
-                    Exit Sub
-                End If
-
-                Dim largo As Double, ancho As Double, alto, cantidadUnidades As Double
-
-                Dim culture = New CultureInfo("es-CL")
-                If Not Double.TryParse(txtLargo.Text, NumberStyles.Any, culture, largo) OrElse Not Double.TryParse(txtAncho.Text, NumberStyles.Any, culture, ancho) OrElse Not Double.TryParse(txtAlto.Text, NumberStyles.Any, culture, alto) OrElse Not Double.TryParse(txtCantidadUnidades.Text, cantidadUnidades) Then
-                    MsgBox("Ingresa valores numéricos válidos. Usa coma para decimales y números enteros para las unidades.", MsgBoxStyle.Exclamation)
-                    Exit Sub
-                End If
-
-                resultadoCubicacion = largo * ancho * alto ' m³
-                descripcion = $"{material} (Volumen: {largo}x{ancho}x{alto})"
-
-            ElseIf tipo = "Por cantidad de unidades" Then
-
-                If String.IsNullOrWhiteSpace(txtCantidadUnidades.Text) Then
-                    MsgBox("Ingrese la cantidad de unidades.", MsgBoxStyle.Exclamation, "Advertencia")
-                    Exit Sub
-                End If
-
-                Dim cantidadUnidades As Double
-                Dim culture As New CultureInfo("es-CL")
-
-                If Not Double.TryParse(txtCantidadUnidades.Text, NumberStyles.Any, culture, cantidadUnidades) Then
-                    MsgBox("Ingrese una cantidad válida (usa coma para decimales si es necesario).", MsgBoxStyle.Exclamation)
-                    Exit Sub
-                End If
-
-
-
-                resultadoCubicacion = cantidadUnidades
-                descripcion = $"{material} (Cantidad de unidades: {cantidadUnidades})"
-            Else
-                MsgBox("Seleccione un tipo de cubicación válido.", MsgBoxStyle.Exclamation, "Advertencia")
-                Exit Sub
-            End If
-
-            ' Agregar al DataGridView
-            dgCubicacion.Rows.Add(material, tipo, resultadoCubicacion, descripcion)
-
-            ' Limpiar campos
-            txtLargo.Clear()
-            txtAncho.Clear()
-            txtAlto.Clear()
-            txtCantidadUnidades.Clear()
-            cmbTipoCubica.Text = ""
-
-        Catch ex As Exception
-            MsgBox("Error en la cubicación: " & ex.Message, MsgBoxStyle.Critical, "Error")
-        End Try
-    End Sub
+    Dim client As IFirebaseClient
 
     Private Sub Cubicacion_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Configurar columnas del DataGridView
-        With dgCubicacion
+        ProgressBarCarga.Visible = False
+        lblEstadoCarga.Visible = False
+    End Sub
 
+    Private Sub InicializarFirebase()
+        Dim config As New FirebaseConfig With {
+        .AuthSecret = "N6kTJwGfYKq9AVH7i3yJ6aTk95ZXw8F3nY1aZFUy",
+        .BasePath = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/"
+    }
+
+        client = New FireSharp.FirebaseClient(config)
+
+        If client Is Nothing Then
+            MsgBox("La conexión con Firebase no está disponible.", MsgBoxStyle.Critical)
+        End If
+    End Sub
+
+    Private Sub btnCargarArchivo_Click(sender As Object, e As EventArgs) Handles btnCargarArchivo.Click
+        OpenFileDialog1.Filter = "CSV Files (*.csv)|*.csv"
+        OpenFileDialog1.Title = "Selecciona un archivo CSV"
+
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            Dim rutaArchivo As String = OpenFileDialog1.FileName
+            LeerArchivoCSV(rutaArchivo)
+        End If
+    End Sub
+
+    Private Sub LeerArchivoCSV(ruta As String)
+        dgvMateriales.Rows.Clear()
+        dgvMateriales.Columns.Clear()
+
+        Using lector As New IO.StreamReader(ruta)
+            ' Leer primera línea para detectar separador
+            Dim primeraLineaTexto As String = lector.ReadLine()
+            If primeraLineaTexto Is Nothing Then Exit Sub
+
+            Dim separador As Char = If(primeraLineaTexto.Contains(";"), ";"c, ","c)
+
+            ' Agregar columnas
+            dgvMateriales.Columns.Add("Descripcion", "Descripción")
+            dgvMateriales.Columns.Add("Unidad", "Unidad")
+            dgvMateriales.Columns.Add("Cantidad", "Cantidad")
+
+            ' Aplicar estilo
+            ConfigurarEstiloDataGridView()
+
+            ' Leer el resto del archivo
+            While Not lector.EndOfStream
+                Dim linea As String = lector.ReadLine()?.Trim()
+
+                ' Ignorar líneas vacías
+                If String.IsNullOrWhiteSpace(linea) Then Continue While
+
+                Dim campos() As String = linea.Split(separador)
+
+                ' Verificar que haya al menos 3 campos
+                If campos.Length >= 3 Then
+                    Dim descripcion As String = LimpiarCampo(campos(0))
+                    Dim unidad As String = LimpiarCampo(campos(1))
+                    Dim cantidad As String = LimpiarCampo(campos(2))
+
+                    ' Agregar solo si unidad y cantidad no están vacíos
+                    If Not String.IsNullOrWhiteSpace(unidad) AndAlso Not String.IsNullOrWhiteSpace(cantidad) Then
+                        dgvMateriales.Rows.Add(descripcion, unidad, cantidad)
+                    End If
+                End If
+            End While
+        End Using
+    End Sub
+
+    ' Limpia un campo eliminando comillas externas y dobles
+    Private Function LimpiarCampo(texto As String) As String
+        If texto.StartsWith("""") AndAlso texto.EndsWith("""") Then
+            texto = texto.Substring(1, texto.Length - 2) ' Quita comillas externas
+        End If
+        texto = texto.Replace("""""", """") ' Reemplaza comillas dobles por una
+        Return texto.Trim()
+    End Function
+
+
+    Private Sub ConfigurarEstiloDataGridView()
+        ''Elementos que hacen que el datagrid se vea mas formal y con mas diseño
+        With dgvMateriales
             ' Establecer el color de fondo y alternar filas en gris claro
             .BackgroundColor = Color.White
             .AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray
@@ -102,21 +119,84 @@ Public Class Cubicacion
             .BorderStyle = BorderStyle.Fixed3D
             .RowHeadersVisible = False
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-            .Columns.Add("Material", "Material")
-            .Columns.Add("TipoCubicacion", "Tipo de Cubicación")
-            .Columns.Add("Resultado", "Resultado")
-            .Columns.Add("Descripcion", "Descripción")
-
         End With
-
-        cmbTipoCubica.Items.Add("Por volumen (Largo x Ancho x Alto)")
-        cmbTipoCubica.Items.Add("Por cantidad de unidades")
-
-
     End Sub
 
-    Private Sub dgHistorialCubicas_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgCubicacion.CellContentClick
+    Private Sub btn_ingresarMateriales_Click(sender As Object, e As EventArgs) Handles btn_ingresarMateriales.Click
+
+        InicializarFirebase()
+
+        If String.IsNullOrWhiteSpace(IdentifyProject) Then
+            MsgBox("El proyecto no ha sido identificado.", MsgBoxStyle.Critical)
+            Exit Sub
+        End If
+
+        Try
+            If dgvMateriales.Rows.Count = 0 Then
+                MsgBox("No hay materiales para ingresar.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+
+            ProgressBarCarga.Value = 0
+            ProgressBarCarga.Visible = True
+            lblEstadoCarga.Text = "Cargando materiales al inventario..."
+            lblEstadoCarga.Visible = True
+
+            Dim totalMateriales As Integer = dgvMateriales.Rows.Count - 1 ' Ignorar la última fila nueva
+            Dim contador As Integer = 0
+
+            For Each fila As DataGridViewRow In dgvMateriales.Rows
+                ' Saltar la fila nueva (vacía al final)
+                If fila.IsNewRow OrElse fila.Cells.Count < 3 Then Continue For
+
+                ' Validar que las celdas existen y no son Nothing
+                Dim descripcion As String = If(fila.Cells(0)?.Value IsNot Nothing, fila.Cells(0).Value.ToString().Trim(), "")
+                Dim unidad As String = If(fila.Cells(1)?.Value IsNot Nothing, fila.Cells(1).Value.ToString().Trim(), "")
+                Dim cantidad As String = If(fila.Cells(2)?.Value IsNot Nothing, fila.Cells(2).Value.ToString().Trim(), "")
+
+                ' Verificar que todos los campos tengan valor
+                If String.IsNullOrWhiteSpace(descripcion) OrElse
+               String.IsNullOrWhiteSpace(unidad) OrElse
+               String.IsNullOrWhiteSpace(cantidad) Then
+                    Continue For
+                End If
+
+                Dim fechaIngreso As String = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
+
+                Dim nuevoMaterial As New Dictionary(Of String, Object) From {
+                {"material", descripcion},
+                {"cantidad", cantidad},
+                {"fecha", fechaIngreso},
+                {"unidad", unidad}
+                }
+
+                If client IsNot Nothing Then
+                    Dim pushResponse = client.Push("Proyectos/" & IdentifyProject & "/Inventario/", nuevoMaterial)
+                Else
+                    MsgBox("La conexión con Firebase no está disponible.", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
+
+
+                contador += 1
+                ProgressBarCarga.Value = Math.Min(100, CInt((contador / totalMateriales) * 100))
+                Application.DoEvents()
+            Next
+
+            lblEstadoCarga.Text = "Carga completada exitosamente."
+            MsgBox("Materiales cargados exitosamente al inventario.", MsgBoxStyle.Information, "Éxito")
+        Catch ex As Exception
+            MsgBox("Error al cargar materiales al inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            lblEstadoCarga.Text = "Error al cargar los materiales."
+        Finally
+            ProgressBarCarga.Visible = False
+        End Try
 
     End Sub
+    Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
+        Dim menu As New Menú
+        Close()
+        menu.Show()
+    End Sub
+
 End Class

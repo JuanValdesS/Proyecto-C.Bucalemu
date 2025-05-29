@@ -76,7 +76,7 @@ Public Class Inventario
                 Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
                 For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
+                    Dim nombre As String = If(item.Value("material") IsNot Nothing, item.Value("material").ToString(), "Desconocido")
                     Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
                     Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
                     Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")
