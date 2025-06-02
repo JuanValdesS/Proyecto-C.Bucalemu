@@ -52,9 +52,9 @@ Public Class Inventario
         Try
             ' Obtener los datos desde Firebase
             Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
-
-            ' Verificar que la respuesta no sea nula
-            If respuesta.Body IsNot "null" Then
+            MsgBox(respuesta.Body)
+            ' Verificar que la respuesta no sea nula y que no tenga espacios adicionales
+            If respuesta.Body IsNot Nothing AndAlso respuesta.Body.Trim() <> "null" Then
                 ' Convertir la respuesta a un JObject (Newtonsoft.Json.Linq)
                 Dim jsonData As JObject = JObject.Parse(respuesta.Body)
 
@@ -102,7 +102,11 @@ Public Class Inventario
                     DataGridView1.Rows.Add(contador, material("nombre"), material("cantidad"), material("unidad"), material("fecha"))
                     contador += 1
                 Next
-
+            ElseIf respuesta.Body.Trim() = "null" Then
+                ' Si no hay datos, mostrar un mensaje
+                MsgBox("No hay datos en el inventario.", MsgBoxStyle.Information)
+            Else
+                MsgBox("Error al cargar los datos del inventario.", MsgBoxStyle.Critical)
             End If
         Catch ex As Exception
             MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)

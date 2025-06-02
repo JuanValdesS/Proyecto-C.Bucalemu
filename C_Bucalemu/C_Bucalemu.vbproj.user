@@ -8,6 +8,9 @@
     <Compile Update="Compras.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Confirmar.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="CreacionProyecto.vb">
       <SubType>Form</SubType>
     </Compile>

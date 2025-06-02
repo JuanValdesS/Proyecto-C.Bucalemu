@@ -181,3 +181,12 @@ C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucal
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\RBush.dll
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\SixLabors.Fonts.dll
 C:\Users\Juan\Desktop\Proyecto-Constructora-Bucalemu\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\System.IO.Packaging.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\ClosedXML.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\ClosedXML.Parser.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\DocumentFormat.OpenXml.Framework.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\ExcelNumberFormat.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\RBush.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\SixLabors.Fonts.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\bin\Debug\net8.0-windows\System.IO.Packaging.dll
+C:\Users\diego\Documents\Proyecto-C.Bucalemu\C_Bucalemu\obj\Debug\net8.0-windows\C_Bucalemu.Confirmar.resources
