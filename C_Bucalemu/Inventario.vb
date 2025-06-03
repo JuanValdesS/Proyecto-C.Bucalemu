@@ -52,7 +52,6 @@ Public Class Inventario
         Try
             ' Obtener los datos desde Firebase
             Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
-            MsgBox(respuesta.Body)
             ' Verificar que la respuesta no sea nula y que no tenga espacios adicionales
             If respuesta.Body IsNot Nothing AndAlso respuesta.Body.Trim() <> "null" Then
                 ' Convertir la respuesta a un JObject (Newtonsoft.Json.Linq)
@@ -104,7 +103,7 @@ Public Class Inventario
                 Next
             ElseIf respuesta.Body.Trim() = "null" Then
                 ' Si no hay datos, mostrar un mensaje
-                MsgBox("No hay datos en el inventario.", MsgBoxStyle.Information)
+                MsgBox("No hay datos en el inventario.", MsgBoxStyle.Information, "Información sobre materiales")
             Else
                 MsgBox("Error al cargar los datos del inventario.", MsgBoxStyle.Critical)
             End If
@@ -246,7 +245,7 @@ Public Class Inventario
                 Dim contador As Integer = 1
 
                 For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
+                    Dim nombre As String = If(item.Value("material") IsNot Nothing, item.Value("material").ToString(), "Desconocido")
                     Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
                     Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
                     Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")

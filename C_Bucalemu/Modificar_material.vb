@@ -46,8 +46,8 @@ Public Class mod_material
                     Dim datosMaterial As Dictionary(Of String, Object) = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(item.Value.ToString()), Dictionary(Of String, Object))
 
                     ' Agregar el nombre del material si existe en el registro
-                    If datosMaterial.ContainsKey("Material") Then
-                        materialesUnicos.Add(datosMaterial("Material").ToString())
+                    If datosMaterial.ContainsKey("material") Then
+                        materialesUnicos.Add(datosMaterial("material").ToString())
                     End If
                 Next
 
@@ -187,7 +187,7 @@ Public Class mod_material
                 For Each item In inventario
                     Dim datosMaterial As Dictionary(Of String, Object) = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(item.Value.ToString()), Dictionary(Of String, Object))
                     ' Si el nombre coincide, aumentar el contador
-                    If datosMaterial.ContainsKey("Material") AndAlso datosMaterial("Material").ToString() = nombre Then
+                    If datosMaterial.ContainsKey("material") AndAlso datosMaterial("material").ToString() = nombre Then
                         contador += 1
                     End If
                 Next
@@ -201,7 +201,7 @@ Public Class mod_material
 
                 ' Crear el objeto con los datos
                 Dim material As New Dictionary(Of String, Object) From {
-                    {"Material", nombre},
+                    {"material", nombre},
                     {"cantidad", cantidad},
                     {"unidad", unidades},
                     {"fecha", fechaIngreso}
@@ -298,7 +298,7 @@ Public Class mod_material
                 ' Filtrar materiales por nombre y unidad
                 For Each item In inventario
                     Dim materialData As Dictionary(Of String, Object) = CType(item.Value, Dictionary(Of String, Object))
-                    If materialData("Material").ToString() = nombre AndAlso materialData("unidad").ToString() = unidades Then
+                    If materialData("material").ToString() = nombre AndAlso materialData("unidad").ToString() = unidades Then
                         materialesFiltrados.Add(New KeyValuePair(Of String, Dictionary(Of String, Object))(item.Key, materialData))
                     End If
                 Next

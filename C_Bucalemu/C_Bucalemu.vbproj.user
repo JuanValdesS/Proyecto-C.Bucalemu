@@ -20,6 +20,9 @@
     <Compile Update="InventarioGlobal.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Menú.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Proyectos.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -33,9 +36,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Login.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Menú.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Modificar_material.vb">

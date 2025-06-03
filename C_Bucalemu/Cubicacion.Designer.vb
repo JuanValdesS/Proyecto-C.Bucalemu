@@ -72,11 +72,12 @@ Partial Class Cubicacion
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.CornflowerBlue
-        Label1.Font = New Font("Segoe UI Symbol", 7.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(189, 21)
+        Label1.BackColor = Color.DarkSlateGray
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
+        Label1.Location = New Point(54, 19)
         Label1.Name = "Label1"
-        Label1.Size = New Size(231, 17)
+        Label1.Size = New Size(490, 35)
         Label1.TabIndex = 4
         Label1.Text = "Seleccione la ficha de cubicación"
         ' 
@@ -87,7 +88,7 @@ Partial Class Cubicacion
         dgvMateriales.Location = New Point(54, 122)
         dgvMateriales.Name = "dgvMateriales"
         dgvMateriales.RowHeadersWidth = 51
-        dgvMateriales.Size = New Size(511, 179)
+        dgvMateriales.Size = New Size(490, 179)
         dgvMateriales.TabIndex = 5
         ' 
         ' OpenFileDialog1

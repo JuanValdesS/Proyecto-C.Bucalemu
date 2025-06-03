@@ -142,7 +142,7 @@ Partial Class mod_material
         ComboBox1.BackColor = Color.AliceBlue
         ComboBox1.Font = New Font("Arial", 7.8F)
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"Unidade(s)", "Kilogramo(s)", "Litro(s)", "Metros", "Metros cuadrado(s)", "Metros Cúbico(s)", "Milímetro(s)"})
+        ComboBox1.Items.AddRange(New Object() {"un", "mt", "kg", "pieza", "plancha"})
         ComboBox1.Location = New Point(225, 144)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(79, 24)

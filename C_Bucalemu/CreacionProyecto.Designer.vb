@@ -35,6 +35,8 @@ Partial Class CreacionProyecto
         cmb_personal = New ComboBox()
         Label4 = New Label()
         dg_personal = New DataGridView()
+        btn_eliminar = New Button()
+        Label5 = New Label()
         CType(dg_personal, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -43,7 +45,7 @@ Partial Class CreacionProyecto
         Label1.AutoSize = True
         Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(93, 42)
+        Label1.Location = New Point(93, 86)
         Label1.Name = "Label1"
         Label1.Size = New Size(171, 20)
         Label1.TabIndex = 0
@@ -52,7 +54,7 @@ Partial Class CreacionProyecto
         ' txt_nombre
         ' 
         txt_nombre.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txt_nombre.Location = New Point(93, 65)
+        txt_nombre.Location = New Point(93, 109)
         txt_nombre.Name = "txt_nombre"
         txt_nombre.PlaceholderText = "Ingrese nombre del proyecto"
         txt_nombre.Size = New Size(222, 25)
@@ -63,7 +65,7 @@ Partial Class CreacionProyecto
         Label2.AutoSize = True
         Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(93, 230)
+        Label2.Location = New Point(93, 320)
         Label2.Name = "Label2"
         Label2.Size = New Size(190, 20)
         Label2.TabIndex = 2
@@ -73,7 +75,7 @@ Partial Class CreacionProyecto
         ' 
         cmb_encargado.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmb_encargado.FormattingEnabled = True
-        cmb_encargado.Location = New Point(93, 253)
+        cmb_encargado.Location = New Point(93, 343)
         cmb_encargado.Name = "cmb_encargado"
         cmb_encargado.Size = New Size(222, 25)
         cmb_encargado.TabIndex = 3
@@ -81,11 +83,11 @@ Partial Class CreacionProyecto
         ' txt_descripcion
         ' 
         txt_descripcion.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txt_descripcion.Location = New Point(93, 130)
+        txt_descripcion.Location = New Point(93, 174)
         txt_descripcion.Multiline = True
         txt_descripcion.Name = "txt_descripcion"
         txt_descripcion.PlaceholderText = "Ingrese breve descripción"
-        txt_descripcion.Size = New Size(222, 86)
+        txt_descripcion.Size = New Size(222, 127)
         txt_descripcion.TabIndex = 6
         ' 
         ' Label3
@@ -93,7 +95,7 @@ Partial Class CreacionProyecto
         Label3.AutoSize = True
         Label3.BackColor = Color.CornflowerBlue
         Label3.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(93, 107)
+        Label3.Location = New Point(93, 151)
         Label3.Name = "Label3"
         Label3.Size = New Size(199, 20)
         Label3.TabIndex = 5
@@ -103,7 +105,7 @@ Partial Class CreacionProyecto
         ' 
         btn_crear.BackColor = Color.CornflowerBlue
         btn_crear.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_crear.Location = New Point(233, 333)
+        btn_crear.Location = New Point(232, 419)
         btn_crear.Name = "btn_crear"
         btn_crear.Size = New Size(225, 39)
         btn_crear.TabIndex = 7
@@ -117,7 +119,7 @@ Partial Class CreacionProyecto
         btn_regresar.BackgroundImageLayout = ImageLayout.Stretch
         btn_regresar.FlatStyle = FlatStyle.Popup
         btn_regresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_regresar.Location = New Point(313, 387)
+        btn_regresar.Location = New Point(312, 473)
         btn_regresar.Name = "btn_regresar"
         btn_regresar.Size = New Size(57, 49)
         btn_regresar.TabIndex = 8
@@ -127,7 +129,7 @@ Partial Class CreacionProyecto
         ' 
         btn_ingresar.BackColor = Color.CornflowerBlue
         btn_ingresar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_ingresar.Location = New Point(509, 65)
+        btn_ingresar.Location = New Point(509, 109)
         btn_ingresar.Name = "btn_ingresar"
         btn_ingresar.Size = New Size(80, 28)
         btn_ingresar.TabIndex = 11
@@ -138,7 +140,7 @@ Partial Class CreacionProyecto
         ' 
         cmb_personal.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cmb_personal.FormattingEnabled = True
-        cmb_personal.Location = New Point(364, 65)
+        cmb_personal.Location = New Point(364, 109)
         cmb_personal.Name = "cmb_personal"
         cmb_personal.Size = New Size(139, 25)
         cmb_personal.TabIndex = 10
@@ -148,7 +150,7 @@ Partial Class CreacionProyecto
         Label4.AutoSize = True
         Label4.BackColor = Color.CornflowerBlue
         Label4.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(364, 42)
+        Label4.Location = New Point(364, 86)
         Label4.Name = "Label4"
         Label4.Size = New Size(174, 20)
         Label4.TabIndex = 9
@@ -158,11 +160,34 @@ Partial Class CreacionProyecto
         ' 
         dg_personal.BackgroundColor = Color.AliceBlue
         dg_personal.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dg_personal.Location = New Point(364, 107)
+        dg_personal.Location = New Point(364, 151)
         dg_personal.Name = "dg_personal"
         dg_personal.RowHeadersWidth = 51
         dg_personal.Size = New Size(225, 171)
         dg_personal.TabIndex = 12
+        ' 
+        ' btn_eliminar
+        ' 
+        btn_eliminar.BackColor = Color.IndianRed
+        btn_eliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btn_eliminar.Location = New Point(364, 332)
+        btn_eliminar.Name = "btn_eliminar"
+        btn_eliminar.Size = New Size(225, 36)
+        btn_eliminar.TabIndex = 13
+        btn_eliminar.Text = "Eliminar personal"
+        btn_eliminar.UseVisualStyleBackColor = False
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.BackColor = Color.DarkSlateGray
+        Label5.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = SystemColors.HighlightText
+        Label5.Location = New Point(174, 25)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(329, 35)
+        Label5.TabIndex = 14
+        Label5.Text = "Creación del proyecto"
         ' 
         ' CreacionProyecto
         ' 
@@ -170,7 +195,9 @@ Partial Class CreacionProyecto
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(669, 501)
+        ClientSize = New Size(669, 540)
+        Controls.Add(Label5)
+        Controls.Add(btn_eliminar)
         Controls.Add(dg_personal)
         Controls.Add(btn_ingresar)
         Controls.Add(cmb_personal)
@@ -203,4 +230,6 @@ Partial Class CreacionProyecto
     Friend WithEvents cmb_personal As ComboBox
     Friend WithEvents Label4 As Label
     Friend WithEvents dg_personal As DataGridView
+    Friend WithEvents btn_eliminar As Button
+    Friend WithEvents Label5 As Label
 End Class

@@ -34,9 +34,9 @@ Public Class CreacionProyecto
 
     Private Sub btn_crear_Click(sender As Object, e As EventArgs) Handles btn_crear.Click
 
-        Dim nombreProyecto As String = txt_nombre.Text.Trim()
-        Dim encargado As String = cmb_encargado.Text.Trim()
-        Dim descripcion As String = txt_descripcion.Text.Trim()
+        Dim nombreProyecto = txt_nombre.Text.Trim
+        Dim encargado = cmb_encargado.Text.Trim
+        Dim descripcion = txt_descripcion.Text.Trim
 
         ' Validar campos
         If nombreProyecto = "" OrElse descripcion = "" OrElse encargado = "" Then
@@ -45,16 +45,16 @@ Public Class CreacionProyecto
         End If
 
         ' Verificar si ya existe el proyecto
-        Dim proyectosResponse As FirebaseResponse = client.Get("Proyectos")
-        Dim proyectosExistentes As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(proyectosResponse.Body)
-        Dim maxId As Integer = 0
+        Dim proyectosResponse = client.Get("Proyectos")
+        Dim proyectosExistentes = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(proyectosResponse.Body)
+        Dim maxId = 0
         If proyectosExistentes IsNot Nothing Then
-            For Each kvp As KeyValuePair(Of String, Object) In proyectosExistentes
-                Dim claveProyecto As String = kvp.Key ' Ejemplo: Proyecto_1
+            For Each kvp In proyectosExistentes
+                Dim claveProyecto = kvp.Key ' Ejemplo: Proyecto_1
 
                 ' Extraer número de ID
                 If claveProyecto.StartsWith("Proyecto_") Then
-                    Dim idNumericoStr As String = claveProyecto.Replace("Proyecto_", "")
+                    Dim idNumericoStr = claveProyecto.Replace("Proyecto_", "")
                     Dim idNumerico As Integer
                     If Integer.TryParse(idNumericoStr, idNumerico) Then
                         If idNumerico > maxId Then maxId = idNumerico
@@ -62,9 +62,9 @@ Public Class CreacionProyecto
                 End If
 
                 ' Validar que el nombre no exista repetido
-                Dim datosProyecto As JObject = JObject.Parse(kvp.Value.ToString())
+                Dim datosProyecto = JObject.Parse(kvp.Value.ToString)
                 If datosProyecto("Info") IsNot Nothing AndAlso datosProyecto("Info")("Nombre") IsNot Nothing Then
-                    If datosProyecto("Info")("Nombre").ToString().ToLower() = nombreProyecto.ToLower() Then
+                    If datosProyecto("Info")("Nombre").ToString.ToLower = nombreProyecto.ToLower Then
                         MessageBox.Show("Ya existe un proyecto con este nombre. Usa otro.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         Return
                     End If
@@ -73,8 +73,8 @@ Public Class CreacionProyecto
         End If
 
         ' Generar el nuevo ID secuencial
-        Dim nuevoId As Integer = maxId + 1
-        Dim idProyecto As String = "Proyecto_" & nuevoId
+        Dim nuevoId = maxId + 1
+        Dim idProyecto = "Proyecto_" & nuevoId
 
         ' Crear objeto de proyecto
         Dim infoProyecto As New Dictionary(Of String, Object) From {
@@ -87,17 +87,17 @@ Public Class CreacionProyecto
         client.Set("Proyectos/" & idProyecto & "/Info", infoProyecto)
 
         ' Crear las subcategorías vacías
-        client.Set("Proyectos/" & idProyecto & "/Compras", New Dictionary(Of String, Object)())
-        client.Set("Proyectos/" & idProyecto & "/Inventario", New Dictionary(Of String, Object)())
-        client.Set("Proyectos/" & idProyecto & "/Reportes", New Dictionary(Of String, Object)())
+        client.Set("Proyectos/" & idProyecto & "/Compras", New Dictionary(Of String, Object))
+        client.Set("Proyectos/" & idProyecto & "/Inventario", New Dictionary(Of String, Object))
+        client.Set("Proyectos/" & idProyecto & "/Reportes", New Dictionary(Of String, Object))
 
         For Each fila As DataGridViewRow In dg_personal.Rows
             If Not fila.IsNewRow Then
-                Dim usuario As String = fila.Cells("usuario").Value.ToString().Trim()
-                Dim Email As String = fila.Cells("Email").Value.ToString().Trim()
+                Dim usuario = fila.Cells("usuario").Value.ToString.Trim
+                Dim Email = fila.Cells("Email").Value.ToString.Trim
 
                 ' Saneamiento para usar en la ruta de Firebase
-                Dim claveUsuario As String = usuario.Replace(".", "_").Replace("@", "_at_")
+                Dim claveUsuario = usuario.Replace(".", "_").Replace("@", "_at_")
 
                 Dim datosPersonal As New Dictionary(Of String, Object) From {
                 {"usuario", usuario},   ' se guarda el original
@@ -112,8 +112,8 @@ Public Class CreacionProyecto
         MessageBox.Show("Proyecto creado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
         ' Volver al formulario principal
-        Dim frm As New Proyectos()
-        Me.Close()
+        Dim frm As New Proyectos
+        Close()
         frm.Show()
 
     End Sub
@@ -175,6 +175,15 @@ Public Class CreacionProyecto
             Exit Sub
         End If
 
+        ' Verificar si el usuario ya está en el DataGridView
+        For Each fila As DataGridViewRow In dg_personal.Rows
+            If Not fila.IsNewRow AndAlso fila.Cells("Usuario").Value.ToString() = nombreSeleccionado Then
+                MessageBox.Show("El usuario ya fue ingresado al proyecto.", "Duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                cmb_personal.Focus()
+                Exit Sub
+            End If
+        Next
+
         Try
             ' Obtener todos los usuarios
             Dim response As FirebaseResponse = client.Get("Usuarios")
@@ -196,7 +205,8 @@ Public Class CreacionProyecto
 
                     ' Agregar fila al DataGridView
                     Dim numeroFila As Integer = dg_personal.Rows.Count + 1
-                    dg_personal.Rows.Add(numeroFila, nombreSeleccionado, correo, rol)
+                    dg_personal.Rows.Add("", nombreSeleccionado, correo, rol)
+                    RenumerarFilas()
 
                     Exit For
                 End If
@@ -249,6 +259,22 @@ Public Class CreacionProyecto
             .RowHeadersVisible = False
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
         End With
+    End Sub
+    Private Sub RenumerarFilas()
+        For i As Integer = 0 To dg_personal.Rows.Count - 1
+            dg_personal.Rows(i).Cells("N").Value = (i + 1).ToString()
+        Next
+    End Sub
+    Private Sub btn_eliminar_Click(sender As Object, e As EventArgs) Handles btn_eliminar.Click
+        If dg_personal.SelectedRows.Count = 0 Then
+            MessageBox.Show("Selecciona una fila para eliminar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim confirmacion As DialogResult = MessageBox.Show("¿Estás seguro de que deseas eliminar este usuario?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If confirmacion = DialogResult.Yes Then
+            dg_personal.Rows.Remove(dg_personal.SelectedRows(0))
+        End If
     End Sub
 
 End Class

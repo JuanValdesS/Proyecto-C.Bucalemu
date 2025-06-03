@@ -31,6 +31,7 @@ Partial Class Registro
         txtConfirmarPass = New TextBox()
         visualizarpass = New CheckBox()
         regresar = New Button()
+        Label1 = New Label()
         SuspendLayout()
         ' 
         ' btn_registro
@@ -38,7 +39,7 @@ Partial Class Registro
         btn_registro.BackColor = Color.Moccasin
         btn_registro.Cursor = Cursors.Hand
         btn_registro.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_registro.Location = New Point(205, 330)
+        btn_registro.Location = New Point(202, 367)
         btn_registro.Name = "btn_registro"
         btn_registro.Size = New Size(86, 61)
         btn_registro.TabIndex = 0
@@ -49,7 +50,7 @@ Partial Class Registro
         ' 
         txtEmail.Cursor = Cursors.IBeam
         txtEmail.Font = New Font("Arial Narrow", 9F)
-        txtEmail.Location = New Point(205, 106)
+        txtEmail.Location = New Point(202, 143)
         txtEmail.Name = "txtEmail"
         txtEmail.PlaceholderText = "Email o correo electrónico"
         txtEmail.Size = New Size(189, 25)
@@ -59,7 +60,7 @@ Partial Class Registro
         ' 
         txtPassword.Cursor = Cursors.IBeam
         txtPassword.Font = New Font("Arial Narrow", 9F)
-        txtPassword.Location = New Point(205, 162)
+        txtPassword.Location = New Point(202, 199)
         txtPassword.Name = "txtPassword"
         txtPassword.PasswordChar = "*"c
         txtPassword.PlaceholderText = "Contraseña"
@@ -71,7 +72,7 @@ Partial Class Registro
         combo_rol.Font = New Font("Arial Narrow", 9F)
         combo_rol.FormattingEnabled = True
         combo_rol.Items.AddRange(New Object() {"Administrador", "Jefe", "Trabajador"})
-        combo_rol.Location = New Point(205, 282)
+        combo_rol.Location = New Point(202, 319)
         combo_rol.Name = "combo_rol"
         combo_rol.Size = New Size(129, 28)
         combo_rol.TabIndex = 3
@@ -80,7 +81,7 @@ Partial Class Registro
         ' 
         txtUsuario.Cursor = Cursors.IBeam
         txtUsuario.Font = New Font("Arial Narrow", 9F)
-        txtUsuario.Location = New Point(205, 51)
+        txtUsuario.Location = New Point(202, 88)
         txtUsuario.Name = "txtUsuario"
         txtUsuario.PlaceholderText = "Usuario"
         txtUsuario.Size = New Size(157, 25)
@@ -90,7 +91,7 @@ Partial Class Registro
         ' 
         txtConfirmarPass.Cursor = Cursors.IBeam
         txtConfirmarPass.Font = New Font("Arial Narrow", 9F)
-        txtConfirmarPass.Location = New Point(205, 223)
+        txtConfirmarPass.Location = New Point(202, 260)
         txtConfirmarPass.Name = "txtConfirmarPass"
         txtConfirmarPass.PasswordChar = "*"c
         txtConfirmarPass.PlaceholderText = "Repita la contraseña"
@@ -104,7 +105,7 @@ Partial Class Registro
         visualizarpass.Cursor = Cursors.Hand
         visualizarpass.Font = New Font("Arial Narrow", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         visualizarpass.ForeColor = SystemColors.HighlightText
-        visualizarpass.Location = New Point(400, 162)
+        visualizarpass.Location = New Point(397, 199)
         visualizarpass.Name = "visualizarpass"
         visualizarpass.Size = New Size(121, 24)
         visualizarpass.TabIndex = 6
@@ -116,12 +117,24 @@ Partial Class Registro
         regresar.BackColor = Color.Moccasin
         regresar.Cursor = Cursors.Hand
         regresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        regresar.Location = New Point(309, 330)
+        regresar.Location = New Point(306, 367)
         regresar.Name = "regresar"
         regresar.Size = New Size(94, 61)
         regresar.TabIndex = 7
         regresar.Text = "Regresar"
         regresar.UseVisualStyleBackColor = False
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.BackColor = Color.DarkOliveGreen
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
+        Label1.Location = New Point(168, 25)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(296, 35)
+        Label1.TabIndex = 8
+        Label1.Text = "Registro de usuario"
         ' 
         ' Registro
         ' 
@@ -130,6 +143,7 @@ Partial Class Registro
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(604, 450)
+        Controls.Add(Label1)
         Controls.Add(regresar)
         Controls.Add(visualizarpass)
         Controls.Add(txtConfirmarPass)
@@ -153,4 +167,5 @@ Partial Class Registro
     Friend WithEvents txtConfirmarPass As TextBox
     Friend WithEvents visualizarpass As CheckBox
     Friend WithEvents regresar As Button
+    Friend WithEvents Label1 As Label
 End Class

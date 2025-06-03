@@ -44,11 +44,12 @@ Partial Class GestionarReportes
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.CornflowerBlue
-        Label1.Font = New Font("Segoe UI Symbol", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.BackColor = Color.DarkSlateGray
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
         Label1.Location = New Point(55, 27)
         Label1.Name = "Label1"
-        Label1.Size = New Size(183, 23)
+        Label1.Size = New Size(308, 35)
         Label1.TabIndex = 5
         Label1.Text = "Gestión de Reportes"
         ' 

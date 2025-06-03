@@ -22,6 +22,7 @@ Partial Class Confirmar
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Confirmar))
         Label1 = New Label()
         dgvConfirmar = New DataGridView()
         btnConfirmar = New Button()
@@ -33,65 +34,85 @@ Partial Class Confirmar
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(24, 41)
+        Label1.BackColor = Color.DarkSlateGray
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
+        Label1.Location = New Point(27, 37)
         Label1.Name = "Label1"
-        Label1.Size = New Size(228, 15)
+        Label1.Size = New Size(520, 35)
         Label1.TabIndex = 0
         Label1.Text = "Confirmar llegada de los materiales"
         ' 
         ' dgvConfirmar
         ' 
+        dgvConfirmar.BackgroundColor = Color.AliceBlue
         dgvConfirmar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvConfirmar.Location = New Point(24, 76)
+        dgvConfirmar.Location = New Point(27, 88)
+        dgvConfirmar.Margin = New Padding(3, 4, 3, 4)
         dgvConfirmar.Name = "dgvConfirmar"
-        dgvConfirmar.Size = New Size(678, 465)
+        dgvConfirmar.RowHeadersWidth = 51
+        dgvConfirmar.Size = New Size(735, 583)
         dgvConfirmar.TabIndex = 1
         ' 
         ' btnConfirmar
         ' 
+        btnConfirmar.BackColor = Color.CornflowerBlue
+        btnConfirmar.Cursor = Cursors.Hand
         btnConfirmar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnConfirmar.Location = New Point(781, 121)
+        btnConfirmar.ForeColor = Color.Black
+        btnConfirmar.Location = New Point(802, 88)
+        btnConfirmar.Margin = New Padding(3, 4, 3, 4)
         btnConfirmar.Name = "btnConfirmar"
-        btnConfirmar.Size = New Size(97, 31)
+        btnConfirmar.Size = New Size(111, 41)
         btnConfirmar.TabIndex = 2
         btnConfirmar.Text = "Confirmar"
-        btnConfirmar.UseVisualStyleBackColor = True
+        btnConfirmar.UseVisualStyleBackColor = False
         ' 
         ' btnEliminar
         ' 
         btnEliminar.BackColor = Color.IndianRed
+        btnEliminar.Cursor = Cursors.Hand
         btnEliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEliminar.Location = New Point(781, 183)
+        btnEliminar.Location = New Point(802, 137)
+        btnEliminar.Margin = New Padding(3, 4, 3, 4)
         btnEliminar.Name = "btnEliminar"
-        btnEliminar.Size = New Size(97, 31)
+        btnEliminar.Size = New Size(111, 41)
         btnEliminar.TabIndex = 3
         btnEliminar.Text = "Eliminar"
         btnEliminar.UseVisualStyleBackColor = False
         ' 
         ' btnRegresar
         ' 
+        btnRegresar.BackColor = Color.Transparent
+        btnRegresar.BackgroundImage = CType(resources.GetObject("btnRegresar.BackgroundImage"), Image)
+        btnRegresar.BackgroundImageLayout = ImageLayout.Stretch
+        btnRegresar.Cursor = Cursors.Hand
+        btnRegresar.FlatStyle = FlatStyle.Popup
         btnRegresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnRegresar.Location = New Point(781, 248)
+        btnRegresar.ForeColor = Color.Black
+        btnRegresar.Location = New Point(821, 193)
+        btnRegresar.Margin = New Padding(3, 4, 3, 4)
         btnRegresar.Name = "btnRegresar"
-        btnRegresar.Size = New Size(97, 31)
+        btnRegresar.Size = New Size(67, 47)
         btnRegresar.TabIndex = 4
-        btnRegresar.Text = "Regresar"
-        btnRegresar.UseVisualStyleBackColor = True
+        btnRegresar.TextAlign = ContentAlignment.MiddleRight
+        btnRegresar.UseVisualStyleBackColor = False
         ' 
         ' Confirmar
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.CornflowerBlue
         BackgroundImage = My.Resources.Resources.Blur_background_of_modern_office_interior_design_for_creative_business___Premium_AI_generated_image
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(946, 600)
+        ClientSize = New Size(961, 710)
         Controls.Add(btnRegresar)
         Controls.Add(btnEliminar)
         Controls.Add(btnConfirmar)
         Controls.Add(dgvConfirmar)
         Controls.Add(Label1)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "Confirmar"
         Text = "Confirmar"
         CType(dgvConfirmar, ComponentModel.ISupportInitialize).EndInit()

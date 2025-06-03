@@ -29,6 +29,7 @@ Partial Class Login
         txtUsuario = New TextBox()
         txtPassword = New TextBox()
         CheckBox1 = New CheckBox()
+        Label3 = New Label()
         SuspendLayout()
         ' 
         ' btnLogin
@@ -36,7 +37,7 @@ Partial Class Login
         btnLogin.BackColor = Color.CornflowerBlue
         btnLogin.Cursor = Cursors.Hand
         btnLogin.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnLogin.Location = New Point(157, 212)
+        btnLogin.Location = New Point(158, 244)
         btnLogin.Margin = New Padding(3, 2, 3, 2)
         btnLogin.Name = "btnLogin"
         btnLogin.Size = New Size(192, 58)
@@ -50,7 +51,7 @@ Partial Class Login
         Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.ForeColor = SystemColors.Desktop
-        Label1.Location = New Point(157, 51)
+        Label1.Location = New Point(158, 83)
         Label1.Name = "Label1"
         Label1.Size = New Size(60, 20)
         Label1.TabIndex = 2
@@ -61,7 +62,7 @@ Partial Class Login
         Label2.AutoSize = True
         Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        Label2.Location = New Point(157, 138)
+        Label2.Location = New Point(158, 170)
         Label2.Name = "Label2"
         Label2.Size = New Size(93, 20)
         Label2.TabIndex = 3
@@ -72,7 +73,7 @@ Partial Class Login
         txtUsuario.BackColor = Color.AliceBlue
         txtUsuario.Cursor = Cursors.IBeam
         txtUsuario.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUsuario.Location = New Point(157, 74)
+        txtUsuario.Location = New Point(158, 106)
         txtUsuario.Margin = New Padding(3, 2, 3, 2)
         txtUsuario.Name = "txtUsuario"
         txtUsuario.PlaceholderText = "Usuario o Correo Electrónico"
@@ -84,7 +85,7 @@ Partial Class Login
         txtPassword.BackColor = Color.AliceBlue
         txtPassword.Cursor = Cursors.IBeam
         txtPassword.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPassword.Location = New Point(157, 160)
+        txtPassword.Location = New Point(158, 192)
         txtPassword.Margin = New Padding(3, 2, 3, 2)
         txtPassword.Name = "txtPassword"
         txtPassword.PasswordChar = "*"c
@@ -100,13 +101,25 @@ Partial Class Login
         CheckBox1.Cursor = Cursors.Hand
         CheckBox1.Font = New Font("Segoe UI Symbol", 7.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         CheckBox1.ForeColor = Color.White
-        CheckBox1.Location = New Point(366, 162)
+        CheckBox1.Location = New Point(367, 194)
         CheckBox1.Margin = New Padding(3, 2, 3, 2)
         CheckBox1.Name = "CheckBox1"
         CheckBox1.Size = New Size(134, 21)
         CheckBox1.TabIndex = 6
         CheckBox1.Text = "Ver Contraseña"
         CheckBox1.UseVisualStyleBackColor = False
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.BackColor = Color.DarkSlateGray
+        Label3.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.ForeColor = SystemColors.HighlightText
+        Label3.Location = New Point(64, 25)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(418, 35)
+        Label3.TabIndex = 7
+        Label3.Text = "Inicio de sesión C.Bucalemu"
         ' 
         ' Login
         ' 
@@ -116,6 +129,7 @@ Partial Class Login
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(555, 332)
+        Controls.Add(Label3)
         Controls.Add(CheckBox1)
         Controls.Add(txtPassword)
         Controls.Add(txtUsuario)
@@ -137,5 +151,6 @@ Partial Class Login
     Friend WithEvents txtUsuario As TextBox
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Label3 As Label
 
 End Class

@@ -145,7 +145,7 @@ Public Class Confirmar
                 For Each item In inventarioData
                     Dim datosMaterial As JObject = item.Value
 
-                    If datosMaterial("Material").ToString().ToUpper() = nombreMedida AndAlso
+                    If datosMaterial("material").ToString().ToUpper() = nombreMedida AndAlso
                    datosMaterial("unidad").ToString().ToUpper() = unidad Then
 
                         ' Si existe, sumar la cantidad
@@ -160,7 +160,7 @@ Public Class Confirmar
                 ' Si no se encontró el material, se crea uno nuevo
                 If Not materialEncontrado Then
                     Dim nuevoMaterial As New JObject()
-                    nuevoMaterial("Material") = nombreMedida
+                    nuevoMaterial("material") = nombreMedida
                     nuevoMaterial("cantidad") = CantidadInt.ToString()
                     nuevoMaterial("unidad") = unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
@@ -184,6 +184,7 @@ Public Class Confirmar
             ' Confirmar al usuario que todo salió bien
             MsgBox("Inventario actualizado correctamente.", MsgBoxStyle.Information, "Mensaje de confirmación")
 
+
         Catch ex As Exception
             ' Capturar errores generales
             MsgBox("Error al actualizar el inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
@@ -196,7 +197,9 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click
-
+        Dim auto As New Autorizar()
+        Me.Close()
+        auto.Show()
     End Sub
 
     Private Sub ConfigurarEstiloDataGridView()

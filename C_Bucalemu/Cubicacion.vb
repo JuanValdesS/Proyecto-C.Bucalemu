@@ -1,7 +1,10 @@
-﻿Imports System.Globalization
-Imports FireSharp.Config
+﻿Imports FireSharp.Config
 Imports FireSharp.Interfaces
 Imports FireSharp.Response
+Imports FireSharp.Exceptions
+Imports Newtonsoft.Json
+Imports System.Globalization
+
 
 Public Class Cubicacion
 
@@ -11,20 +14,6 @@ Public Class Cubicacion
         ProgressBarCarga.Visible = False
         lblEstadoCarga.Visible = False
     End Sub
-
-    Private Sub InicializarFirebase()
-        Dim config As New FirebaseConfig With {
-        .AuthSecret = "N6kTJwGfYKq9AVH7i3yJ6aTk95ZXw8F3nY1aZFUy",
-        .BasePath = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/"
-    }
-
-        client = New FireSharp.FirebaseClient(config)
-
-        If client Is Nothing Then
-            MsgBox("La conexión con Firebase no está disponible.", MsgBoxStyle.Critical)
-        End If
-    End Sub
-
     Private Sub btnCargarArchivo_Click(sender As Object, e As EventArgs) Handles btnCargarArchivo.Click
         OpenFileDialog1.Filter = "CSV Files (*.csv)|*.csv"
         OpenFileDialog1.Title = "Selecciona un archivo CSV"
@@ -156,19 +145,19 @@ Public Class Cubicacion
 
                 ' Verificar que todos los campos tengan valor
                 If String.IsNullOrWhiteSpace(descripcion) OrElse
-               String.IsNullOrWhiteSpace(unidad) OrElse
-               String.IsNullOrWhiteSpace(cantidad) Then
+           String.IsNullOrWhiteSpace(unidad) OrElse
+           String.IsNullOrWhiteSpace(cantidad) Then
                     Continue For
                 End If
 
                 Dim fechaIngreso As String = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
                 Dim nuevoMaterial As New Dictionary(Of String, Object) From {
-                {"material", descripcion},
-                {"cantidad", cantidad},
-                {"fecha", fechaIngreso},
-                {"unidad", unidad}
-                }
+            {"material", descripcion},
+            {"cantidad", cantidad},
+            {"fecha", fechaIngreso},
+            {"unidad", unidad}
+            }
 
                 If client IsNot Nothing Then
                     Dim pushResponse = client.Push("Proyectos/" & IdentifyProject & "/Inventario/", nuevoMaterial)
@@ -191,7 +180,15 @@ Public Class Cubicacion
         Finally
             ProgressBarCarga.Visible = False
         End Try
+    End Sub
 
+    ' Ejemplo de cómo inicializas el cliente (debes tener algo similar en tu código)
+    Private Sub InicializarFirebase()
+        Dim fcon As New FireSharp.Config.FirebaseConfig() With {
+            .AuthSecret = "N6kTJwGfYKq9AVH7i3yJ6aTk95ZXw8F3nY1aZFUy",
+            .BasePath = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/"
+        }
+        client = New FireSharp.FirebaseClient(fcon)
     End Sub
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
         Dim menu As New Menú

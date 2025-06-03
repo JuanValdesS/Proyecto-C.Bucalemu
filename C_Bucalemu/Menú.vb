@@ -1,4 +1,9 @@
-﻿Public Class Menú
+﻿Imports FireSharp.Response
+Imports FireSharp.Interfaces
+Imports FireSharp.Config
+Imports Newtonsoft.Json
+
+Public Class Menú
     Dim compra As New Compras()
     Dim mod_mat As New mod_material()
     Dim repo As New Reportes()
@@ -47,6 +52,7 @@
         btn_inventario.Visible = False
         btn_registro.Visible = False
         btnAutorizar.Visible = False
+        btn_finalizar.Visible = False
 
         ' Obtener el rol del usuario autenticado
         Dim rolUsuario As String = My.Settings.RolUsuario
@@ -56,6 +62,7 @@
             btn_registro.Visible = True
             btnAutorizar.Visible = True
             btn_inventario.Visible = True
+            btn_finalizar.Visible = True
         End If
 
         If rolUsuario = "Jefe" Then
@@ -92,4 +99,73 @@
         registro.Show()
         Me.Close()
     End Sub
+
+    Private Sub btn_finalizar_Click(sender As Object, e As EventArgs) Handles btn_finalizar.Click
+
+        Dim resultado As DialogResult = MessageBox.Show("¿Estás seguro de finalizar el proyecto?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If resultado = DialogResult.Yes Then
+            Try
+                Dim rutaProyecto As String = $"Proyectos/{IdentifyProject}/Inventario"
+                Dim rutaInventarioGlobal As String = "Inventario"
+
+                ' Obtener inventario del proyecto
+                Dim inventarioResponse As FirebaseResponse = client.Get(rutaProyecto)
+
+                If inventarioResponse.Body <> "null" Then
+                    Dim inventarioProyecto As Dictionary(Of String, Dictionary(Of String, Object)) =
+                        JsonConvert.DeserializeObject(Of Dictionary(Of String, Dictionary(Of String, Object)))(inventarioResponse.Body)
+
+                    For Each kvp In inventarioProyecto
+                        Dim idMaterial As String = kvp.Key
+                        Dim datosMaterial As Dictionary(Of String, Object) = kvp.Value
+
+                        ' Obtener campos del material
+                        Dim nombreMaterial As String = datosMaterial("material").ToString()
+                        Dim cantidadProyecto As Double = Convert.ToDouble(datosMaterial("cantidad"))
+                        Dim unidad As String = datosMaterial("unidad").ToString()
+                        Dim fecha As String = datosMaterial("fecha").ToString()
+
+                        ' Ruta al material en el inventario global
+                        Dim rutaMaterialGlobal As String = $"{rutaInventarioGlobal}/{idMaterial}"
+
+                        ' Obtener si ya existe en inventario global
+                        Dim globalResponse As FirebaseResponse = client.Get($"{rutaMaterialGlobal}/cantidad")
+                        Dim cantidadGlobal As Double = 0
+
+                        If globalResponse.Body <> "null" Then
+                            cantidadGlobal = Convert.ToDouble(globalResponse.Body)
+                        End If
+
+                        ' Sumar cantidades
+                        Dim nuevaCantidad As Double = cantidadGlobal + cantidadProyecto
+
+                        ' Crear o actualizar el material en InventarioGlobal
+                        Dim nuevoMaterial As New Dictionary(Of String, Object) From {
+                            {"material", nombreMaterial},
+                            {"cantidad", nuevaCantidad},
+                            {"unidad", unidad},
+                            {"fecha", DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")}
+                        }
+
+                        client.Set(rutaMaterialGlobal, nuevoMaterial)
+                    Next
+                End If
+
+                ' Eliminar el proyecto completo
+                client.Delete($"Proyectos/{IdentifyProject}")
+
+                MessageBox.Show("Proyecto finalizado correctamente. El inventario fue transferido al Inventario Global.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                Dim pro As New Proyectos()
+                Me.Close()
+                pro.Show()
+
+
+            Catch ex As Exception
+                MessageBox.Show("Error al finalizar el proyecto: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End If
+    End Sub
+
 End Class

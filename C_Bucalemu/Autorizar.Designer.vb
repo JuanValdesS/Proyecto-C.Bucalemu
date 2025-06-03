@@ -37,7 +37,7 @@ Partial Class Autorizar
         btnAceptar.BackColor = Color.CornflowerBlue
         btnAceptar.Cursor = Cursors.Hand
         btnAceptar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnAceptar.Location = New Point(799, 96)
+        btnAceptar.Location = New Point(759, 77)
         btnAceptar.Margin = New Padding(3, 4, 3, 4)
         btnAceptar.Name = "btnAceptar"
         btnAceptar.Size = New Size(97, 31)
@@ -50,7 +50,7 @@ Partial Class Autorizar
         btnRechazar.BackColor = Color.IndianRed
         btnRechazar.Cursor = Cursors.Hand
         btnRechazar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnRechazar.Location = New Point(799, 135)
+        btnRechazar.Location = New Point(759, 116)
         btnRechazar.Margin = New Padding(3, 4, 3, 4)
         btnRechazar.Name = "btnRechazar"
         btnRechazar.Size = New Size(97, 31)
@@ -66,7 +66,7 @@ Partial Class Autorizar
         btnMenu.Cursor = Cursors.Hand
         btnMenu.FlatStyle = FlatStyle.Popup
         btnMenu.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnMenu.Location = New Point(814, 279)
+        btnMenu.Location = New Point(770, 271)
         btnMenu.Margin = New Padding(3, 4, 3, 4)
         btnMenu.Name = "btnMenu"
         btnMenu.Size = New Size(68, 51)
@@ -77,7 +77,7 @@ Partial Class Autorizar
         ' 
         dgAutorizar.BackgroundColor = Color.AliceBlue
         dgAutorizar.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgAutorizar.Location = New Point(75, 96)
+        dgAutorizar.Location = New Point(29, 77)
         dgAutorizar.Margin = New Padding(3, 4, 3, 4)
         dgAutorizar.Name = "dgAutorizar"
         dgAutorizar.RowHeadersWidth = 51
@@ -87,31 +87,33 @@ Partial Class Autorizar
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.BackColor = Color.CornflowerBlue
-        Label1.Location = New Point(75, 46)
+        Label1.BackColor = Color.DarkSlateGray
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
+        Label1.Location = New Point(29, 25)
         Label1.Name = "Label1"
-        Label1.Size = New Size(162, 15)
+        Label1.Size = New Size(371, 35)
         Label1.TabIndex = 5
         Label1.Text = "Autorización de compras"
         ' 
         ' Button1
         ' 
         Button1.BackColor = Color.CornflowerBlue
-        Button1.Location = New Point(787, 192)
+        Button1.Location = New Point(759, 154)
         Button1.Name = "Button1"
-        Button1.Size = New Size(135, 47)
+        Button1.Size = New Size(97, 110)
         Button1.TabIndex = 6
         Button1.Text = "Confirmar Ingreso del material"
         Button1.UseVisualStyleBackColor = False
         ' 
         ' Autorizar
         ' 
-        AutoScaleDimensions = New SizeF(8F, 15F)
+        AutoScaleDimensions = New SizeF(9F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.AliceBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(946, 600)
+        ClientSize = New Size(906, 600)
         Controls.Add(Button1)
         Controls.Add(Label1)
         Controls.Add(dgAutorizar)

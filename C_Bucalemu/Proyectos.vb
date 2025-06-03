@@ -57,6 +57,9 @@ Public Class Proyectos
 
         client = New FireSharp.FirebaseClient(config)
 
+        'Ocultar botones'
+        btn_crear.Visible = False
+        btnGestionarInventario.Visible = False
         btn_eliminar.Visible = False
 
         ' Obtener el rol del usuario autenticado
@@ -65,6 +68,8 @@ Public Class Proyectos
         ' Mostrar el botón solo si el usuario es Administrador
         If rolUsuario = "Administrador" Then
             btn_eliminar.Visible = True
+            btn_crear.Visible = True
+            btnGestionarInventario.Visible = True
         End If
 
         If client Is Nothing Then

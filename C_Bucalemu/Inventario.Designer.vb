@@ -36,13 +36,13 @@ Partial Class Inventario
         ' Prueba
         ' 
         Prueba.AutoSize = True
-        Prueba.BackColor = Color.CornflowerBlue
+        Prueba.BackColor = Color.DarkSlateGray
         Prueba.FlatStyle = FlatStyle.Flat
-        Prueba.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Prueba.ForeColor = SystemColors.ControlText
+        Prueba.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Prueba.ForeColor = SystemColors.HighlightText
         Prueba.Location = New Point(54, 21)
         Prueba.Name = "Prueba"
-        Prueba.Size = New Size(208, 20)
+        Prueba.Size = New Size(385, 35)
         Prueba.TabIndex = 2
         Prueba.Text = "Información de materiales"
         ' 
@@ -111,7 +111,7 @@ Partial Class Inventario
         txt_buscar.BackColor = Color.AliceBlue
         txt_buscar.Cursor = Cursors.IBeam
         txt_buscar.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txt_buscar.Location = New Point(54, 59)
+        txt_buscar.Location = New Point(54, 70)
         txt_buscar.Name = "txt_buscar"
         txt_buscar.PlaceholderText = "Ingrese nombre del material a buscar"
         txt_buscar.Size = New Size(260, 25)

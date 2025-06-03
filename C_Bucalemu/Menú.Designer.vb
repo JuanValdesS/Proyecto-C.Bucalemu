@@ -32,6 +32,7 @@ Partial Class Menú
         btnVerInventario = New Button()
         btnAutorizar = New Button()
         btn_registro = New Button()
+        btn_finalizar = New Button()
         SuspendLayout()
         ' 
         ' btn_Compras
@@ -100,14 +101,16 @@ Partial Class Menú
         ' 
         ' btn_logout
         ' 
-        btn_logout.BackColor = Color.RosyBrown
+        btn_logout.BackColor = Color.Transparent
+        btn_logout.BackgroundImage = CType(resources.GetObject("btn_logout.BackgroundImage"), Image)
+        btn_logout.BackgroundImageLayout = ImageLayout.Stretch
         btn_logout.Cursor = Cursors.Hand
+        btn_logout.FlatStyle = FlatStyle.Popup
         btn_logout.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_logout.Location = New Point(294, 486)
+        btn_logout.Location = New Point(599, 488)
         btn_logout.Name = "btn_logout"
-        btn_logout.Size = New Size(109, 60)
+        btn_logout.Size = New Size(63, 60)
         btn_logout.TabIndex = 5
-        btn_logout.Text = "Cerrar Sesión"
         btn_logout.UseVisualStyleBackColor = False
         ' 
         ' btnVerInventario
@@ -142,12 +145,24 @@ Partial Class Menú
         btn_registro.Cursor = Cursors.Hand
         btn_registro.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btn_registro.ForeColor = SystemColors.ControlText
-        btn_registro.Location = New Point(294, 419)
+        btn_registro.Location = New Point(295, 487)
         btn_registro.Name = "btn_registro"
         btn_registro.Size = New Size(109, 61)
         btn_registro.TabIndex = 8
         btn_registro.Text = "Admin Register"
         btn_registro.UseVisualStyleBackColor = False
+        ' 
+        ' btn_finalizar
+        ' 
+        btn_finalizar.BackColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
+        btn_finalizar.Cursor = Cursors.Hand
+        btn_finalizar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
+        btn_finalizar.Location = New Point(295, 418)
+        btn_finalizar.Name = "btn_finalizar"
+        btn_finalizar.Size = New Size(108, 63)
+        btn_finalizar.TabIndex = 10
+        btn_finalizar.Text = "Finalizar proyecto"
+        btn_finalizar.UseVisualStyleBackColor = False
         ' 
         ' Menú
         ' 
@@ -157,6 +172,7 @@ Partial Class Menú
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(674, 574)
+        Controls.Add(btn_finalizar)
         Controls.Add(btn_registro)
         Controls.Add(btnAutorizar)
         Controls.Add(btnVerInventario)
@@ -182,4 +198,5 @@ Partial Class Menú
     Friend WithEvents btnVerInventario As Button
     Friend WithEvents btnAutorizar As Button
     Friend WithEvents btn_registro As Button
+    Friend WithEvents btn_finalizar As Button
 End Class
