@@ -71,7 +71,7 @@ Partial Class Registro
         ' 
         combo_rol.Font = New Font("Arial Narrow", 9F)
         combo_rol.FormattingEnabled = True
-        combo_rol.Items.AddRange(New Object() {"Administrador", "Jefe", "Trabajador"})
+        combo_rol.Items.AddRange(New Object() {"Jefe", "Administrador", "Encargado de compras", "Encargado del inventario", "Trabajador"})
         combo_rol.Location = New Point(202, 319)
         combo_rol.Name = "combo_rol"
         combo_rol.Size = New Size(129, 28)

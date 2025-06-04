@@ -23,27 +23,14 @@ Partial Class Login
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Login))
-        btnLogin = New Button()
         Label1 = New Label()
         Label2 = New Label()
         txtUsuario = New TextBox()
         txtPassword = New TextBox()
         CheckBox1 = New CheckBox()
         Label3 = New Label()
+        btnLogin = New Button()
         SuspendLayout()
-        ' 
-        ' btnLogin
-        ' 
-        btnLogin.BackColor = Color.CornflowerBlue
-        btnLogin.Cursor = Cursors.Hand
-        btnLogin.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnLogin.Location = New Point(158, 244)
-        btnLogin.Margin = New Padding(3, 2, 3, 2)
-        btnLogin.Name = "btnLogin"
-        btnLogin.Size = New Size(192, 58)
-        btnLogin.TabIndex = 0
-        btnLogin.Text = "Login"
-        btnLogin.UseVisualStyleBackColor = False
         ' 
         ' Label1
         ' 
@@ -121,6 +108,15 @@ Partial Class Login
         Label3.TabIndex = 7
         Label3.Text = "Inicio de sesión C.Bucalemu"
         ' 
+        ' btnLogin
+        ' 
+        btnLogin.Location = New Point(210, 248)
+        btnLogin.Name = "btnLogin"
+        btnLogin.Size = New Size(96, 32)
+        btnLogin.TabIndex = 8
+        btnLogin.Text = "Login"
+        btnLogin.UseVisualStyleBackColor = True
+        ' 
         ' Login
         ' 
         AutoScaleDimensions = New SizeF(9F, 20F)
@@ -129,13 +125,13 @@ Partial Class Login
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(555, 332)
+        Controls.Add(btnLogin)
         Controls.Add(Label3)
         Controls.Add(CheckBox1)
         Controls.Add(txtPassword)
         Controls.Add(txtUsuario)
         Controls.Add(Label2)
         Controls.Add(Label1)
-        Controls.Add(btnLogin)
         Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 2, 3, 2)
@@ -144,13 +140,12 @@ Partial Class Login
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents btnLogin As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents txtUsuario As TextBox
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents btnLogin As Button
 
 End Class

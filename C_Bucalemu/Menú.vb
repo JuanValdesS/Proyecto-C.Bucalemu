@@ -9,7 +9,6 @@ Public Class Menú
     Dim repo As New Reportes()
     Dim VerInventario As New Inventario
     Dim Autorizar As New Autorizar()
-    Dim registro As New Registro()
     Dim cubi As New Cubicacion()
 
     Private fcon As New FireSharp.Config.FirebaseConfig With {
@@ -49,25 +48,49 @@ Public Class Menú
         End Try
 
         ' Ocultar el botón por defecto
-        btn_inventario.Visible = False
-        btn_registro.Visible = False
-        btnAutorizar.Visible = False
+        btn_inventario.Enabled = False
+        btnAutorizar.Enabled = False
         btn_finalizar.Visible = False
+        btnVerInventario.Enabled = False
+        btn_Compras.Enabled = False
+        btn_cubicacion.Enabled = False
+        btn_confirmar.Enabled = False
+        btn_reportes.Enabled = False
 
         ' Obtener el rol del usuario autenticado
         Dim rolUsuario As String = My.Settings.RolUsuario
 
         ' Mostrar el botón solo si el usuario es Administrador
+        If rolUsuario = "Jefe" Then
+            btn_inventario.Enabled = True
+            btnAutorizar.Enabled = True
+            btn_finalizar.Visible = True
+            btnVerInventario.Enabled = True
+            btn_Compras.Enabled = True
+            btn_cubicacion.Enabled = True
+            btn_confirmar.Enabled = True
+            btn_reportes.Enabled = True
+        End If
+
         If rolUsuario = "Administrador" Then
-            btn_registro.Visible = True
-            btnAutorizar.Visible = True
-            btn_inventario.Visible = True
+            btn_Compras.Enabled = True
+            btn_reportes.Enabled = True
+            btnVerInventario.Enabled = True
+            btn_cubicacion.Enabled = True
             btn_finalizar.Visible = True
         End If
 
-        If rolUsuario = "Jefe" Then
-            btnAutorizar.Visible = True
-            btn_inventario.Visible = True
+        If rolUsuario = "Encargado de compras" Then
+            btnAutorizar.Enabled = True
+            btn_reportes.Enabled = True
+            btnVerInventario.Enabled = True
+        End If
+
+        If rolUsuario = "Encargado del inventario" Then
+            btn_inventario.Enabled = True
+            btn_reportes.Enabled = True
+            btnVerInventario.Enabled = True
+            btn_confirmar.Enabled = True
         End If
 
     End Sub
@@ -92,11 +115,6 @@ Public Class Menú
 
     Private Sub btnAutorizar_Click(sender As Object, e As EventArgs) Handles btnAutorizar.Click
         Autorizar.Show()
-        Me.Close()
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btn_registro.Click
-        registro.Show()
         Me.Close()
     End Sub
 
@@ -168,4 +186,9 @@ Public Class Menú
         End If
     End Sub
 
+    Private Sub btn_confirmar_Click(sender As Object, e As EventArgs) Handles btn_confirmar.Click
+        Dim Confirmar As New Confirmar()
+        Confirmar.Show()
+        Me.Close()
+    End Sub
 End Class

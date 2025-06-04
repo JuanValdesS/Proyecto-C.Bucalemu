@@ -2,14 +2,14 @@
 Imports Newtonsoft.Json.Linq
 Imports System.Net
 Imports System.Diagnostics.Eventing.Reader
-Imports DocumentFormat.OpenXml.Drawing.Diagrams
-Imports DocumentFormat.OpenXml.Drawing.Charts
+Imports System.Drawing
 
 
 Public Class Autorizar
 
     Private Sub Autorizar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RecargarSolicitudes()
+
     End Sub
 
 
@@ -115,12 +115,12 @@ Public Class Autorizar
             RecargarSolicitudes()
 
             ' Confirmar al usuario que todo salió bien
-            MsgBox("Inventario actualizado correctamente.", MsgBoxStyle.Information, "Mensaje de confirmación")
+            MsgBox("Compra actualizada.", MsgBoxStyle.Information, "Mensaje de confirmación")
 
 
         Catch ex As Exception
             ' Capturar errores generales
-            MsgBox("Error al actualizar el inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            MsgBox("Error al actualizar: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
     End Sub
 
@@ -256,11 +256,5 @@ Public Class Autorizar
         Catch ex As Exception
             MsgBox("Error al obtener los datos: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim Confirmar As New Confirmar()
-        Confirmar.Show()
-        Me.Close()
     End Sub
 End Class

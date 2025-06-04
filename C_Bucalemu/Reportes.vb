@@ -35,10 +35,6 @@ Public Class Reportes
         Dim rolUsuario As String = My.Settings.RolUsuario
 
         ' Mostrar el botón solo si el usuario es Administrador o Jefe
-        If rolUsuario = "Administrador" Then
-            btn_greportes.Visible = True
-        End If
-
         If rolUsuario = "Jefe" Then
             btn_greportes.Visible = True
         End If

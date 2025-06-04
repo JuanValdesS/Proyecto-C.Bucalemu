@@ -197,9 +197,9 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click
-        Dim auto As New Autorizar()
+        Dim men As New Menú()
         Me.Close()
-        auto.Show()
+        men.Show()
     End Sub
 
     Private Sub ConfigurarEstiloDataGridView()

@@ -28,7 +28,6 @@ Partial Class Autorizar
         btnMenu = New Button()
         dgAutorizar = New DataGridView()
         Label1 = New Label()
-        Button1 = New Button()
         CType(dgAutorizar, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -66,7 +65,7 @@ Partial Class Autorizar
         btnMenu.Cursor = Cursors.Hand
         btnMenu.FlatStyle = FlatStyle.Popup
         btnMenu.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnMenu.Location = New Point(770, 271)
+        btnMenu.Location = New Point(776, 165)
         btnMenu.Margin = New Padding(3, 4, 3, 4)
         btnMenu.Name = "btnMenu"
         btnMenu.Size = New Size(68, 51)
@@ -96,16 +95,6 @@ Partial Class Autorizar
         Label1.TabIndex = 5
         Label1.Text = "Autorización de compras"
         ' 
-        ' Button1
-        ' 
-        Button1.BackColor = Color.CornflowerBlue
-        Button1.Location = New Point(759, 154)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(97, 110)
-        Button1.TabIndex = 6
-        Button1.Text = "Confirmar Ingreso del material"
-        Button1.UseVisualStyleBackColor = False
-        ' 
         ' Autorizar
         ' 
         AutoScaleDimensions = New SizeF(9F, 20F)
@@ -114,7 +103,6 @@ Partial Class Autorizar
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(906, 600)
-        Controls.Add(Button1)
         Controls.Add(Label1)
         Controls.Add(dgAutorizar)
         Controls.Add(btnMenu)
@@ -134,5 +122,4 @@ Partial Class Autorizar
     Friend WithEvents btnMenu As Button
     Friend WithEvents dgAutorizar As DataGridView
     Friend WithEvents Label1 As Label
-    Friend WithEvents Button1 As Button
 End Class

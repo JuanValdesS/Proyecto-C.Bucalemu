@@ -42,7 +42,7 @@ Public Class Inventario
 
         End If
 
-        If rolUsuario = "Jefe" Then
+        If rolUsuario = "Encargado del inventario" Then
             Button2.Visible = True
         End If
 
@@ -102,8 +102,7 @@ Public Class Inventario
                     contador += 1
                 Next
             ElseIf respuesta.Body.Trim() = "null" Then
-                ' Si no hay datos, mostrar un mensaje
-                MsgBox("No hay datos en el inventario.", MsgBoxStyle.Information, "Información sobre materiales")
+                ' Mensaje nulo
             Else
                 MsgBox("Error al cargar los datos del inventario.", MsgBoxStyle.Critical)
             End If

@@ -31,6 +31,7 @@ Partial Class Proyectos
         btnGestionarInventario = New Button()
         btn_eliminar = New Button()
         btn_logout = New Button()
+        btn_registro = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -129,6 +130,19 @@ Partial Class Proyectos
         btn_logout.Text = "Cerrar sesión"
         btn_logout.UseVisualStyleBackColor = False
         ' 
+        ' btn_registro
+        ' 
+        btn_registro.BackColor = Color.RosyBrown
+        btn_registro.Cursor = Cursors.Hand
+        btn_registro.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btn_registro.ForeColor = SystemColors.ControlText
+        btn_registro.Location = New Point(810, 468)
+        btn_registro.Name = "btn_registro"
+        btn_registro.Size = New Size(109, 61)
+        btn_registro.TabIndex = 9
+        btn_registro.Text = "Admin Register"
+        btn_registro.UseVisualStyleBackColor = False
+        ' 
         ' Proyectos
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -136,6 +150,7 @@ Partial Class Proyectos
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(1002, 630)
+        Controls.Add(btn_registro)
         Controls.Add(btn_logout)
         Controls.Add(btn_eliminar)
         Controls.Add(btnGestionarInventario)
@@ -160,4 +175,5 @@ Partial Class Proyectos
     Friend WithEvents btnGestionarInventario As Button
     Friend WithEvents btn_eliminar As Button
     Friend WithEvents btn_logout As Button
+    Friend WithEvents btn_registro As Button
 End Class

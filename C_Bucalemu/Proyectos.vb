@@ -61,14 +61,20 @@ Public Class Proyectos
         btn_crear.Visible = False
         btnGestionarInventario.Visible = False
         btn_eliminar.Visible = False
+        btn_registro.Visible = False
 
         ' Obtener el rol del usuario autenticado
         Dim rolUsuario As String = My.Settings.RolUsuario
 
         ' Mostrar el botón solo si el usuario es Administrador
-        If rolUsuario = "Administrador" Then
+        If rolUsuario = "Jefe" Then
             btn_eliminar.Visible = True
             btn_crear.Visible = True
+            btnGestionarInventario.Visible = True
+            btn_registro.Visible = True
+        End If
+
+        If rolUsuario = "Encargado del inventario" Then
             btnGestionarInventario.Visible = True
         End If
 
@@ -266,5 +272,12 @@ Public Class Proyectos
             Me.Close() ' Oculta el formulario actual
             sh.Show() ' Muestra el formulario de login
         End If
+    End Sub
+
+    Private Sub btn_registro_Click(sender As Object, e As EventArgs) Handles btn_registro.Click
+        Dim registro As New Registro()
+
+        registro.Show()
+        Me.Close()
     End Sub
 End Class
