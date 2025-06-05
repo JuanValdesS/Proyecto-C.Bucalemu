@@ -71,6 +71,12 @@ Public Class Inventario
                     DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
+                DataGridView1.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+
                 ' Crear lista para almacenar temporalmente los materiales
                 Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
@@ -129,7 +135,7 @@ Public Class Inventario
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -175,7 +181,8 @@ Public Class Inventario
             If Not fila.IsNewRow Then
                 Dim nombre = fila.Cells("Nombre").Value.ToString
                 Dim unidad = fila.Cells("Unidad").Value.ToString
-                Dim cantidad = Convert.ToInt32(fila.Cells("Cantidad").Value)
+                Dim cantidad As Decimal = Decimal.Parse(fila.Cells("Cantidad").Value.ToString, New Globalization.CultureInfo("es-ES"))
+
 
                 ' Clave única basada en nombre + unidad
                 Dim clave = nombre & " - " & unidad
@@ -200,6 +207,9 @@ Public Class Inventario
             DataGridView1.Columns.Add("Unidad", "Unidad")
             DataGridView1.Columns.Add("CantidadTotal", "Cantidad Total")
         End If
+
+        DataGridView1.Columns("CantidadTotal").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        DataGridView1.Columns("Material").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         ' Agregar los totales al DataGridView2
         For Each kvp In totales
@@ -240,6 +250,11 @@ Public Class Inventario
                     DataGridView1.Columns.Add("Unidad", "Unidad")
                     DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
+
+                DataGridView1.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
                 Dim contador As Integer = 1
 

@@ -112,6 +112,7 @@ Public Class Proyectos
                 dt.Columns.Add("Descripción")
                 dt.Columns.Add("Encargado")
 
+
                 For Each proyectoKey In proyectosDict.Keys
                     Dim infoResponse As FirebaseResponse = client.Get("Proyectos/" & proyectoKey & "/Info")
                     If infoResponse.Body <> "null" Then
@@ -147,7 +148,7 @@ Public Class Proyectos
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True

@@ -93,7 +93,7 @@ Partial Class Menú
         Label1.BackColor = Color.Moccasin
         Label1.Font = New Font("Segoe UI Symbol", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = SystemColors.Desktop
-        Label1.Location = New Point(300, 33)
+        Label1.Location = New Point(299, 56)
         Label1.Name = "Label1"
         Label1.Size = New Size(417, 28)
         Label1.TabIndex = 4
@@ -107,7 +107,7 @@ Partial Class Menú
         btn_logout.Cursor = Cursors.Hand
         btn_logout.FlatStyle = FlatStyle.Popup
         btn_logout.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_logout.Location = New Point(897, 509)
+        btn_logout.Location = New Point(927, 546)
         btn_logout.Name = "btn_logout"
         btn_logout.Size = New Size(63, 60)
         btn_logout.TabIndex = 5
@@ -148,7 +148,7 @@ Partial Class Menú
         btn_finalizar.FlatStyle = FlatStyle.Popup
         btn_finalizar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btn_finalizar.ImageAlign = ContentAlignment.MiddleRight
-        btn_finalizar.Location = New Point(31, 509)
+        btn_finalizar.Location = New Point(38, 546)
         btn_finalizar.Name = "btn_finalizar"
         btn_finalizar.Size = New Size(72, 61)
         btn_finalizar.TabIndex = 10
@@ -174,7 +174,7 @@ Partial Class Menú
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(996, 597)
+        ClientSize = New Size(1035, 637)
         Controls.Add(btn_confirmar)
         Controls.Add(btn_finalizar)
         Controls.Add(btnAutorizar)

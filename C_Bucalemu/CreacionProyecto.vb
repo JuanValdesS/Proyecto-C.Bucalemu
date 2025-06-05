@@ -145,9 +145,10 @@ Public Class CreacionProyecto
                 End If
 
                 ' Agregamos solo los administradores al ComboBox de encargado
-                If user.ContainsKey("Rol") AndAlso user("Rol") = "Administrador" AndAlso user.ContainsKey("Usuario") Then
+                If user.ContainsKey("Rol") AndAlso user("Rol") = "Jefe" AndAlso user.ContainsKey("Usuario") Then
                     cmb_encargado.Items.Add(user("Usuario"))
                 End If
+
             Next
 
             ' Seleccionamos el primer elemento de cada ComboBox si tienen ítems

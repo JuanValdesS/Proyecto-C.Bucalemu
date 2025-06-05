@@ -64,6 +64,10 @@ Public Class InventarioGlobal
                     dgvInventario.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
+                dgvInventario.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                dgvInventario.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                dgvInventario.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
                 ' Crear lista para almacenar temporalmente los materiales
                 Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
@@ -122,7 +126,7 @@ Public Class InventarioGlobal
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -161,7 +165,7 @@ Public Class InventarioGlobal
             If Not fila.IsNewRow Then
                 Dim nombre = fila.Cells("Nombre").Value.ToString
                 Dim unidad = fila.Cells("Unidad").Value.ToString
-                Dim cantidad = Convert.ToInt32(fila.Cells("Cantidad").Value)
+                Dim cantidad As Decimal = Decimal.Parse(fila.Cells("Cantidad").Value.ToString, New Globalization.CultureInfo("es-ES"))
 
                 ' Clave única basada en nombre + unidad
                 Dim clave = nombre & " - " & unidad
@@ -186,6 +190,9 @@ Public Class InventarioGlobal
             dgvInventario.Columns.Add("Unidad", "Unidad")
             dgvInventario.Columns.Add("CantidadTotal", "Cantidad Total")
         End If
+
+        dgvInventario.Columns("CantidadTotal").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        dgvInventario.Columns("Material").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         ' Agregar los totales al DataGridView2
         For Each kvp In totales
@@ -219,10 +226,15 @@ Public Class InventarioGlobal
                     dgvInventario.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
+                dgvInventario.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                dgvInventario.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                dgvInventario.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                dgvInventario.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
                 Dim contador As Integer = 1
 
                 For Each item As KeyValuePair(Of String, JToken) In jsonData
-                    Dim nombre As String = If(item.Value("Material") IsNot Nothing, item.Value("Material").ToString(), "Desconocido")
+                    Dim nombre As String = If(item.Value("material") IsNot Nothing, item.Value("material").ToString(), "Desconocido")
                     Dim cantidad As String = If(item.Value("cantidad") IsNot Nothing, item.Value("cantidad").ToString(), "0")
                     Dim unidades As String = If(item.Value("unidad") IsNot Nothing, item.Value("unidad").ToString(), "No registrada")
                     Dim fechaIngreso As String = If(item.Value("fecha") IsNot Nothing, item.Value("fecha").ToString(), "No registrada")

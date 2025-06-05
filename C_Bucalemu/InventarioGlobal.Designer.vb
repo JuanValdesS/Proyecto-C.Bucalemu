@@ -30,6 +30,7 @@ Partial Class InventarioGlobal
         dgvInventario = New DataGridView()
         txtBuscar = New TextBox()
         Label1 = New Label()
+        Label2 = New Label()
         CType(dgvInventario, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -37,22 +38,22 @@ Partial Class InventarioGlobal
         ' 
         btnGestionar.BackColor = Color.CornflowerBlue
         btnGestionar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnGestionar.Location = New Point(1199, 131)
+        btnGestionar.Location = New Point(65, 219)
         btnGestionar.Margin = New Padding(3, 4, 3, 4)
         btnGestionar.Name = "btnGestionar"
-        btnGestionar.Size = New Size(158, 31)
+        btnGestionar.Size = New Size(187, 38)
         btnGestionar.TabIndex = 0
         btnGestionar.Text = "Gestionar inventario"
         btnGestionar.UseVisualStyleBackColor = False
         ' 
         ' btnRestablecer
         ' 
-        btnRestablecer.BackColor = Color.CornflowerBlue
+        btnRestablecer.BackColor = Color.IndianRed
         btnRestablecer.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnRestablecer.Location = New Point(1199, 208)
+        btnRestablecer.Location = New Point(65, 284)
         btnRestablecer.Margin = New Padding(3, 4, 3, 4)
         btnRestablecer.Name = "btnRestablecer"
-        btnRestablecer.Size = New Size(158, 31)
+        btnRestablecer.Size = New Size(187, 36)
         btnRestablecer.TabIndex = 1
         btnRestablecer.Text = "Restablecer inventario"
         btnRestablecer.UseVisualStyleBackColor = False
@@ -61,44 +62,47 @@ Partial Class InventarioGlobal
         ' 
         btnTotal.BackColor = Color.CornflowerBlue
         btnTotal.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnTotal.Location = New Point(1199, 169)
+        btnTotal.Location = New Point(65, 155)
         btnTotal.Margin = New Padding(3, 4, 3, 4)
         btnTotal.Name = "btnTotal"
-        btnTotal.Size = New Size(158, 31)
+        btnTotal.Size = New Size(187, 38)
         btnTotal.TabIndex = 2
         btnTotal.Text = "Total Material"
         btnTotal.UseVisualStyleBackColor = False
         ' 
         ' btnMenu
         ' 
-        btnMenu.BackColor = Color.CornflowerBlue
+        btnMenu.BackColor = Color.Transparent
+        btnMenu.BackgroundImage = CType(resources.GetObject("btnMenu.BackgroundImage"), Image)
+        btnMenu.BackgroundImageLayout = ImageLayout.Stretch
+        btnMenu.Cursor = Cursors.Hand
+        btnMenu.FlatStyle = FlatStyle.Popup
         btnMenu.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMenu.Location = New Point(1199, 247)
+        btnMenu.Location = New Point(122, 353)
         btnMenu.Margin = New Padding(3, 4, 3, 4)
         btnMenu.Name = "btnMenu"
-        btnMenu.Size = New Size(158, 31)
+        btnMenu.Size = New Size(60, 48)
         btnMenu.TabIndex = 3
-        btnMenu.Text = "Menu"
         btnMenu.UseVisualStyleBackColor = False
         ' 
         ' dgvInventario
         ' 
         dgvInventario.BackgroundColor = Color.AliceBlue
         dgvInventario.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvInventario.Location = New Point(27, 131)
+        dgvInventario.Location = New Point(360, 78)
         dgvInventario.Margin = New Padding(3, 4, 3, 4)
         dgvInventario.Name = "dgvInventario"
         dgvInventario.RowHeadersWidth = 51
-        dgvInventario.Size = New Size(1134, 741)
+        dgvInventario.Size = New Size(1110, 741)
         dgvInventario.TabIndex = 4
         ' 
         ' txtBuscar
         ' 
-        txtBuscar.Location = New Point(27, 78)
+        txtBuscar.Location = New Point(37, 78)
         txtBuscar.Margin = New Padding(3, 4, 3, 4)
         txtBuscar.Name = "txtBuscar"
         txtBuscar.PlaceholderText = "Ingrese material a buscar"
-        txtBuscar.Size = New Size(305, 27)
+        txtBuscar.Size = New Size(244, 27)
         txtBuscar.TabIndex = 5
         ' 
         ' Label1
@@ -107,11 +111,23 @@ Partial Class InventarioGlobal
         Label1.BackColor = Color.DarkSlateGray
         Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = SystemColors.HighlightText
-        Label1.Location = New Point(27, 25)
+        Label1.Location = New Point(715, 24)
         Label1.Name = "Label1"
-        Label1.Size = New Size(166, 35)
+        Label1.Size = New Size(328, 35)
         Label1.TabIndex = 6
-        Label1.Text = "Inventario "
+        Label1.Text = "Inventario Remanente"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.DarkSlateGray
+        Label2.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.ForeColor = SystemColors.HighlightText
+        Label2.Location = New Point(37, 24)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(159, 35)
+        Label2.TabIndex = 7
+        Label2.Text = "Busqueda"
         ' 
         ' InventarioGlobal
         ' 
@@ -120,7 +136,8 @@ Partial Class InventarioGlobal
         BackColor = SystemColors.ActiveCaption
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(1413, 1040)
+        ClientSize = New Size(1566, 864)
+        Controls.Add(Label2)
         Controls.Add(Label1)
         Controls.Add(txtBuscar)
         Controls.Add(dgvInventario)
@@ -144,4 +161,5 @@ Partial Class InventarioGlobal
     Friend WithEvents dgvInventario As DataGridView
     Friend WithEvents txtBuscar As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
 End Class

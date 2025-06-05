@@ -10,10 +10,7 @@ Public Class mod_material
     Private client As FireSharp.Interfaces.IFirebaseClient
     Private Sub Modificar_material_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        nMedidas.Visible = False
-        cbMedida.Visible = False
         txtMaterial.Visible = False
-        lbl_medida.Visible = False
         Dim IdProyecto As String = IdentifyProject
 
         Try
@@ -95,6 +92,11 @@ Public Class mod_material
                     DataGridView1.Columns.Add("Fecha", "Fecha de Ingreso")
                 End If
 
+                DataGridView1.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                DataGridView1.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
                 ' Crear lista para almacenar temporalmente los materiales
                 Dim listaMateriales As New List(Of Dictionary(Of String, String))
 
@@ -149,23 +151,6 @@ Public Class mod_material
                     txtbox1.Items.Add(nombre)
                 End If
 
-                'Agrega la medida al nombre si es que este no esta vacío
-                If CheckBox1.Checked Then
-                    nombre = (nombre & " " & nMedidas.Text & cbMedida.Text).ToUpper()
-                    If String.IsNullOrWhiteSpace(nMedidas.Text) OrElse String.IsNullOrWhiteSpace(cbMedida.Text) Then
-                        MsgBox("Por favor, ingrese la medida del material", MsgBoxStyle.Exclamation, "Advertencia")
-                        Exit Sub
-                    End If
-
-                    Dim medidaFormateada As String = nMedidas.Text.Trim() & cbMedida.Text.Trim()
-
-                    ' Verifica si ya contiene la medida para evitar duplicados
-                    If Not nombre.ToUpper().Contains(medidaFormateada.ToUpper()) Then
-                        nombre &= " " & medidaFormateada
-                    End If
-
-                End If
-
                 ' Validar que los campos no estén vacíos
                 If String.IsNullOrWhiteSpace(nombre) OrElse String.IsNullOrWhiteSpace(cantidad) OrElse String.IsNullOrWhiteSpace(unidades) Then
                     MsgBox("Por favor, ingrese nombre, cantidad del material y su unidad", MsgBoxStyle.Exclamation, "Advertencia")
@@ -217,9 +202,6 @@ Public Class mod_material
                 nCantidad.Value = 0
                 txtMaterial.Clear()
                 ComboBox1.Text = ""
-                nMedidas.Clear()
-                cbMedida.Text = ""
-                CheckBox1.Checked = False
 
                 ' Recargar el inventario después de agregar un dato
                 CargarInventario()
@@ -233,9 +215,6 @@ Public Class mod_material
             nCantidad.Value = 0
             txtMaterial.Clear()
             ComboBox1.Text = ""
-            nMedidas.Clear()
-            cbMedida.Text = ""
-            CheckBox1.Checked = False
 
             MsgBox("No tienes permisos para realizar esta acción.", MsgBoxStyle.Exclamation, "Acceso denegado")
         End If
@@ -244,139 +223,91 @@ Public Class mod_material
 
     Private Sub btn_retirar_Click(sender As Object, e As EventArgs) Handles btn_retirar.Click
 
-        If My.Settings.RolUsuario = "Administrador" Or My.Settings.RolUsuario = "Jefe" Then
-
+        If My.Settings.RolUsuario = "Jefe" Or My.Settings.RolUsuario = "Encargado del inventario" Then
             Try
-                Dim nombre = txtbox1.Text.Trim()
-                ' Capturar los datos del material
-                Dim cantidadSolicitada As Integer
-                Dim unidades As String = ComboBox1.Text.Trim()
-
-                ' Verificar si la cantidad ingresada es un número válido
-                If Not Integer.TryParse(nCantidad.Text.Trim(), cantidadSolicitada) OrElse cantidadSolicitada <= 0 Then
-                    MsgBox("Ingrese una cantidad válida para retirar.", MsgBoxStyle.Exclamation, "Advertencia")
+                ' Verifica que haya una fila seleccionada
+                If DataGridView1.SelectedRows.Count = 0 Then
+                    MsgBox("Seleccione un material desde la tabla para retirar.", MsgBoxStyle.Exclamation, "Informacion")
                     Exit Sub
                 End If
 
-                ' Verificar que se haya ingresado un nombre y una unidad
-                If String.IsNullOrWhiteSpace(nombre) OrElse String.IsNullOrWhiteSpace(unidades) Then
-                    MsgBox("Por favor, ingrese nombre del material y seleccione una unidad.", MsgBoxStyle.Exclamation, "Advertencia")
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim nombre As String = selectedRow.Cells("Nombre").Value.ToString()
+                Dim unidades As String = selectedRow.Cells("Unidad").Value.ToString()
+
+                ' Pregunta la cantidad que desea retirar
+                Dim input As String = InputBox("Ingrese la cantidad que desea retirar del material """ & nombre & """ (" & unidades & "):", "Retirar material", MsgBoxStyle.Information)
+                If String.IsNullOrWhiteSpace(input) Then Exit Sub
+
+                Dim cantidadRetirar As Integer
+                If Not Integer.TryParse(input.Trim(), cantidadRetirar) OrElse cantidadRetirar <= 0 Then
+                    MsgBox("Cantidad inválida.", MsgBoxStyle.Exclamation, "Error")
                     Exit Sub
                 End If
 
-                ' Verificar si se seleccionó "Otro" en el ComboBox
-                If nombre = "OTRO" Then
-                    MsgBox("La selección 'OTRO' no es valida para esta opción, por favor, ingrese otra", MsgBoxStyle.Information, "Advertencia")
-                    txtbox1.Text = ""
-                    txtbox1.Focus()
-                    Exit Sub
-                End If
-
-                ' Verificar si client está inicializado
-                If client Is Nothing Then
-                    MsgBox("No hay conexión con la base de datos.", MsgBoxStyle.Critical, "error")
-                    Exit Sub
-                End If
-
-                ' Obtener todos los materiales de Firebase
                 Dim response = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
                 If response.Body = "null" Then
-                    MsgBox("No hay materiales en el inventario.", MsgBoxStyle.Exclamation, "Advertencia")
+                    MsgBox("No hay inventario disponible.", MsgBoxStyle.Exclamation, "Advertencia")
                     Exit Sub
                 End If
 
                 Dim inventarioJson As JObject = JObject.Parse(response.Body)
-                Dim inventario As New Dictionary(Of String, Object)
-
-                For Each item As JProperty In inventarioJson.Properties()
-                    Dim materialData As Dictionary(Of String, Object) = item.Value.ToObject(Of Dictionary(Of String, Object))()
-                    inventario.Add(item.Name, materialData)
-                Next
-
                 Dim materialesFiltrados = New List(Of KeyValuePair(Of String, Dictionary(Of String, Object)))()
 
-                ' Filtrar materiales por nombre y unidad
-                For Each item In inventario
-                    Dim materialData As Dictionary(Of String, Object) = CType(item.Value, Dictionary(Of String, Object))
-                    If materialData("material").ToString() = nombre AndAlso materialData("unidad").ToString() = unidades Then
-                        materialesFiltrados.Add(New KeyValuePair(Of String, Dictionary(Of String, Object))(item.Key, materialData))
+                ' Buscar todos los registros del material con mismo nombre y unidad
+                For Each item As JProperty In inventarioJson.Properties()
+                    Dim datos As Dictionary(Of String, Object) = item.Value.ToObject(Of Dictionary(Of String, Object))()
+                    If datos("material").ToString() = nombre AndAlso datos("unidad").ToString() = unidades Then
+                        materialesFiltrados.Add(New KeyValuePair(Of String, Dictionary(Of String, Object))(item.Name, datos))
                     End If
                 Next
 
-                ' Si no se encontró el material con la unidad específica
                 If materialesFiltrados.Count = 0 Then
-                    MsgBox("No hay stock del material en la unidad seleccionada.", MsgBoxStyle.Exclamation, "Advertencia")
+                    MsgBox("No se encontraron registros del material en esa unidad.", MsgBoxStyle.Information, "Advertencia")
                     Exit Sub
                 End If
 
-                ' Ordenar los materiales por fecha de ingreso (el más antiguo primero)
-                materialesFiltrados.Sort(Function(a, b) DateTime.Parse(a.Value("fecha").ToString()).CompareTo(DateTime.Parse(b.Value("fecha").ToString())))
+                ' Ordenar por fecha de ingreso (más antiguo primero)
+                materialesFiltrados = materialesFiltrados.OrderBy(Function(m) DateTime.Parse(m.Value("fecha").ToString())).ToList()
 
-                ' Calcular el total disponible
-                Dim cantidadDisponible As Integer = materialesFiltrados.Sum(Function(m) CInt(m.Value("cantidad")))
+                ' Calcular stock total
+                Dim stockTotal As Integer = materialesFiltrados.Sum(Function(m) CInt(m.Value("cantidad").ToString()))
 
-                ' Si la cantidad solicitada es mayor a la disponible, preguntar al usuario
-                If cantidadSolicitada > cantidadDisponible Then
-                    Dim respuesta As MsgBoxResult
-                    respuesta = MsgBox("Solo hay " & cantidadDisponible & " disponibles. ¿Desea retirar lo disponible?", MsgBoxStyle.YesNo + MsgBoxStyle.Question, "Stock insuficiente")
-
-                    If respuesta = MsgBoxResult.Yes Then
-                        cantidadSolicitada = cantidadDisponible ' Asignar la cantidad disponible
-                    Else
-                        Exit Sub ' No realiza la operación si el usuario elige "No"
-                    End If
+                If cantidadRetirar > stockTotal Then
+                    Dim result = MsgBox("La cantidad solicitada excede el stock actual (" & stockTotal & "). ¿Desea retirar la cantidad disponible?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation)
+                    If result = MsgBoxResult.No Then Exit Sub
                 End If
 
-                ' Retirar la cantidad solicitada
-                Dim cantidadRestante = cantidadSolicitada
-                For Each material In materialesFiltrados
-                    Dim id As String = material.Key
-                    Dim materialData As Dictionary(Of String, Object) = material.Value
-                    Dim stockDisponible As Integer = Convert.ToInt32(materialData("cantidad"))
+                ' Iniciar proceso de retiro
+                Dim cantidadPorRetirar = cantidadRetirar
 
-                    If cantidadRestante <= 0 Then
-                        Exit For
-                    End If
+                For Each item In materialesFiltrados
+                    Dim key = item.Key
+                    Dim datos = item.Value
+                    Dim cantidadDisponible = CInt(datos("cantidad").ToString())
 
-                    If stockDisponible <= cantidadRestante Then
-                        ' Si el stock disponible es menor o igual a lo que se quiere retirar, eliminarlo completamente
-                        client.Delete("Proyectos/" & IdentifyProject & "/Inventario/" & id)
-                        cantidadRestante -= stockDisponible
+                    If cantidadPorRetirar >= cantidadDisponible Then
+                        ' Eliminar el registro completamente
+                        client.Delete("Proyectos/" & IdentifyProject & "/Inventario/" & key)
+                        cantidadPorRetirar -= cantidadDisponible
                     Else
-                        ' Si hay más stock del necesario, solo reducir la cantidad
-                        materialData("cantidad") = stockDisponible - cantidadRestante
-                        client.Update("Proyectos/" & IdentifyProject & "/Inventario/" & id, materialData)
-                        cantidadRestante = 0
+                        ' Actualizar con nueva cantidad
+                        datos("cantidad") = cantidadDisponible - cantidadPorRetirar
+                        client.Update("Proyectos/" & IdentifyProject & "/Inventario/" & key, datos)
+                        cantidadPorRetirar = 0
                     End If
+
+                    If cantidadPorRetirar = 0 Then Exit For
                 Next
 
-                ' Mensaje de éxito
                 MsgBox("Material retirado correctamente.", MsgBoxStyle.Information, "Éxito")
-
-                ' Limpiar campos
-                txtbox1.Text = ""
-                nCantidad.Value = 0
-                ComboBox1.Text = ""
-
-                ' Recargar el inventario después de retirar material
                 CargarInventario()
 
             Catch ex As Exception
                 MsgBox("Error al retirar material: " & ex.Message, MsgBoxStyle.Critical, "Error")
             End Try
-
         Else
-
-            'Limpiamos los campos
-            txtbox1.Text = ""
-            nCantidad.Value = 0
-            txtMaterial.Clear()
-            ComboBox1.Text = ""
-            nMedidas.Clear()
-            cbMedida.Text = ""
-            CheckBox1.Checked = False
-
-            MsgBox("No tienes permisos para realizar esta acción.", MsgBoxStyle.Exclamation, "Acceso denegado")
+            MsgBox("No tienes permisos para realizar esta acción.", MsgBoxStyle.Exclamation, "Advertencia")
         End If
 
     End Sub
@@ -400,7 +331,8 @@ Public Class mod_material
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -446,18 +378,6 @@ Public Class mod_material
         inven.Show()
         Me.Close()
 
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
-        If CheckBox1.Checked Then
-            nMedidas.Visible = True
-            cbMedida.Visible = True
-            lbl_medida.Visible = True
-        Else
-            nMedidas.Visible = False
-            cbMedida.Visible = False
-            lbl_medida.Visible = False
-        End If
     End Sub
 
 End Class

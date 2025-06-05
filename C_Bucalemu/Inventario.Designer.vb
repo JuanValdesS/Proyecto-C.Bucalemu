@@ -30,6 +30,7 @@ Partial Class Inventario
         btn_total = New Button()
         btn_reestablecer = New Button()
         txt_buscar = New TextBox()
+        Label1 = New Label()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -40,7 +41,7 @@ Partial Class Inventario
         Prueba.FlatStyle = FlatStyle.Flat
         Prueba.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Prueba.ForeColor = SystemColors.HighlightText
-        Prueba.Location = New Point(54, 21)
+        Prueba.Location = New Point(577, 45)
         Prueba.Name = "Prueba"
         Prueba.Size = New Size(385, 35)
         Prueba.TabIndex = 2
@@ -50,10 +51,10 @@ Partial Class Inventario
         ' 
         DataGridView1.BackgroundColor = Color.AliceBlue
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(54, 111)
+        DataGridView1.Location = New Point(379, 95)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(545, 421)
+        DataGridView1.Size = New Size(764, 571)
         DataGridView1.TabIndex = 3
         ' 
         ' Button1
@@ -64,7 +65,7 @@ Partial Class Inventario
         Button1.Cursor = Cursors.Hand
         Button1.FlatAppearance.BorderColor = Color.White
         Button1.FlatStyle = FlatStyle.Popup
-        Button1.Location = New Point(692, 333)
+        Button1.Location = New Point(156, 354)
         Button1.Name = "Button1"
         Button1.Size = New Size(61, 50)
         Button1.TabIndex = 4
@@ -75,9 +76,9 @@ Partial Class Inventario
         Button2.BackColor = Color.CornflowerBlue
         Button2.Cursor = Cursors.Hand
         Button2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button2.Location = New Point(635, 111)
+        Button2.Location = New Point(54, 219)
         Button2.Name = "Button2"
-        Button2.Size = New Size(169, 63)
+        Button2.Size = New Size(268, 52)
         Button2.TabIndex = 5
         Button2.Text = "Gestión de Inventario"
         Button2.UseVisualStyleBackColor = False
@@ -87,9 +88,9 @@ Partial Class Inventario
         btn_total.BackColor = Color.CornflowerBlue
         btn_total.Cursor = Cursors.Hand
         btn_total.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_total.Location = New Point(635, 180)
+        btn_total.Location = New Point(54, 161)
         btn_total.Name = "btn_total"
-        btn_total.Size = New Size(169, 63)
+        btn_total.Size = New Size(268, 52)
         btn_total.TabIndex = 6
         btn_total.Text = "Total de Material"
         btn_total.UseVisualStyleBackColor = False
@@ -99,9 +100,9 @@ Partial Class Inventario
         btn_reestablecer.BackColor = Color.IndianRed
         btn_reestablecer.Cursor = Cursors.Hand
         btn_reestablecer.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_reestablecer.Location = New Point(635, 249)
+        btn_reestablecer.Location = New Point(54, 277)
         btn_reestablecer.Name = "btn_reestablecer"
-        btn_reestablecer.Size = New Size(169, 63)
+        btn_reestablecer.Size = New Size(268, 52)
         btn_reestablecer.TabIndex = 7
         btn_reestablecer.Text = "Reestablecer inventario"
         btn_reestablecer.UseVisualStyleBackColor = False
@@ -111,11 +112,24 @@ Partial Class Inventario
         txt_buscar.BackColor = Color.AliceBlue
         txt_buscar.Cursor = Cursors.IBeam
         txt_buscar.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txt_buscar.Location = New Point(54, 70)
+        txt_buscar.Location = New Point(54, 95)
         txt_buscar.Name = "txt_buscar"
         txt_buscar.PlaceholderText = "Ingrese nombre del material a buscar"
-        txt_buscar.Size = New Size(260, 25)
+        txt_buscar.Size = New Size(268, 25)
         txt_buscar.TabIndex = 8
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.BackColor = Color.DarkSlateGray
+        Label1.FlatStyle = FlatStyle.Flat
+        Label1.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.ForeColor = SystemColors.HighlightText
+        Label1.Location = New Point(54, 45)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(159, 35)
+        Label1.TabIndex = 9
+        Label1.Text = "Busqueda"
         ' 
         ' Inventario
         ' 
@@ -124,7 +138,8 @@ Partial Class Inventario
         BackColor = Color.CornflowerBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(857, 553)
+        ClientSize = New Size(1192, 740)
+        Controls.Add(Label1)
         Controls.Add(txt_buscar)
         Controls.Add(btn_reestablecer)
         Controls.Add(btn_total)
@@ -147,4 +162,5 @@ Partial Class Inventario
     Friend WithEvents btn_total As Button
     Friend WithEvents btn_reestablecer As Button
     Friend WithEvents txt_buscar As TextBox
+    Friend WithEvents Label1 As Label
 End Class
