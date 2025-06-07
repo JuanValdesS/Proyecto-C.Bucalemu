@@ -1,5 +1,6 @@
 ﻿Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
+Imports System.Globalization
 Imports System.Net
 
 Public Class Confirmar
@@ -56,6 +57,12 @@ Public Class Confirmar
             dgvConfirmar.Columns.Add("Fecha", "Fecha de Ingreso")
             dgvConfirmar.Columns.Add("Estado", "Estado")
 
+            dgvConfirmar.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgvConfirmar.Columns("Materiales").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgvConfirmar.Columns("Fecha").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
+
+
             Dim contador As Integer = 1
 
             ' Rellenar el DataGridView
@@ -83,110 +90,90 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnConfirmar_Click(sender As Object, e As EventArgs) Handles btnConfirmar.Click
-        ' Validar si hay filas en el DataGridView
         If dgvConfirmar.Rows.Count = 0 Then
             MsgBox("No hay datos para enviar.", MsgBoxStyle.Exclamation, "Advertencia")
             Exit Sub
         End If
 
-        ' Validar si el usuario seleccionó una fila
         If dgvConfirmar.SelectedRows.Count = 0 Then
             MsgBox("Por favor seleccione una solicitud.", MsgBoxStyle.Information, "Información")
             Exit Sub
         End If
 
-        ' Obtener la fila seleccionada y el ID de la solicitud
         Dim row As DataGridViewRow = dgvConfirmar.SelectedRows(0)
         Dim solicitudID As String = row.Cells("ID").Value.ToString()
 
-        ' Definir las URLs de Firebase para Inventario y la solicitud de Compra
         Dim firebaseInventarioUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Inventario.json"
         Dim firebaseComprasUrl As String = $"https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Confirmar/" & solicitudID & ".json"
 
         Try
             Dim client As New WebClient()
-
-            ' Descargar el inventario actual desde Firebase
             Dim inventarioResponse As String = client.DownloadString(firebaseInventarioUrl)
             Dim inventarioData As New Dictionary(Of String, JObject)
 
-            ' Verificar si el inventario existe y no está vacío
             If Not String.IsNullOrEmpty(inventarioResponse) AndAlso inventarioResponse <> "null" Then
                 inventarioData = JsonConvert.DeserializeObject(Of Dictionary(Of String, JObject))(inventarioResponse)
             End If
 
-            ' Obtener la cadena de materiales de la solicitud seleccionada
             Dim materiales As String = row.Cells("Materiales").Value.ToString()
-            Dim Texto() As String = materiales.Split(",") 'con esto volvemos a convertir la cadena de string de materiales en una lista, la cual almacena el nombre, medida, cantidad, unidad
+            Dim Texto() As String = materiales.Split(",")
 
-            ' Procesar cada material de la solicitud
             For Each palabra In Texto
                 Dim Material() As String = palabra.Trim().Split(" ")
-                If Material.Length < 4 Then Continue For ' Saltar si no tiene formato correcto
+                If Material.Length < 4 Then Continue For
 
-                ' Separar los datos del material
-                Dim Nombre As String = Material(0).ToUpper() ' Ej: "Cemento"
-                Dim medida As String = Material(1).ToUpper() ' Ej: "Saco"
-                Dim CantidadStr As String = Material(2)      ' Ej: "10"
-                Dim unidad As String = Material(3)           ' Ej: "Unidades"
+                Dim Nombre As String = Material(0).ToUpper()
+                Dim medida As String = Material(1).ToUpper()
+                Dim CantidadStr As String = Material(2).Trim().Replace(",", ".") ' Reemplazar coma por punto
+                Dim unidad As String = Material(3).ToUpper()
 
-                ' Unir nombre y medida para formar el identificador
-                Dim nombreMedida As String = (Nombre + " " + medida).Trim()
+                Dim nombreMedida As String = (Nombre & " " & medida).Trim()
 
-                ' Validar y convertir la cantidad a entero
-                Dim CantidadInt As Integer
-                If Not Integer.TryParse(CantidadStr, CantidadInt) Then
-                    MsgBox("Cantidad inválida para " & nombreMedida, MsgBoxStyle.Critical, "Error de datos")
+                ' Intentar convertir la cantidad a Double, usando CultureInfo para manejar coma o punto
+                Dim CantidadDouble As Double
+                If Not Double.TryParse(CantidadStr, NumberStyles.Any, CultureInfo.InvariantCulture, CantidadDouble) Then
+                    MsgBox("Cantidad inválida para " & nombreMedida & ": """ & CantidadStr & """", MsgBoxStyle.Critical, "Error de datos")
                     Continue For
                 End If
 
-                ' Verificar si el material ya existe en el inventario
                 Dim materialEncontrado As Boolean = False
                 For Each item In inventarioData
                     Dim datosMaterial As JObject = item.Value
-
                     If datosMaterial("material").ToString().ToUpper() = nombreMedida AndAlso
                    datosMaterial("unidad").ToString().ToUpper() = unidad Then
 
-                        ' Si existe, sumar la cantidad
-                        Dim cantidadExistente As Integer = Integer.Parse(datosMaterial("cantidad").ToString())
-                        datosMaterial("cantidad") = (cantidadExistente + CantidadInt).ToString()
+                        Dim cantidadExistente As Double = Double.Parse(datosMaterial("cantidad").ToString(), CultureInfo.InvariantCulture)
+                        datosMaterial("cantidad") = (cantidadExistente + CantidadDouble).ToString()
                         datosMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
                         materialEncontrado = True
                         Exit For
                     End If
                 Next
 
-                ' Si no se encontró el material, se crea uno nuevo
                 If Not materialEncontrado Then
                     Dim nuevoMaterial As New JObject()
                     nuevoMaterial("material") = nombreMedida
-                    nuevoMaterial("cantidad") = CantidadInt.ToString()
+                    nuevoMaterial("cantidad") = CantidadDouble.ToString(CultureInfo.InvariantCulture)
                     nuevoMaterial("unidad") = unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
-                    ' Crear una clave para el nuevo material (ej: CEMENTOSACO_0001)
-                    Dim claveMaterial As String = (Nombre + medida).Replace(" ", "").ToUpper() & "_0001"
+                    Dim claveMaterial As String = (Nombre & medida).Replace(" ", "").ToUpper() & "_0001"
                     inventarioData(claveMaterial) = nuevoMaterial
                 End If
             Next
 
-            ' Convertir el inventario actualizado a JSON y subirlo a Firebase
             Dim updateJson As String = JsonConvert.SerializeObject(inventarioData)
-            client.UploadString(firebaseInventarioUrl, "PUT", updateJson)
-
-            ' Eliminar la solicitud aceptada de la base de datos
+            For Each item In inventarioData
+                Dim materialKey As String = item.Key
+                Dim materialUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Inventario/" & materialKey & ".json"
+                Dim materialJson As String = JsonConvert.SerializeObject(item.Value)
+                client.UploadString(materialUrl, "PUT", materialJson)
+            Next
             client.UploadString(firebaseComprasUrl, "DELETE", String.Empty)
 
-            ' Recargar los datos en la interfaz
-            'Autorizar_Load(Me, EventArgs.Empty)
-
-            ' Confirmar al usuario que todo salió bien
             MsgBox("Inventario actualizado correctamente.", MsgBoxStyle.Information, "Mensaje de confirmación")
 
-
         Catch ex As Exception
-            ' Capturar errores generales
             MsgBox("Error al actualizar el inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
 
@@ -220,7 +207,7 @@ Public Class Confirmar
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True

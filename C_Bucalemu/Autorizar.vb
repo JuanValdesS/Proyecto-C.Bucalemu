@@ -36,7 +36,7 @@ Public Class Autorizar
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -219,6 +219,11 @@ Public Class Autorizar
             dgAutorizar.Columns.Add("Fecha", "Fecha de Ingreso")
             dgAutorizar.Columns.Add("Estado", "Estado")
 
+            dgAutorizar.Columns("RealID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgAutorizar.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgAutorizar.Columns("Materiales").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgAutorizar.Columns("Fecha").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
             Dim contador As Integer = 1
 
             ' Rellenar el DataGridView
@@ -235,10 +240,7 @@ Public Class Autorizar
                         Dim nombreMaterial As String = datosMaterial("Material").ToString().Trim()
                         Dim cantidad As String = datosMaterial("Cantidad").ToString()
                         Dim unidad As String = datosMaterial("Unidad").ToString()
-                        Dim medida As String = datosMaterial("Medida").ToString()
-                        Dim unidadMedida As String = datosMaterial("Unidad de medida").ToString()
-
-                        materialesTexto.Add($"{nombreMaterial} {medida}{unidadMedida} {cantidad} {unidad}")
+                        materialesTexto.Add($"{nombreMaterial}: {cantidad} {unidad}")
                         fecha = datosMaterial("Fecha").ToString()
                     ElseIf propiedad.Name = "Estado" Then
                         estado = propiedad.Value.ToString()

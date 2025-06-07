@@ -4,6 +4,9 @@ Imports FireSharp.Response
 Imports FireSharp.Exceptions
 Imports Newtonsoft.Json
 Imports System.Globalization
+Imports System.IO
+Imports System.Net
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 
 
 Public Class Cubicacion
@@ -42,6 +45,9 @@ Public Class Cubicacion
 
             ' Aplicar estilo
             ConfigurarEstiloDataGridView()
+
+            dgvMateriales.Columns("Descripcion").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+            dgvMateriales.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
             ' Leer el resto del archivo
             While Not lector.EndOfStream
@@ -95,7 +101,7 @@ Public Class Cubicacion
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -113,75 +119,77 @@ Public Class Cubicacion
 
     Private Sub btn_ingresarMateriales_Click(sender As Object, e As EventArgs) Handles btn_ingresarMateriales.Click
 
-        InicializarFirebase()
-
-        If String.IsNullOrWhiteSpace(IdentifyProject) Then
-            MsgBox("El proyecto no ha sido identificado.", MsgBoxStyle.Critical)
+        If dgvMateriales.Rows.Count = 0 Then
+            MsgBox("No hay materiales para enviar.", MsgBoxStyle.Exclamation, "Error")
             Exit Sub
         End If
 
+        Dim firebaseUrlBase As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Compras"
+
+        ' Inicializar barra de progreso
+        ProgressBarCarga.Value = 0
+        ProgressBarCarga.Maximum = dgvMateriales.Rows.Cast(Of DataGridViewRow).Count(Function(r) Not r.IsNewRow)
+        ProgressBarCarga.Visible = True
+        lblEstadoCarga.Visible = True
+        lblEstadoCarga.Text = "Enviando solicitudes..."
+
         Try
-            If dgvMateriales.Rows.Count = 0 Then
-                MsgBox("No hay materiales para ingresar.", MsgBoxStyle.Exclamation)
-                Exit Sub
+            Dim client As New WebClient()
+            client.Headers(HttpRequestHeader.ContentType) = "application/json"
+
+            ' Obtener último número de solicitud
+            Dim response As String = client.DownloadString(firebaseUrlBase & ".json")
+            Dim solicitudIdActual As Integer = 1
+
+            If Not String.IsNullOrWhiteSpace(response) AndAlso response.Trim() <> "null" Then
+                Dim solicitudesExistentes As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response)
+                Dim numerosExistentes = solicitudesExistentes.Keys.Where(Function(k) k.StartsWith("Solicitud_")).Select(Function(k) Integer.Parse(k.Replace("Solicitud_", ""))).ToList()
+                If numerosExistentes.Count > 0 Then
+                    solicitudIdActual = numerosExistentes.Max() + 1
+                End If
             End If
 
-            ProgressBarCarga.Value = 0
-            ProgressBarCarga.Visible = True
-            lblEstadoCarga.Text = "Cargando materiales al inventario..."
-            lblEstadoCarga.Visible = True
+            ' Crear una solicitud por cada material
+            For Each row As DataGridViewRow In dgvMateriales.Rows
+                If Not row.IsNewRow Then
+                    Dim solicitudNombre As String = "Solicitud_" & solicitudIdActual
 
-            Dim totalMateriales As Integer = dgvMateriales.Rows.Count - 1 ' Ignorar la última fila nueva
-            Dim contador As Integer = 0
+                    Dim compra As New Dictionary(Of String, Object) From {
+                    {"ID", Guid.NewGuid().ToString()},
+                    {"Material", row.Cells("Descripcion").Value},
+                    {"Cantidad", row.Cells("Cantidad").Value},
+                    {"Unidad", row.Cells("Unidad").Value},
+                    {"Fecha", DateTime.Now.ToString("dd-MM-yyyy")}
+                    }
 
-            For Each fila As DataGridViewRow In dgvMateriales.Rows
-                ' Saltar la fila nueva (vacía al final)
-                If fila.IsNewRow OrElse fila.Cells.Count < 3 Then Continue For
+                    Dim jsonProducto As String = JsonConvert.SerializeObject(compra)
+                    client.UploadString($"{firebaseUrlBase}/{solicitudNombre}/0.json", "PUT", jsonProducto)
 
-                ' Validar que las celdas existen y no son Nothing
-                Dim descripcion As String = If(fila.Cells(0)?.Value IsNot Nothing, fila.Cells(0).Value.ToString().Trim(), "")
-                Dim unidad As String = If(fila.Cells(1)?.Value IsNot Nothing, fila.Cells(1).Value.ToString().Trim(), "")
-                Dim cantidad As String = If(fila.Cells(2)?.Value IsNot Nothing, fila.Cells(2).Value.ToString().Trim(), "")
+                    ' Agregar estado individual
+                    Dim estadoGeneral As String = """En Proceso"""
+                    client.UploadString($"{firebaseUrlBase}/{solicitudNombre}/Estado.json", "PUT", estadoGeneral)
 
-                ' Verificar que todos los campos tengan valor
-                If String.IsNullOrWhiteSpace(descripcion) OrElse
-           String.IsNullOrWhiteSpace(unidad) OrElse
-           String.IsNullOrWhiteSpace(cantidad) Then
-                    Continue For
+                    ' Avanzar contador
+                    solicitudIdActual += 1
+                    ProgressBarCarga.Value += 1
+                    lblEstadoCarga.Text = $"Enviando solicitud {solicitudIdActual - 1}..."
+                    Application.DoEvents()
                 End If
-
-                Dim fechaIngreso As String = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
-
-                Dim nuevoMaterial As New Dictionary(Of String, Object) From {
-            {"material", descripcion},
-            {"cantidad", cantidad},
-            {"fecha", fechaIngreso},
-            {"unidad", unidad}
-            }
-
-                If client IsNot Nothing Then
-                    Dim pushResponse = client.Push("Proyectos/" & IdentifyProject & "/Inventario/", nuevoMaterial)
-                Else
-                    MsgBox("La conexión con Firebase no está disponible.", MsgBoxStyle.Critical)
-                    Exit Sub
-                End If
-
-
-                contador += 1
-                ProgressBarCarga.Value = Math.Min(100, CInt((contador / totalMateriales) * 100))
-                Application.DoEvents()
             Next
 
-            lblEstadoCarga.Text = "Carga completada exitosamente."
-            MsgBox("Materiales cargados exitosamente al inventario.", MsgBoxStyle.Information, "Éxito")
-        Catch ex As Exception
-            MsgBox("Error al cargar materiales al inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
-            lblEstadoCarga.Text = "Error al cargar los materiales."
-        Finally
-            ProgressBarCarga.Visible = False
-        End Try
-    End Sub
+            MsgBox("Materiales enviados correctamente como solicitudes individuales.", MsgBoxStyle.Information, "Éxito")
+            dgvMateriales.Rows.Clear()
 
+        Catch ex As Exception
+            MsgBox("Error al enviar solicitudes: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        Finally
+            ProgressBarCarga.Value = 0
+            ProgressBarCarga.Visible = False
+            lblEstadoCarga.Text = ""
+            lblEstadoCarga.Visible = False
+        End Try
+
+    End Sub
     ' Ejemplo de cómo inicializas el cliente (debes tener algo similar en tu código)
     Private Sub InicializarFirebase()
         Dim fcon As New FireSharp.Config.FirebaseConfig() With {

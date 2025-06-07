@@ -12,18 +12,11 @@ Public Class Compras
         Dim material As String = txtMaterial.Text
         Dim cantidad As Integer = nCantidad.Value
         Dim unidad As String = cbUnidad.Text
-        Dim medida As String = nMedidas.Text
-        Dim unidadMedida = cmMedida.Text
         Dim fecha As String = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") ' Fecha actual
 
         ' Verificar que no haya campos vacíos
         If String.IsNullOrWhiteSpace(material) OrElse String.IsNullOrWhiteSpace(unidad) Then
             MsgBox("Por favor, ingrese todos los campos.", MsgBoxStyle.Exclamation, "Advertencia")
-            Return
-        End If
-
-        If cbMedidas.Checked AndAlso (String.IsNullOrWhiteSpace(medida) OrElse String.IsNullOrWhiteSpace(unidadMedida)) Then
-            MsgBox("Debe ingresar las medidas si está activado el campo.", MsgBoxStyle.Exclamation)
             Return
         End If
 
@@ -34,9 +27,12 @@ Public Class Compras
             dgCompras.Columns.Add("Cantidad", "Cantidad")
             dgCompras.Columns.Add("Unidad", "Unidad")
             dgCompras.Columns.Add("Fecha", "Fecha de Ingreso")
-            dgCompras.Columns.Add("Medida", "Medida")
-            dgCompras.Columns.Add("Unidad de Medida", "Unidad de Medida")
         End If
+
+        dgCompras.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        dgCompras.Columns("Nombre").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        dgCompras.Columns("Cantidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+        dgCompras.Columns("Unidad").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
 
         ' Agregar una nueva fila al DataGridView
         Dim rowIndex As Integer = dgCompras.Rows.Add() ' Añadir una nueva fila
@@ -48,17 +44,12 @@ Public Class Compras
         row.Cells("Cantidad").Value = cantidad
         row.Cells("Unidad").Value = unidad
         row.Cells("Fecha").Value = fecha
-        row.Cells("Medida").Value = medida
-        row.Cells("Unidad de Medida").Value = unidadMedida
 
 
         ' Limpiar los controles de entrada después de agregar
         txtMaterial.Clear()
-        nMedidas.Clear()
         nCantidad.Value = 0
         cbUnidad.SelectedIndex = -1
-        cmMedida.SelectedIndex = -1
-        cbMedidas.Checked = False
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
@@ -99,7 +90,7 @@ Public Class Compras
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True
@@ -124,9 +115,6 @@ Public Class Compras
         ConfigurarEstiloDataGridView()
         dgCompras.Rows.Clear()
         dgCompras.Columns.Clear()
-        cmMedida.Visible = False
-        nMedidas.Visible = False
-        lbl_medida.Visible = False
     End Sub
 
     Private Sub btnSolicitar_Click(sender As Object, e As EventArgs) Handles btnSolicitar.Click
@@ -171,9 +159,7 @@ Public Class Compras
                     {"Material", row.Cells("Nombre").Value},
                     {"Cantidad", row.Cells("Cantidad").Value},
                     {"Unidad", row.Cells("Unidad").Value},
-                    {"Fecha", row.Cells("Fecha").Value},
-                    {"Medida", row.Cells("Medida").Value},
-                    {"Unidad de medida", row.Cells("Unidad de medida").Value}
+                    {"Fecha", row.Cells("Fecha").Value}
                 }
 
                     Dim jsonProducto As String = JsonConvert.SerializeObject(compra)
@@ -198,19 +184,6 @@ Public Class Compras
     Private Sub txtMaterial_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtMaterial.KeyPress
         ' Convertir el carácter presionado a mayúscula
         e.KeyChar = Char.ToUpper(e.KeyChar)
-    End Sub
-
-    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles cbMedidas.CheckedChanged
-        If cbMedidas.Checked Then
-            nMedidas.Visible = True
-            cmMedida.Visible = True
-            lbl_medida.Visible = True
-        Else
-            nMedidas.Visible = False
-            cmMedida.Visible = False
-            lbl_medida.Visible = False
-        End If
-
     End Sub
 
 End Class
