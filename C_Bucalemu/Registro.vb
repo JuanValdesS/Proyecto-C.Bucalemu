@@ -82,7 +82,10 @@ Public Class Registro
             For Each user In users
                 ' Convertir el objeto almacenado en Firebase a un diccionario correctamente
                 Dim userData As Dictionary(Of String, Object) = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(user.Value.ToString()), Dictionary(Of String, Object))
-
+                If userData("Usuario") = usu Then
+                    MsgBox("El nombre de usuario ya existe, cambie el nombre de usuario.", MsgBoxStyle.Critical)
+                    Exit Sub
+                End If
                 If userData("Email") = email Then
                     MsgBox("El usuario ya está registrado.", MsgBoxStyle.Exclamation)
                     Exit Sub
@@ -129,7 +132,7 @@ RegistrarUsuario:
     End Sub
 
     Private Sub regresar_Click(sender As Object, e As EventArgs) Handles regresar.Click
-        Dim menu As New Menú()
+        Dim menu As New Proyectos()
         menu.Show()
         Me.Close()
     End Sub

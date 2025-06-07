@@ -8,7 +8,7 @@ Public Class CreacionProyecto
     Dim client As IFirebaseClient
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
-        Dim Log As New Login()
+        Dim Log As New Proyectos()
 
         Me.Close()
         Log.Show()
