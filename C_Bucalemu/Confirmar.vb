@@ -185,17 +185,16 @@ Public Class Confirmar
                     inventarioData(claveMaterial) = nuevoMaterial
                 End If
             Next
+            'este for esta hecho para verificar que todo se esta agregando de manera correcta
+            'For Each item In inventarioData
+            'MsgBox(item.Key)
+            'MsgBox(JsonConvert.SerializeObject(item.Value))
+            'Next
 
-            For Each item In inventarioData
-                MsgBox(item.Key)
-                MsgBox(JsonConvert.SerializeObject(item.Value))
-            Next
-
-            'Dim updateJson As String = JsonConvert.SerializeObject(inventarioData)
             For Each item In inventarioData
                 Dim materialKey As String = item.Key
                 Dim materialUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Inventario/" & materialKey & ".json"
-                MsgBox(item.Value.ToString()) ' nos entrega el valor del material) ' este nos muestra la informacion del id de los materiales que se va cargando
+                'MsgBox(item.Value.ToString()) ' nos entrega el valor del material) ' este nos muestra la informacion del id de los materiales que se va cargando
                 Dim materialJson As String = JsonConvert.SerializeObject(item.Value)
                 client.UploadString(materialUrl, "PUT", materialJson)
             Next
