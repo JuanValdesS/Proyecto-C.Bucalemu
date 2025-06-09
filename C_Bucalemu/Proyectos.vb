@@ -166,7 +166,6 @@ Public Class Proyectos
     Private Function VerificarAccesoProyecto() As Boolean
         Try
             ' Saneamos el nombre de usuario antes de buscarlo en Firebase
-            'Dim usuarioSaneado As String = UsuarioRegistrado '.Replace(".", "_").Replace("@", "_at_")
             Dim correoUsuario As String = UsuarioRegistrado.Trim().ToLower() ' Aseguramos formato uniforme
 
             Dim TipoIngreso As String
@@ -206,7 +205,7 @@ Public Class Proyectos
                 For Each key In personalAutorizado.Keys
 
                     key = key.Trim().ToLower()
-                    If key = usuarioSaneado Then
+                    If key = usuarioSaneado.Trim().ToLower() Then
                         Return True
                     End If
                 Next

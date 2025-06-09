@@ -80,6 +80,7 @@ Public Class Registro
 
             ' Buscar si el email ya está registrado
             For Each user In users
+
                 ' Convertir el objeto almacenado en Firebase a un diccionario correctamente
                 Dim userData As Dictionary(Of String, Object) = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(user.Value.ToString()), Dictionary(Of String, Object))
                 If userData("Usuario") = usu Then
@@ -94,10 +95,14 @@ Public Class Registro
 
 RegistrarUsuario:
             ' Obtener el último ID numérico y generar uno nuevo (0001, 0002, ...)
+
             Dim lastID As Integer = If(users?.Count > 0, users.Count, 0)
+
             Dim nuevoID As String = (lastID + 1).ToString("D4")
 
+
             ' Crear el objeto con los datos del usuario
+
             Dim Usuario As New Dictionary(Of String, Object) From {
                 {"Usuario", usu},
                 {"Email", email},
@@ -117,6 +122,7 @@ RegistrarUsuario:
             txtPassword.Text = ""
             txtConfirmarPass.Text = ""
             combo_rol.Text = ""
+            Registro_Load(sender, e) ' Recargar para actualizar la conexión)
 
         Catch ex As Exception
             MsgBox("Error al agregar el usuario: " & ex.Message, MsgBoxStyle.Critical)

@@ -2,6 +2,7 @@
 Imports Newtonsoft.Json.Linq
 Imports System.Globalization
 Imports System.Net
+Imports System.Security.Cryptography.Xml
 
 Public Class Confirmar
     Private Sub Confirmar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -32,6 +33,7 @@ Public Class Confirmar
                 dgvConfirmar.Columns.Clear()
                 MsgBox("No hay solicitudes pendientes.", MsgBoxStyle.Exclamation, "Advertencia")
                 Exit Sub
+
             End If
 
             ' Deserializar JSON
@@ -112,67 +114,95 @@ Public Class Confirmar
             Dim inventarioData As New Dictionary(Of String, JObject)
 
             If Not String.IsNullOrEmpty(inventarioResponse) AndAlso inventarioResponse <> "null" Then
-                inventarioData = JsonConvert.DeserializeObject(Of Dictionary(Of String, JObject))(inventarioResponse)
+                inventarioData = JsonConvert.DeserializeObject(Of Dictionary(Of String, JObject))(inventarioResponse) ' aqui esta toda la info del inventario
             End If
+            'MsgBox(inventarioData.Count) ' nos dice la cantidad de elementos que hay en la base de datos de inventario
+            Dim materiales As String = row.Cells("Materiales").Value.ToString() ' celda materiales
+            Dim Texto() As String = materiales.Split(",") 'aqui se separan los diferentes materiales
 
-            Dim materiales As String = row.Cells("Materiales").Value.ToString()
-            Dim Texto() As String = materiales.Split(",")
-
-            For Each palabra In Texto
-                Dim Material() As String = palabra.Trim().Split(" ")
-                If Material.Length < 4 Then Continue For
-
-                Dim Nombre As String = Material(0).ToUpper()
-                Dim medida As String = Material(1).ToUpper()
-                Dim CantidadStr As String = Material(2).Trim().Replace(",", ".") ' Reemplazar coma por punto
-                Dim unidad As String = Material(3).ToUpper()
-
-                Dim nombreMedida As String = (Nombre & " " & medida).Trim()
-
-                ' Intentar convertir la cantidad a Double, usando CultureInfo para manejar coma o punto
-                Dim CantidadDouble As Double
-                If Not Double.TryParse(CantidadStr, NumberStyles.Any, CultureInfo.InvariantCulture, CantidadDouble) Then
-                    MsgBox("Cantidad inválida para " & nombreMedida & ": """ & CantidadStr & """", MsgBoxStyle.Critical, "Error de datos")
-                    Continue For
-                End If
+            For Each palabra In Texto ' con este for entramos en la descripcion de cada material nombre : cantidad unidad
+                Dim Separar() As String = palabra.Trim().Split(":")
+                'MsgBox(Material(0)) ' nombre del material
+                'MsgBox(Material(1)) 'informacion del material
+                Dim Nombre As String = Separar(0).Trim().ToUpper() ' Nombre del material
+                Dim Info As String = Separar(1).Trim().ToUpper() ' Informacion del material
+                Dim Cantidad As Integer = Info.Split(" ")(0).Trim() ' Cantidad del material
+                Dim Unidad As String = Info.Split(" ")(1).Trim().ToUpper()
 
                 Dim materialEncontrado As Boolean = False
-                For Each item In inventarioData
-                    Dim datosMaterial As JObject = item.Value
-                    If datosMaterial("material").ToString().ToUpper() = nombreMedida AndAlso
-                   datosMaterial("unidad").ToString().ToUpper() = unidad Then
 
-                        Dim cantidadExistente As Double = Double.Parse(datosMaterial("cantidad").ToString(), CultureInfo.InvariantCulture)
-                        datosMaterial("cantidad") = (cantidadExistente + CantidadDouble).ToString()
+                Dim maxId As Integer = 0 ' Variable para almacenar el ID máximo encontrado
+
+                For Each item In inventarioData
+                    'MsgBox(item.Key) ' nos entrega la llave o el id del material material:_0001
+
+                    Dim datosMaterial As JObject = item.Value
+                    If datosMaterial("material").ToString().ToUpper() = Nombre Then ' si el nombre del material coincidecon un elemento en la base de datos entonces entra 
+
+                        'Dim cantidadExistente As Double = Double.Parse(datosMaterial("cantidad").ToString(), CultureInfo.InvariantCulture)
+                        Dim claveMaterial = item.Key ' Ejemplo: Proyecto_1
+                        Dim idNumerico As Integer = claveMaterial.Split("_")(1)
+                        Dim id = claveMaterial.Split("_")(0) ' Extraer el ID del material   
+
+                        ' Extraer número de ID
+                        If maxId < idNumerico Then
+
+                            maxId = idNumerico ' Actualizar el ID máximo si es mayor que el actual
+
+                        End If
+
+
+                        datosMaterial("cantidad") = Cantidad
                         datosMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
+
                         materialEncontrado = True
                         Exit For
                     End If
                 Next
 
+                If materialEncontrado = True Then
+                    Dim nuevoMaterial As New JObject()
+                    maxId = maxId + 1
+                    Dim IdFinal As String = (Nombre).Replace(" ", "") & "_" & maxId.ToString("D4") ' Formatear el ID con ceros a la izquierda
+                    nuevoMaterial("material") = Nombre
+                    nuevoMaterial("cantidad") = Cantidad
+                    nuevoMaterial("unidad") = Unidad
+                    nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
+
+
+                    inventarioData(IdFinal) = nuevoMaterial ' Agregar o actualizar el material en el inventario)
+
+                End If
+
                 If Not materialEncontrado Then
                     Dim nuevoMaterial As New JObject()
-                    nuevoMaterial("material") = nombreMedida
-                    nuevoMaterial("cantidad") = CantidadDouble.ToString(CultureInfo.InvariantCulture)
+                    nuevoMaterial("material") = Nombre
+                    nuevoMaterial("cantidad") = Cantidad
                     nuevoMaterial("unidad") = unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
-                    Dim claveMaterial As String = (Nombre & medida).Replace(" ", "").ToUpper() & "_0001"
+                    Dim claveMaterial As String = (Nombre).Replace(" ", "").ToUpper() & "_0001"
                     inventarioData(claveMaterial) = nuevoMaterial
                 End If
             Next
 
-            Dim updateJson As String = JsonConvert.SerializeObject(inventarioData)
+            For Each item In inventarioData
+                MsgBox(item.Key)
+                MsgBox(JsonConvert.SerializeObject(item.Value))
+            Next
+
+            'Dim updateJson As String = JsonConvert.SerializeObject(inventarioData)
             For Each item In inventarioData
                 Dim materialKey As String = item.Key
                 Dim materialUrl As String = "https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/" & IdentifyProject & "/Inventario/" & materialKey & ".json"
+                MsgBox(item.Value.ToString()) ' nos entrega el valor del material) ' este nos muestra la informacion del id de los materiales que se va cargando
                 Dim materialJson As String = JsonConvert.SerializeObject(item.Value)
                 client.UploadString(materialUrl, "PUT", materialJson)
             Next
             client.UploadString(firebaseComprasUrl, "DELETE", String.Empty)
 
             MsgBox("Inventario actualizado correctamente.", MsgBoxStyle.Information, "Mensaje de confirmación")
-
+            Confirmar_Load(sender, e) ' Recargar el DataGridView para mostrar los cambios
         Catch ex As Exception
             MsgBox("Error al actualizar el inventario: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
