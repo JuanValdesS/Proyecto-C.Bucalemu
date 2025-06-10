@@ -42,8 +42,8 @@ Public Class Autorizar
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
-            .AllowUserToResizeColumns = False
-            .AllowUserToResizeRows = False
+            .AllowUserToResizeColumns = True
+            .AllowUserToResizeRows = True
 
             ' Cambiar estilo del grid
             .BorderStyle = BorderStyle.Fixed3D

@@ -236,7 +236,7 @@ Public Class mod_material
                 Dim unidades As String = selectedRow.Cells("Unidad").Value.ToString()
 
                 ' Pregunta la cantidad que desea retirar
-                Dim input As String = InputBox("Ingrese la cantidad que desea retirar del material """ & nombre & """ (" & unidades & "):", "Retirar material", MsgBoxStyle.Information)
+                Dim input As String = InputBox("Ingrese la cantidad que desea retirar del material """ & nombre & """ (" & unidades & "):", "Retirar material", "0", MsgBoxStyle.Information)
                 If String.IsNullOrWhiteSpace(input) Then Exit Sub
 
                 Dim cantidadRetirar As Integer
@@ -338,8 +338,8 @@ Public Class mod_material
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
-            .AllowUserToResizeColumns = False
-            .AllowUserToResizeRows = False
+            .AllowUserToResizeColumns = True
+            .AllowUserToResizeRows = True
 
             ' Cambiar estilo del grid
             .BorderStyle = BorderStyle.Fixed3D

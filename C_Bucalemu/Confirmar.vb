@@ -92,6 +92,7 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnConfirmar_Click(sender As Object, e As EventArgs) Handles btnConfirmar.Click
+
         If dgvConfirmar.Rows.Count = 0 Then
             MsgBox("No hay datos para enviar.", MsgBoxStyle.Exclamation, "Advertencia")
             Exit Sub
@@ -166,6 +167,7 @@ Public Class Confirmar
                     Dim IdFinal As String = (Nombre).Replace(" ", "") & "_" & maxId.ToString("D4") ' Formatear el ID con ceros a la izquierda
                     nuevoMaterial("material") = Nombre
                     nuevoMaterial("cantidad") = Cantidad
+                    nuevoMaterial("stock_max") = Cantidad ' <- NUEVO CAMPO
                     nuevoMaterial("unidad") = Unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
@@ -178,7 +180,8 @@ Public Class Confirmar
                     Dim nuevoMaterial As New JObject()
                     nuevoMaterial("material") = Nombre
                     nuevoMaterial("cantidad") = Cantidad
-                    nuevoMaterial("unidad") = unidad
+                    nuevoMaterial("stock_max") = Cantidad ' <- NUEVO CAMPO
+                    nuevoMaterial("unidad") = Unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
                     Dim claveMaterial As String = (Nombre).Replace(" ", "").ToUpper() & "_0001"
@@ -242,8 +245,8 @@ Public Class Confirmar
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
-            .AllowUserToResizeColumns = False
-            .AllowUserToResizeRows = False
+            .AllowUserToResizeColumns = True
+            .AllowUserToResizeRows = True
 
             ' Cambiar estilo del grid
             .BorderStyle = BorderStyle.Fixed3D

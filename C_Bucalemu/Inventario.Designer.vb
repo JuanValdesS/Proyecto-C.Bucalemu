@@ -31,6 +31,7 @@ Partial Class Inventario
         btn_reestablecer = New Button()
         txt_buscar = New TextBox()
         Label1 = New Label()
+        btn_consultar = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -65,7 +66,7 @@ Partial Class Inventario
         Button1.Cursor = Cursors.Hand
         Button1.FlatAppearance.BorderColor = Color.White
         Button1.FlatStyle = FlatStyle.Popup
-        Button1.Location = New Point(156, 354)
+        Button1.Location = New Point(156, 435)
         Button1.Name = "Button1"
         Button1.Size = New Size(61, 50)
         Button1.TabIndex = 4
@@ -100,7 +101,7 @@ Partial Class Inventario
         btn_reestablecer.BackColor = Color.IndianRed
         btn_reestablecer.Cursor = Cursors.Hand
         btn_reestablecer.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_reestablecer.Location = New Point(54, 277)
+        btn_reestablecer.Location = New Point(54, 358)
         btn_reestablecer.Name = "btn_reestablecer"
         btn_reestablecer.Size = New Size(268, 52)
         btn_reestablecer.TabIndex = 7
@@ -131,6 +132,18 @@ Partial Class Inventario
         Label1.TabIndex = 9
         Label1.Text = "Busqueda"
         ' 
+        ' btn_consultar
+        ' 
+        btn_consultar.BackColor = Color.CornflowerBlue
+        btn_consultar.Cursor = Cursors.Hand
+        btn_consultar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btn_consultar.Location = New Point(54, 277)
+        btn_consultar.Name = "btn_consultar"
+        btn_consultar.Size = New Size(268, 52)
+        btn_consultar.TabIndex = 10
+        btn_consultar.Text = "Consultar stock"
+        btn_consultar.UseVisualStyleBackColor = False
+        ' 
         ' Inventario
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -139,6 +152,7 @@ Partial Class Inventario
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
         ClientSize = New Size(1192, 740)
+        Controls.Add(btn_consultar)
         Controls.Add(Label1)
         Controls.Add(txt_buscar)
         Controls.Add(btn_reestablecer)
@@ -163,4 +177,5 @@ Partial Class Inventario
     Friend WithEvents btn_reestablecer As Button
     Friend WithEvents txt_buscar As TextBox
     Friend WithEvents Label1 As Label
+    Friend WithEvents btn_consultar As Button
 End Class

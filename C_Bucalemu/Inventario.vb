@@ -1,8 +1,11 @@
 ﻿Imports Newtonsoft.Json
 Imports Newtonsoft.Json.Linq
 Imports System.Net
+Imports System.Globalization
 
 Public Class Inventario
+
+    Private jsonDataGlobal As JObject ' Declarar al principio del formulario
 
     Private fcon As New FireSharp.Config.FirebaseConfig With {
     .AuthSecret = "N6kTJwGfYKq9AVH7i3yJ6aTk95ZXw8F3nY1aZFUy",
@@ -22,6 +25,7 @@ Public Class Inventario
 
             If client IsNot Nothing Then
                 CargarInventario()
+                PintarFilasSegunStock()
             Else
                 MsgBox("Error al conectar con la base de datos", MsgBoxStyle.Critical)
             End If
@@ -36,13 +40,8 @@ Public Class Inventario
         ' Obtener el rol del usuario autenticado
         Dim rolUsuario As String = My.Settings.RolUsuario
 
-        ' Mostrar el botón solo si el usuario es Administrador
-        If rolUsuario = "Administrador" Then
-            Button2.Visible = True
-
-        End If
-
-        If rolUsuario = "Encargado del inventario" Then
+        ' Mostrar el botón solo si el usuario es jefe o encargado del inventario
+        If rolUsuario = "Jefe" Or rolUsuario = "Encargado del inventario" Then
             Button2.Visible = True
         End If
 
@@ -56,6 +55,7 @@ Public Class Inventario
             If respuesta.Body IsNot Nothing AndAlso respuesta.Body.Trim() <> "null" Then
                 ' Convertir la respuesta a un JObject (Newtonsoft.Json.Linq)
                 Dim jsonData As JObject = JObject.Parse(respuesta.Body)
+                jsonDataGlobal = jsonData
 
                 ' Limpiar el DataGridView antes de cargar los datos
                 ConfigurarEstiloDataGridView()
@@ -89,11 +89,11 @@ Public Class Inventario
                     ' Solo agregar si la fecha es válida
                     If DateTime.TryParse(fechaIngreso, Nothing) Then
                         Dim material As New Dictionary(Of String, String) From {
-                            {"nombre", nombre},
-                            {"cantidad", cantidad},
-                            {"unidad", unidades},
-                            {"fecha", fechaIngreso}
-                        }
+                    {"nombre", nombre},
+                    {"cantidad", cantidad},
+                    {"unidad", unidades},
+                    {"fecha", fechaIngreso}
+                }
                         listaMateriales.Add(material)
                     End If
                 Next
@@ -141,8 +141,8 @@ Public Class Inventario
             .ReadOnly = True
             .AllowUserToAddRows = False
             .AllowUserToDeleteRows = False
-            .AllowUserToResizeColumns = False
-            .AllowUserToResizeRows = False
+            .AllowUserToResizeColumns = True
+            .AllowUserToResizeRows = True
 
             ' Cambiar estilo del grid
             .BorderStyle = BorderStyle.Fixed3D
@@ -276,7 +276,151 @@ Public Class Inventario
         End Try
     End Sub
 
+    Private Function CalcularPorcentajeStock(cantidadStr As String, stockMaxStr As String) As Integer
+        Try
+            Dim cultura As CultureInfo = New CultureInfo("es-CL")
+            Dim cantidad As Double = Convert.ToDouble(cantidadStr, cultura)
+            Dim stockMax As Double = Convert.ToDouble(stockMaxStr, cultura)
+
+            If stockMax <= 0 Then
+                Return 0 ' evitar división por cero
+            End If
+
+            Dim porcentaje As Double = (cantidad / stockMax) * 100
+            Return CInt(Math.Round(porcentaje))
+        Catch ex As Exception
+            Return -1 ' error
+        End Try
+    End Function
+
+    Private Function VerificarMaterialesBajoStockD() As Boolean
+        Dim materialesFaltantes As New List(Of String)
+        Dim cultura As CultureInfo = New CultureInfo("es-CL")
+
+        Try
+            ' Obtener todo el inventario desde Firebase
+            Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
+
+            If respuesta.Body Is Nothing OrElse respuesta.Body.Trim() = "null" Then
+                MessageBox.Show("No se pudo obtener el inventario desde Firebase.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Dim inventarioData As JObject = JObject.Parse(respuesta.Body)
+            ' Recorrer cada fila del DataGridView
+            For Each fila As DataGridViewRow In DataGridView1.Rows
+
+                If fila.IsNewRow Then Continue For
+
+                Try
+                    Dim nombreMaterial As String = fila.Cells(1).Value.ToString()
+                    Dim cantidadStr As String = fila.Cells(2).Value.ToString()
+                    Dim stockMaxStr As String = Nothing
+
+                    ' Buscar el nodo que contiene ese material
+                    For Each item As KeyValuePair(Of String, JToken) In inventarioData
+                        Dim nombreEnFirebase As String = item.Value("material")?.ToString()
+
+                        If nombreEnFirebase = nombreMaterial Then
+                            stockMaxStr = item.Value("stock_max")?.ToString()
+                            Exit For
+                        End If
+                    Next
+
+                    If stockMaxStr IsNot Nothing Then
+                        Dim porcentaje As Integer = CalcularPorcentajeStock(cantidadStr, stockMaxStr)
+
+                        If porcentaje >= 0 AndAlso porcentaje <= 15 Then
+                            materialesFaltantes.Add($"- {nombreMaterial} ({porcentaje}%)")
+                        End If
+                    End If
+
+                Catch ex As Exception
+                    ' Ignorar errores individuales de fila
+                End Try
+            Next
+
+            ' Mostrar resultados
+            If materialesFaltantes.Count > 0 Then
+                Dim mensaje As String = "Los siguientes materiales tienen bajo stock (<20%):" & vbCrLf & String.Join(vbCrLf, materialesFaltantes)
+                MessageBox.Show(mensaje, "Materiales con bajo stock", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return True
+            Else
+                MessageBox.Show("No hay materiales con poco stock.", "Stock suficiente", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return False
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("No hay materiales en el inventario" & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+    End Function
+
+    Private Function PintarFilasSegunStock() As Boolean
+        Dim cultura As CultureInfo = New CultureInfo("es-CL")
+
+        Try
+            ' Obtener todo el inventario desde Firebase
+            Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
+
+            If respuesta.Body Is Nothing OrElse respuesta.Body.Trim() = "null" Then
+                MessageBox.Show("No se pudo obtener el inventario desde Firebase.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Return False
+            End If
+
+            Dim inventarioData As JObject = JObject.Parse(respuesta.Body)
+
+            ' Recorrer cada fila del DataGridView
+            For Each fila As DataGridViewRow In DataGridView1.Rows
+                If fila.IsNewRow Then Continue For
+
+                Try
+                    Dim nombreMaterial As String = fila.Cells(1).Value?.ToString()
+                    Dim cantidadStr As String = fila.Cells(2).Value?.ToString()
+                    Dim stockMaxStr As String = Nothing
+
+                    ' Buscar stock_max del material en Firebase
+                    For Each item As KeyValuePair(Of String, JToken) In inventarioData
+                        Dim nombreEnFirebase As String = item.Value("material")?.ToString()
+
+                        If nombreEnFirebase = nombreMaterial Then
+                            stockMaxStr = item.Value("stock_max")?.ToString()
+                            Exit For
+                        End If
+                    Next
+
+                    ' Si encontró el stock_max, calcular porcentaje y pintar fila
+                    If stockMaxStr IsNot Nothing Then
+                        Dim porcentaje As Integer = CalcularPorcentajeStock(cantidadStr, stockMaxStr)
+
+                        If porcentaje <= 60 Then
+                            fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 255, 200) ' amarillo claro
+                        End If
+
+                        If porcentaje <= 15 Then
+                            fila.DefaultCellStyle.BackColor = Color.FromArgb(255, 200, 200) ' rojo claro
+                        End If
+
+                    End If
+
+                Catch ex As Exception
+                    ' Ignorar errores por fila individual
+                End Try
+            Next
+
+            Return True
+
+        Catch ex As Exception
+            MessageBox.Show("Error al pintar filas por stock: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+    End Function
+
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txt_buscar.TextChanged
         FiltrarInventario(txt_buscar.Text)
+    End Sub
+
+    Private Sub btn_consultar_Click(sender As Object, e As EventArgs) Handles btn_consultar.Click
+        VerificarMaterialesBajoStockD()
     End Sub
 End Class
