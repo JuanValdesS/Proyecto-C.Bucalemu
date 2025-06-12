@@ -1,4 +1,5 @@
-﻿Imports Newtonsoft.Json.Linq
+﻿Imports System.Globalization
+Imports Newtonsoft.Json.Linq
 
 Public Class mod_material
 
@@ -140,7 +141,7 @@ Public Class mod_material
             Try
                 Dim nombre = txtbox1.Text
                 ' Capturar los datos del material
-                Dim cantidad = nCantidad.Value
+                Dim cantidad As Decimal = nCantidad.Value
                 ' Obtener la fecha y hora actuales en formato adecuado
                 Dim fechaIngreso = Date.Now.ToString("dd-MM-yyyy HH:mm:ss")
                 Dim unidades = ComboBox1.Text
@@ -239,8 +240,8 @@ Public Class mod_material
                 Dim input As String = InputBox("Ingrese la cantidad que desea retirar del material """ & nombre & """ (" & unidades & "):", "Retirar material", "0", MsgBoxStyle.Information)
                 If String.IsNullOrWhiteSpace(input) Then Exit Sub
 
-                Dim cantidadRetirar As Integer
-                If Not Integer.TryParse(input.Trim(), cantidadRetirar) OrElse cantidadRetirar <= 0 Then
+                Dim cantidadRetirar As Double
+                If Not Double.TryParse(input.Trim().Replace(",", "."), NumberStyles.Any, CultureInfo.InvariantCulture, cantidadRetirar) OrElse cantidadRetirar <= 0 Then
                     MsgBox("Cantidad inválida.", MsgBoxStyle.Exclamation, "Error")
                     Exit Sub
                 End If
@@ -271,7 +272,7 @@ Public Class mod_material
                 materialesFiltrados = materialesFiltrados.OrderBy(Function(m) DateTime.Parse(m.Value("fecha").ToString())).ToList()
 
                 ' Calcular stock total
-                Dim stockTotal As Integer = materialesFiltrados.Sum(Function(m) CInt(m.Value("cantidad").ToString()))
+                Dim stockTotal As Double = materialesFiltrados.Sum(Function(m) CDbl(m.Value("cantidad").ToString()))
 
                 If cantidadRetirar > stockTotal Then
                     Dim result = MsgBox("La cantidad solicitada excede el stock actual (" & stockTotal & "). ¿Desea retirar la cantidad disponible?", MsgBoxStyle.YesNo + MsgBoxStyle.Exclamation)
@@ -284,7 +285,7 @@ Public Class mod_material
                 For Each item In materialesFiltrados
                     Dim key = item.Key
                     Dim datos = item.Value
-                    Dim cantidadDisponible = CInt(datos("cantidad").ToString())
+                    Dim cantidadDisponible As Double = CDbl(datos("cantidad").ToString())
 
                     If cantidadPorRetirar >= cantidadDisponible Then
                         ' Eliminar el registro completamente
@@ -379,5 +380,8 @@ Public Class mod_material
         Me.Close()
 
     End Sub
-
+    Private Sub ComboBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ComboBox1.KeyPress
+        ' Convertir el carácter presionado a mayúscula
+        e.KeyChar = Char.ToUpper(e.KeyChar)
+    End Sub
 End Class

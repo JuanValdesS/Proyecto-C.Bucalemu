@@ -10,7 +10,7 @@ Public Class Compras
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         Dim estado As String = "En proceso"
         Dim material As String = txtMaterial.Text
-        Dim cantidad As Integer = nCantidad.Value
+        Dim cantidad As Decimal = nCantidad.Value
         Dim unidad As String = cbUnidad.Text
         Dim fecha As String = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss") ' Fecha actual
 
@@ -185,5 +185,8 @@ Public Class Compras
         ' Convertir el carácter presionado a mayúscula
         e.KeyChar = Char.ToUpper(e.KeyChar)
     End Sub
-
+    Private Sub cbUnidad_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cbUnidad.KeyPress
+        ' Convertir el carácter presionado a mayúscula
+        e.KeyChar = Char.ToUpper(e.KeyChar)
+    End Sub
 End Class

@@ -99,9 +99,12 @@ Partial Class Compras
         ' nCantidad
         ' 
         nCantidad.BackColor = Color.AliceBlue
+        nCantidad.DecimalPlaces = 2
         nCantidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        nCantidad.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         nCantidad.Location = New Point(380, 96)
         nCantidad.Margin = New Padding(4, 5, 4, 5)
+        nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         nCantidad.Name = "nCantidad"
         nCantidad.Size = New Size(133, 25)
         nCantidad.TabIndex = 5
@@ -159,7 +162,7 @@ Partial Class Compras
         cbUnidad.BackColor = Color.AliceBlue
         cbUnidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cbUnidad.FormattingEnabled = True
-        cbUnidad.Items.AddRange(New Object() {"un", "mt", "kg", "pieza", "plancha"})
+        cbUnidad.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha"})
         cbUnidad.Location = New Point(231, 96)
         cbUnidad.Margin = New Padding(3, 2, 3, 2)
         cbUnidad.Name = "cbUnidad"

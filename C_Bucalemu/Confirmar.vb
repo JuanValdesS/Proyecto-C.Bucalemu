@@ -2,7 +2,7 @@
 Imports Newtonsoft.Json.Linq
 Imports System.Globalization
 Imports System.Net
-Imports System.Security.Cryptography.Xml
+Imports System.Text.RegularExpressions
 
 Public Class Confirmar
     Private Sub Confirmar_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -118,17 +118,16 @@ Public Class Confirmar
                 inventarioData = JsonConvert.DeserializeObject(Of Dictionary(Of String, JObject))(inventarioResponse) ' aqui esta toda la info del inventario
             End If
             'MsgBox(inventarioData.Count) ' nos dice la cantidad de elementos que hay en la base de datos de inventario
-            Dim materiales As String = row.Cells("Materiales").Value.ToString() ' celda materiales
-            Dim Texto() As String = materiales.Split(",") 'aqui se separan los diferentes materiales
+            Dim materialesTexto As String = row.Cells("Materiales").Value.ToString()
 
-            For Each palabra In Texto ' con este for entramos en la descripcion de cada material nombre : cantidad unidad
-                Dim Separar() As String = palabra.Trim().Split(":")
-                'MsgBox(Material(0)) ' nombre del material
-                'MsgBox(Material(1)) 'informacion del material
-                Dim Nombre As String = Separar(0).Trim().ToUpper() ' Nombre del material
-                Dim Info As String = Separar(1).Trim().ToUpper() ' Informacion del material
-                Dim Cantidad As Integer = Info.Split(" ")(0).Trim() ' Cantidad del material
-                Dim Unidad As String = Info.Split(" ")(1).Trim().ToUpper()
+            ' Expresión regular: busca patrones con formato "nombre : cantidad unidad"
+            Dim patron As String = "(.+?):\s*([\d\.,]+)\s+([a-zA-Z\.]+)"
+            Dim coincidencias As MatchCollection = Regex.Matches(materialesTexto, patron)
+
+            For Each match As Match In coincidencias
+                Dim Nombre As String = match.Groups(1).Value.Trim().ToUpper() ' nombre del material
+                Dim Cantidad As Double = Double.Parse(match.Groups(2).Value.Trim().Replace(",", "."), CultureInfo.InvariantCulture)
+                Dim Unidad As String = match.Groups(3).Value.Trim().ToUpper() ' unidad
 
                 Dim materialEncontrado As Boolean = False
 
@@ -138,7 +137,8 @@ Public Class Confirmar
                     'MsgBox(item.Key) ' nos entrega la llave o el id del material material:_0001
 
                     Dim datosMaterial As JObject = item.Value
-                    If datosMaterial("material").ToString().ToUpper() = Nombre Then ' si el nombre del material coincidecon un elemento en la base de datos entonces entra 
+                    If datosMaterial("material") IsNot Nothing AndAlso datosMaterial("material").ToString().ToUpper() = Nombre Then
+                        ' si el nombre del material coincidecon un elemento en la base de datos entonces entra 
 
                         'Dim cantidadExistente As Double = Double.Parse(datosMaterial("cantidad").ToString(), CultureInfo.InvariantCulture)
                         Dim claveMaterial = item.Key ' Ejemplo: Proyecto_1
@@ -161,30 +161,32 @@ Public Class Confirmar
                     End If
                 Next
 
-                If materialEncontrado = True Then
+                If materialEncontrado Then
                     Dim nuevoMaterial As New JObject()
                     maxId = maxId + 1
-                    Dim IdFinal As String = (Nombre).Replace(" ", "") & "_" & maxId.ToString("D4") ' Formatear el ID con ceros a la izquierda
+
+                    ' Limpiar el nombre para usarlo como clave segura en Firebase
+                    Dim claveNombre As String = Regex.Replace(Nombre.ToUpper(), "[^A-Z0-9]", "") ' Solo letras y números
+
+                    Dim IdFinal As String = claveNombre & "_" & maxId.ToString("D4") ' ID limpio + número
                     nuevoMaterial("material") = Nombre
                     nuevoMaterial("cantidad") = Cantidad
-                    nuevoMaterial("stock_max") = Cantidad ' <- NUEVO CAMPO
+                    nuevoMaterial("stock_max") = Cantidad
                     nuevoMaterial("unidad") = Unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
-
-                    inventarioData(IdFinal) = nuevoMaterial ' Agregar o actualizar el material en el inventario)
-
-                End If
-
-                If Not materialEncontrado Then
+                    inventarioData(IdFinal) = nuevoMaterial ' Aquí sí agregamos nuevo ID aunque ya exista el material
+                Else
                     Dim nuevoMaterial As New JObject()
                     nuevoMaterial("material") = Nombre
                     nuevoMaterial("cantidad") = Cantidad
-                    nuevoMaterial("stock_max") = Cantidad ' <- NUEVO CAMPO
+                    nuevoMaterial("stock_max") = Cantidad
                     nuevoMaterial("unidad") = Unidad
                     nuevoMaterial("fecha") = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")
 
-                    Dim claveMaterial As String = (Nombre).Replace(" ", "").ToUpper() & "_0001"
+                    Dim claveNombre As String = Regex.Replace(Nombre.ToUpper(), "[^A-Z0-9]", "")
+                    Dim claveMaterial As String = claveNombre & "_0001"
+
                     inventarioData(claveMaterial) = nuevoMaterial
                 End If
             Next
@@ -212,7 +214,35 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        If dgvConfirmar.SelectedRows.Count = 0 Then
+            MsgBox("Por favor seleccione una solicitud para eliminar.", MsgBoxStyle.Exclamation, "Advertencia")
+            Exit Sub
+        End If
 
+        ' Confirmar con el usuario antes de eliminar
+        Dim resultado As DialogResult = MessageBox.Show("¿Está seguro de que desea eliminar esta solicitud?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If resultado = DialogResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            Dim row As DataGridViewRow = dgvConfirmar.SelectedRows(0)
+            Dim solicitudID As String = row.Cells("ID").Value.ToString()
+
+            ' URL a Firebase para eliminar la solicitud específica
+            Dim firebaseDeleteUrl As String = $"https://db-cbucalemu-b8965-default-rtdb.firebaseio.com/Proyectos/{IdentifyProject}/Confirmar/{solicitudID}.json"
+
+            Dim client As New WebClient()
+            client.Headers.Add("Content-Type", "application/json")
+            client.UploadString(firebaseDeleteUrl, "DELETE", String.Empty)
+
+            ' Eliminar del DataGridView
+            dgvConfirmar.Rows.Remove(row)
+
+            MsgBox("Solicitud eliminada correctamente.", MsgBoxStyle.Information, "Eliminación exitosa")
+        Catch ex As Exception
+            MsgBox("Error al eliminar la solicitud: " & ex.Message, MsgBoxStyle.Critical, "Error")
+        End Try
     End Sub
 
     Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click

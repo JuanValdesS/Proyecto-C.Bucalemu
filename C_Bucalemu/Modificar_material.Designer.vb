@@ -139,7 +139,7 @@ Partial Class mod_material
         ComboBox1.BackColor = Color.AliceBlue
         ComboBox1.Font = New Font("Arial", 7.8F)
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"un", "mt", "kg", "pieza", "plancha"})
+        ComboBox1.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha", "", ""})
         ComboBox1.Location = New Point(172, 262)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(79, 24)
@@ -194,9 +194,12 @@ Partial Class mod_material
         ' nCantidad
         ' 
         nCantidad.BackColor = Color.AliceBlue
+        nCantidad.DecimalPlaces = 2
         nCantidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        nCantidad.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         nCantidad.Location = New Point(72, 262)
         nCantidad.Margin = New Padding(3, 4, 3, 4)
+        nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         nCantidad.Name = "nCantidad"
         nCantidad.Size = New Size(77, 25)
         nCantidad.TabIndex = 19

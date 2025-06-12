@@ -261,4 +261,10 @@ Public Class InventarioGlobal
         CargarInventario()
         txtBuscar.Clear()
     End Sub
+
+    Private Sub btnGestionar_Click(sender As Object, e As EventArgs) Handles btnGestionar.Click
+        Dim ges As New GestionarInventarioGlobal()
+        Me.Hide()
+        ges.Show()
+    End Sub
 End Class
