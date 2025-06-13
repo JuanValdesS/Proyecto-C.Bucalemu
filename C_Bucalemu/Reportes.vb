@@ -4,6 +4,7 @@ Imports System.Windows.Forms.VisualStyles.VisualStyleElement.Button
 Imports Newtonsoft.Json.Linq
 Imports System.Net.Mail
 Imports System.Net
+Imports Newtonsoft.Json
 
 Public Class Reportes
 
@@ -56,29 +57,51 @@ Public Class Reportes
             Return
         End If
 
-        Dim reporteid = "Reporte_" & Date.Now.ToString("dd-MM-yyyy_HH:mm")
 
         ' guardar el reporte en firebase
+
         Try
+            ' Obtener todos los reportes existentes
+            Dim reportesPath As String = "Proyectos/" & IdentifyProject & "/Reportes"
+            Dim reportesSnapshot = client.Get(reportesPath)
+            Dim reportes As Dictionary(Of String, Object) = New Dictionary(Of String, Object)()
+            If reportesSnapshot IsNot Nothing AndAlso reportesSnapshot.Body <> "null" Then
+                reportes = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(reportesSnapshot.Body)
+            End If
+
+            ' Encontrar el máximo número de reporte
+            Dim maxReporteNum As Integer = 0
+            For Each key In reportes.Keys
+                If key.StartsWith("Reporte_") Then
+                    Dim numStr As String = key.Substring("Reporte_".Length)
+                    Dim num As Integer
+                    If Integer.TryParse(numStr, num) AndAlso num > maxReporteNum Then
+                        maxReporteNum = num
+                    End If
+                End If
+            Next
+
+            ' Crear nuevo ID
+            Dim reporteid As String = "Reporte_" & (maxReporteNum + 1)
+
+            ' Guardar el reporte
             Dim reporte As New Dictionary(Of String, Object) From {
-                {"Estado", "No visualizado"},
-                {"Titulo del correo", titulo},
-                {"Descripcion", descripcion},
-                {"Fecha", Date.Now.ToString("dd-MM-yyyy HH:mm:ss")}
-            }
+            {"Estado", "No visualizado"},
+            {"Titulo del correo", titulo},
+            {"Descripcion", descripcion},
+            {"Fecha", Date.Now.ToString("dd-MM-yyyy HH:mm:ss")}
+        }
 
-            ' Guardar el reporte bajo el proyecto actual
-            client.Set("Proyectos/" & IdentifyProject & "/Reportes/" & reporteid, reporte)
+            client.Set(reportesPath & "/" & reporteid, reporte)
 
+            ' Limpiar y notificar
             txtObservacion.Clear()
             txtTitulo.Clear()
-            txtObservacion.Focus()
-            MsgBox("Reporte subido correctamente", MsgBoxStyle.Information, "Éxito")
+            MsgBox("Reporte guardado como: " & reporteid, MsgBoxStyle.Information, "Éxito")
+            Reportes_Load(Nothing, Nothing)
 
         Catch Ex As Exception
-            MsgBox("Error al guardar el reporte en Firebase: " & Ex.Message, MsgBoxStyle.Critical, "Error")
-            Exit Sub
-
+            MsgBox("Error: " & Ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
 
     End Sub
