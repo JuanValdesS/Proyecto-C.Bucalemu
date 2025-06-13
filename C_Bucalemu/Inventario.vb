@@ -227,6 +227,7 @@ Public Class Inventario
         btn_total.Enabled = True
 
         CargarInventario()
+        PintarFilasSegunStock()
         txt_buscar.Clear()
     End Sub
     Private Sub FiltrarInventario(filtro As String)

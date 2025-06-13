@@ -31,7 +31,7 @@ Public Class Registro
 
             'verificar si el usuario es tiene @
             If usu.Contains("@") Then
-                MsgBox("El nombre de usuario no debe contener '@'.", MsgBoxStyle.Exclamation)
+                MsgBox("El nombre de usuario no debe contener '@'.", MsgBoxStyle.Exclamation, "Advertencia")
                 Exit Sub
             End If
 
@@ -39,13 +39,13 @@ Public Class Registro
             If String.IsNullOrWhiteSpace(usu) OrElse String.IsNullOrWhiteSpace(email) OrElse
                String.IsNullOrWhiteSpace(password) OrElse String.IsNullOrWhiteSpace(cpassword) OrElse
                String.IsNullOrWhiteSpace(rol) Then
-                MsgBox("Por favor, ingrese todos los campos solicitados", MsgBoxStyle.Exclamation)
+                MsgBox("Por favor, ingrese todos los campos solicitados", MsgBoxStyle.Exclamation, "Advertencia")
                 Exit Sub
             End If
 
             ' Verificar si las contraseñas coinciden
             If password <> cpassword Then
-                MsgBox("Las contraseñas no coinciden.", MsgBoxStyle.Exclamation)
+                MsgBox("Las contraseñas no coinciden.", MsgBoxStyle.Exclamation, "Advertencia")
                 Exit Sub
             End If
 
@@ -57,7 +57,7 @@ Public Class Registro
 
             ' Si no hay usuarios, crea el primero directamente
             If response.Body = "null" OrElse response Is Nothing Then
-                MsgBox("No hay usuarios registrados. Creando el primero...", MsgBoxStyle.Information)
+                MsgBox("No hay usuarios registrados. Creando el primero...", MsgBoxStyle.Information, "Creando...")
                 GoTo RegistrarUsuario
             End If
 
@@ -68,13 +68,13 @@ Public Class Registro
                 Dim jsonObject As Newtonsoft.Json.Linq.JObject = Newtonsoft.Json.Linq.JObject.Parse(response.Body)
                 users = jsonObject.ToObject(Of Dictionary(Of String, Object))()
             Catch ex As Exception
-                MsgBox("Error al procesar los datos de usuarios: " & ex.Message, MsgBoxStyle.Critical)
+                MsgBox("Error al procesar los datos de usuarios: " & ex.Message, MsgBoxStyle.Critical, "Error")
                 Exit Sub
             End Try
 
             ' Verificar si la conversión fue exitosa
             If users Is Nothing Then
-                MsgBox("Error al obtener los datos de los usuarios.", MsgBoxStyle.Critical)
+                MsgBox("Error al obtener los datos de los usuarios.", MsgBoxStyle.Critical, "Error")
                 Exit Sub
             End If
 
@@ -84,11 +84,11 @@ Public Class Registro
                 ' Convertir el objeto almacenado en Firebase a un diccionario correctamente
                 Dim userData As Dictionary(Of String, Object) = CType(Newtonsoft.Json.JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(user.Value.ToString()), Dictionary(Of String, Object))
                 If userData("Usuario") = usu Then
-                    MsgBox("El nombre de usuario ya existe, cambie el nombre de usuario.", MsgBoxStyle.Critical)
+                    MsgBox("El nombre de usuario ya existe, cambie el nombre de usuario.", MsgBoxStyle.Critical, "Duplicado")
                     Exit Sub
                 End If
                 If userData("Email") = email Then
-                    MsgBox("El usuario ya está registrado.", MsgBoxStyle.Exclamation)
+                    MsgBox("El usuario ya está registrado.", MsgBoxStyle.Exclamation, "Duplicado")
                     Exit Sub
                 End If
             Next
@@ -114,7 +114,7 @@ RegistrarUsuario:
             Dim saveResponse = client.Set("Usuarios/" & nuevoID, Usuario)
 
             ' Mensaje de éxito
-            MsgBox("Usuario agregado correctamente", MsgBoxStyle.Information)
+            MsgBox("Usuario agregado correctamente", MsgBoxStyle.Information, "Éxito")
 
             ' Limpiar los campos
             txtUsuario.Text = ""

@@ -136,7 +136,7 @@ Public Class mod_material
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
 
-        If My.Settings.RolUsuario = "Administrador" Or My.Settings.RolUsuario = "Jefe" Then
+        If My.Settings.RolUsuario = "Encargado del inventario" Or My.Settings.RolUsuario = "Jefe" Then
 
             Try
                 Dim nombre = txtbox1.Text

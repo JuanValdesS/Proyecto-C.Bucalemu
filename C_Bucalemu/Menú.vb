@@ -56,6 +56,7 @@ Public Class Menú
         btn_cubicacion.Enabled = False
         btn_confirmar.Enabled = False
         btn_reportes.Enabled = False
+        btn_finalizar.Enabled = False
 
         ' Obtener el rol del usuario autenticado
         Dim rolUsuario As String = My.Settings.RolUsuario
@@ -70,6 +71,7 @@ Public Class Menú
             btn_cubicacion.Enabled = True
             btn_confirmar.Enabled = True
             btn_reportes.Enabled = True
+            btn_finalizar.Enabled = True
         End If
 
         If rolUsuario = "Administrador" Then
@@ -91,6 +93,11 @@ Public Class Menú
             btn_reportes.Enabled = True
             btnVerInventario.Enabled = True
             btn_confirmar.Enabled = True
+        End If
+
+        If rolUsuario = "Trabajador" Then
+            btn_reportes.Enabled = True
+            btnVerInventario.Enabled = True
         End If
 
     End Sub
