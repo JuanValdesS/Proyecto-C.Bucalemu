@@ -20,17 +20,22 @@ Public Class Inventario
         btn_reestablecer.Enabled = False
 
         ' Puede ir lógica adicional si es necesario
+
         Try
             client = New FireSharp.FirebaseClient(fcon)
 
             If client IsNot Nothing Then
+
                 CargarInventario()
                 PintarFilasSegunStock()
+
             Else
+
                 MsgBox("Error al conectar con la base de datos", MsgBoxStyle.Critical)
             End If
 
         Catch ex As Exception
+
             MsgBox("Error de conexión: " & ex.Message, MsgBoxStyle.Critical)
         End Try
 
@@ -108,11 +113,13 @@ Public Class Inventario
                     contador += 1
                 Next
             ElseIf respuesta.Body.Trim() = "null" Then
-                ' Mensaje nulo
+
             Else
+
                 MsgBox("Error al cargar los datos del inventario.", MsgBoxStyle.Critical)
             End If
         Catch ex As Exception
+
             MsgBox("Error al cargar inventario: " & ex.Message, MsgBoxStyle.Critical)
         End Try
     End Sub
@@ -365,7 +372,7 @@ Public Class Inventario
             Dim respuesta = client.Get("Proyectos/" & IdentifyProject & "/Inventario")
 
             If respuesta.Body Is Nothing OrElse respuesta.Body.Trim() = "null" Then
-                MessageBox.Show("No se pudo obtener el inventario desde Firebase.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("el inventario se encuentra vacio")
                 Return False
             End If
 

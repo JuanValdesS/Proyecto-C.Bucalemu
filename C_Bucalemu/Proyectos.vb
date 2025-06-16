@@ -25,7 +25,7 @@ Public Class Proyectos
 
         ' Obtener nombre del proyecto seleccionado
         Dim nombreProyecto = DataGridView1.CurrentRow.Cells("Nombre").Value.ToString()
-        Dim IdProyecto = DataGridView1.CurrentRow.Cells("ID Proyecto").Value.ToString()
+        Dim IdProyecto = DataGridView1.CurrentRow.Cells("ID Real").Value.ToString()
 
         ' Guardar el nombre globalmente
         IdentifyProject = IdProyecto
@@ -101,27 +101,33 @@ Public Class Proyectos
             DataGridView1.Columns.Clear()
 
             Dim response As FirebaseResponse = client.Get("Proyectos")
-
+            'MsgBox(response.Body) '-> nos entrega un diccionario, las llaves son los ids de los proyectos y el contenido de los diccionarios, son mas diccionarios que tienen llave(compras,confirmacion,info,etc)
             If response.Body <> "null" Then
                 Dim proyectosDict As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(response.Body)
-                Dim dt As New DataTable()
+                ' Dim dt As New DataTable()
 
                 ' Columnas a mostrar en el DataGridView
-                dt.Columns.Add("ID Proyecto")
-                dt.Columns.Add("Nombre")
-                dt.Columns.Add("Descripción")
-                dt.Columns.Add("Encargado")
-
-
+                'dt.Columns.Add("ID Real") ' Para mantener la consistencia con el DataGridView
+                DataGridView1.Columns.Add("ID Real", "ID Real")
+                DataGridView1.Columns("ID Real").Visible = False
+                DataGridView1.Columns.Add("ID Proyecto", "ID Proyecto")
+                DataGridView1.Columns.Add("Nombre", "Nombre")
+                DataGridView1.Columns.Add("Descripción", "Descripción")
+                DataGridView1.Columns.Add("Encargado", "Encargado")
+                Dim columna As Integer = 1
                 For Each proyectoKey In proyectosDict.Keys
                     Dim infoResponse As FirebaseResponse = client.Get("Proyectos/" & proyectoKey & "/Info")
+                    'MsgBox(infoResponse.Body) '-> nos entrega un diccionario con la info del proyecto, como nombre, descripcion y encargado)
                     If infoResponse.Body <> "null" Then
                         Dim proyecto As Proyectos = JsonConvert.DeserializeObject(Of Proyectos)(infoResponse.Body)
-                        dt.Rows.Add(proyectoKey, proyecto.nombre, proyecto.Descripción, proyecto.encargado)
+                        Dim IdReal = "Proyecto_" & columna
+                        DataGridView1.Rows.Add(proyectoKey, IdReal, proyecto.nombre, proyecto.Descripción, proyecto.encargado)
+
                     End If
+                    columna += 1
                 Next
 
-                DataGridView1.DataSource = dt
+                'DataGridView1.DataSource = dt
             Else
                 MsgBox("No se encontraron proyectos.", MsgBoxStyle.Information, "No hay proyectos")
             End If
@@ -241,7 +247,7 @@ Public Class Proyectos
         End If
 
         Dim nombreProyecto = DataGridView1.CurrentRow.Cells("Nombre").Value.ToString
-        Dim idProyecto = DataGridView1.CurrentRow.Cells("ID Proyecto").Value.ToString
+        Dim idProyecto = DataGridView1.CurrentRow.Cells("ID Real").Value.ToString
 
         Dim result = MessageBox.Show($"¿Estás seguro de que deseas eliminar el proyecto '{nombreProyecto}'?", "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -280,4 +286,6 @@ Public Class Proyectos
         registro.Show()
         Me.Close()
     End Sub
+
+
 End Class
