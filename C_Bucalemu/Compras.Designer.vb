@@ -104,7 +104,7 @@ Partial Class Compras
         nCantidad.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         nCantidad.Location = New Point(380, 96)
         nCantidad.Margin = New Padding(4, 5, 4, 5)
-        nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        nCantidad.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         nCantidad.Name = "nCantidad"
         nCantidad.Size = New Size(133, 25)
         nCantidad.TabIndex = 5

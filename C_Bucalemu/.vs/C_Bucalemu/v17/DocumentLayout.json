@@ -3,32 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\gestionarreportes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:gestionarreportes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\gestionarreportes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:gestionarreportes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\gestionarinventarioglobal.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:gestionarinventarioglobal.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\inventario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:inventario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:autorizar.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\inventario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
       "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:inventario.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\modificar_material.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:modificar_material.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\modificar_material.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:modificar_material.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|c:\\users\\juan\\desktop\\proyecto-constructora-bucalemu\\proyecto-c.bucalemu\\c_bucalemu\\compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{29786F35-7892-4C88-A314-F28F6AEB3CD0}|C_Bucalemu.vbproj|solutionrelative:compras.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,34 +34,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "GestionarReportes.vb",
-              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarReportes.vb",
-              "RelativeDocumentMoniker": "GestionarReportes.vb",
-              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarReportes.vb",
-              "RelativeToolTip": "GestionarReportes.vb",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCsAAABnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-06-17T01:06:59.201Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Autorizar.vb",
-              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
-              "RelativeDocumentMoniker": "Autorizar.vb",
-              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
-              "RelativeToolTip": "Autorizar.vb",
-              "ViewState": "AgIAANUAAAAAAAAAAAAowN0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-06-17T00:53:19.517Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -76,43 +46,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GestionarReportes.vb [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarReportes.vb",
-              "RelativeDocumentMoniker": "GestionarReportes.vb",
-              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarReportes.vb [Dise\u00F1o]",
-              "RelativeToolTip": "GestionarReportes.vb [Dise\u00F1o]",
+              "DocumentIndex": 5,
+              "Title": "Compras.vb",
+              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb",
+              "RelativeDocumentMoniker": "Compras.vb",
+              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb",
+              "RelativeToolTip": "Compras.vb",
+              "ViewState": "AgIAALEAAAAAAAAAAAAmwLoAAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-06-17T01:06:15.213Z",
+              "WhenOpened": "2025-06-17T01:17:38.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Compras.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb",
+              "RelativeDocumentMoniker": "Compras.vb",
+              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Compras.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Compras.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-17T01:17:19.67Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "GestionarInventarioGlobal.vb [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarInventarioGlobal.vb",
-              "RelativeDocumentMoniker": "GestionarInventarioGlobal.vb",
-              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\GestionarInventarioGlobal.vb [Dise\u00F1o]",
-              "RelativeToolTip": "GestionarInventarioGlobal.vb [Dise\u00F1o]",
+              "Title": "Modificar_material.vb",
+              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Modificar_material.vb",
+              "RelativeDocumentMoniker": "Modificar_material.vb",
+              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Modificar_material.vb",
+              "RelativeToolTip": "Modificar_material.vb",
+              "ViewState": "AgIAAHsBAAAAAAAAAAAcwIEBAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-06-17T01:05:44.825Z",
+              "WhenOpened": "2025-06-17T01:14:53.481Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Modificar_material.vb [Dise\u00F1o]",
+              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Modificar_material.vb",
+              "RelativeDocumentMoniker": "Modificar_material.vb",
+              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Modificar_material.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Modificar_material.vb [Dise\u00F1o]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-06-17T01:14:48.13Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Autorizar.vb [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb",
-              "RelativeDocumentMoniker": "Autorizar.vb",
-              "ToolTip": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Autorizar.vb [Dise\u00F1o]",
-              "RelativeToolTip": "Autorizar.vb [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2025-06-17T00:53:17.979Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Inventario.vb",
               "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Inventario.vb",
               "RelativeDocumentMoniker": "Inventario.vb",
@@ -125,7 +109,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Inventario.vb [Dise\u00F1o]",
               "DocumentMoniker": "C:\\Users\\Juan\\Desktop\\Proyecto-Constructora-Bucalemu\\Proyecto-C.Bucalemu\\C_Bucalemu\\Inventario.vb",
               "RelativeDocumentMoniker": "Inventario.vb",

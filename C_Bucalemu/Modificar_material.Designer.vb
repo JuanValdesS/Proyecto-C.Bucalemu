@@ -48,7 +48,7 @@ Partial Class mod_material
         btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnAgregar.ForeColor = SystemColors.ActiveCaptionText
-        btnAgregar.Location = New Point(72, 307)
+        btnAgregar.Location = New Point(72, 296)
         btnAgregar.Name = "btnAgregar"
         btnAgregar.Size = New Size(179, 42)
         btnAgregar.TabIndex = 0
@@ -61,10 +61,10 @@ Partial Class mod_material
         txtMaterial.BackColor = Color.AliceBlue
         txtMaterial.Cursor = Cursors.IBeam
         txtMaterial.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtMaterial.Location = New Point(72, 163)
+        txtMaterial.Location = New Point(32, 163)
         txtMaterial.Name = "txtMaterial"
         txtMaterial.PlaceholderText = "Nombre del material"
-        txtMaterial.Size = New Size(179, 22)
+        txtMaterial.Size = New Size(243, 22)
         txtMaterial.TabIndex = 1
         ToolTip1.SetToolTip(txtMaterial, "Ingrese nombre del material. Ej: Cemento")
         ' 
@@ -74,7 +74,7 @@ Partial Class mod_material
         Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.ForeColor = SystemColors.ActiveCaptionText
-        Label1.Location = New Point(72, 94)
+        Label1.Location = New Point(88, 94)
         Label1.Name = "Label1"
         Label1.Size = New Size(139, 20)
         Label1.TabIndex = 3
@@ -86,7 +86,7 @@ Partial Class mod_material
         Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label2.ForeColor = SystemColors.ActiveCaptionText
-        Label2.Location = New Point(72, 236)
+        Label2.Location = New Point(72, 225)
         Label2.Name = "Label2"
         Label2.Size = New Size(77, 20)
         Label2.TabIndex = 4
@@ -114,7 +114,7 @@ Partial Class mod_material
         btn_regresar.Cursor = Cursors.Hand
         btn_regresar.FlatStyle = FlatStyle.Popup
         btn_regresar.ImageAlign = ContentAlignment.BottomCenter
-        btn_regresar.Location = New Point(141, 458)
+        btn_regresar.Location = New Point(141, 447)
         btn_regresar.Name = "btn_regresar"
         btn_regresar.Size = New Size(57, 48)
         btn_regresar.TabIndex = 6
@@ -128,7 +128,7 @@ Partial Class mod_material
         Label3.BackColor = Color.CornflowerBlue
         Label3.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label3.ForeColor = SystemColors.ActiveCaptionText
-        Label3.Location = New Point(172, 236)
+        Label3.Location = New Point(172, 225)
         Label3.Name = "Label3"
         Label3.Size = New Size(79, 20)
         Label3.TabIndex = 7
@@ -140,7 +140,7 @@ Partial Class mod_material
         ComboBox1.Font = New Font("Arial", 7.8F)
         ComboBox1.FormattingEnabled = True
         ComboBox1.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha", "", ""})
-        ComboBox1.Location = New Point(172, 262)
+        ComboBox1.Location = New Point(172, 251)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(79, 24)
         ComboBox1.TabIndex = 8
@@ -151,9 +151,9 @@ Partial Class mod_material
         txtbox1.BackColor = Color.AliceBlue
         txtbox1.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtbox1.FormattingEnabled = True
-        txtbox1.Location = New Point(72, 133)
+        txtbox1.Location = New Point(32, 133)
         txtbox1.Name = "txtbox1"
-        txtbox1.Size = New Size(179, 24)
+        txtbox1.Size = New Size(243, 24)
         txtbox1.TabIndex = 9
         ToolTip1.SetToolTip(txtbox1, "Seleccione un material para añadir")
         ' 
@@ -163,7 +163,7 @@ Partial Class mod_material
         btn_retirar.Cursor = Cursors.Hand
         btn_retirar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btn_retirar.ForeColor = SystemColors.ActiveCaptionText
-        btn_retirar.Location = New Point(88, 383)
+        btn_retirar.Location = New Point(88, 372)
         btn_retirar.Name = "btn_retirar"
         btn_retirar.Size = New Size(146, 42)
         btn_retirar.TabIndex = 10
@@ -197,9 +197,9 @@ Partial Class mod_material
         nCantidad.DecimalPlaces = 2
         nCantidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         nCantidad.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        nCantidad.Location = New Point(72, 262)
+        nCantidad.Location = New Point(72, 251)
         nCantidad.Margin = New Padding(3, 4, 3, 4)
-        nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        nCantidad.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         nCantidad.Name = "nCantidad"
         nCantidad.Size = New Size(77, 25)
         nCantidad.TabIndex = 19

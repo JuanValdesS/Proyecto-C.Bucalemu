@@ -72,9 +72,9 @@ Partial Class GestionarInventarioGlobal
         nCantidad.DecimalPlaces = 2
         nCantidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         nCantidad.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        nCantidad.Location = New Point(85, 292)
+        nCantidad.Location = New Point(89, 282)
         nCantidad.Margin = New Padding(3, 4, 3, 4)
-        nCantidad.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        nCantidad.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         nCantidad.Name = "nCantidad"
         nCantidad.Size = New Size(77, 25)
         nCantidad.TabIndex = 32
@@ -85,7 +85,7 @@ Partial Class GestionarInventarioGlobal
         btn_retirar.Cursor = Cursors.Hand
         btn_retirar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btn_retirar.ForeColor = SystemColors.ActiveCaptionText
-        btn_retirar.Location = New Point(101, 413)
+        btn_retirar.Location = New Point(105, 403)
         btn_retirar.Name = "btn_retirar"
         btn_retirar.Size = New Size(146, 42)
         btn_retirar.TabIndex = 31
@@ -97,9 +97,9 @@ Partial Class GestionarInventarioGlobal
         txtbox1.BackColor = Color.AliceBlue
         txtbox1.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtbox1.FormattingEnabled = True
-        txtbox1.Location = New Point(85, 163)
+        txtbox1.Location = New Point(27, 163)
         txtbox1.Name = "txtbox1"
-        txtbox1.Size = New Size(179, 24)
+        txtbox1.Size = New Size(291, 24)
         txtbox1.TabIndex = 30
         ' 
         ' ComboBox1
@@ -108,7 +108,7 @@ Partial Class GestionarInventarioGlobal
         ComboBox1.Font = New Font("Arial", 7.8F)
         ComboBox1.FormattingEnabled = True
         ComboBox1.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha", "", ""})
-        ComboBox1.Location = New Point(185, 292)
+        ComboBox1.Location = New Point(189, 282)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(79, 24)
         ComboBox1.TabIndex = 29
@@ -119,7 +119,7 @@ Partial Class GestionarInventarioGlobal
         Label3.BackColor = Color.CornflowerBlue
         Label3.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label3.ForeColor = SystemColors.ActiveCaptionText
-        Label3.Location = New Point(185, 266)
+        Label3.Location = New Point(189, 256)
         Label3.Name = "Label3"
         Label3.Size = New Size(79, 20)
         Label3.TabIndex = 28
@@ -133,7 +133,7 @@ Partial Class GestionarInventarioGlobal
         btn_regresar.Cursor = Cursors.Hand
         btn_regresar.FlatStyle = FlatStyle.Popup
         btn_regresar.ImageAlign = ContentAlignment.BottomCenter
-        btn_regresar.Location = New Point(154, 488)
+        btn_regresar.Location = New Point(158, 478)
         btn_regresar.Name = "btn_regresar"
         btn_regresar.Size = New Size(57, 48)
         btn_regresar.TabIndex = 27
@@ -147,7 +147,7 @@ Partial Class GestionarInventarioGlobal
         Label2.BackColor = Color.CornflowerBlue
         Label2.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label2.ForeColor = SystemColors.ActiveCaptionText
-        Label2.Location = New Point(85, 266)
+        Label2.Location = New Point(89, 256)
         Label2.Name = "Label2"
         Label2.Size = New Size(77, 20)
         Label2.TabIndex = 26
@@ -159,7 +159,7 @@ Partial Class GestionarInventarioGlobal
         Label1.BackColor = Color.CornflowerBlue
         Label1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         Label1.ForeColor = SystemColors.ActiveCaptionText
-        Label1.Location = New Point(85, 124)
+        Label1.Location = New Point(105, 124)
         Label1.Name = "Label1"
         Label1.Size = New Size(139, 20)
         Label1.TabIndex = 25
@@ -170,10 +170,10 @@ Partial Class GestionarInventarioGlobal
         txtMaterial.BackColor = Color.AliceBlue
         txtMaterial.Cursor = Cursors.IBeam
         txtMaterial.Font = New Font("Arial", 7.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtMaterial.Location = New Point(85, 193)
+        txtMaterial.Location = New Point(27, 193)
         txtMaterial.Name = "txtMaterial"
         txtMaterial.PlaceholderText = "Nombre del material"
-        txtMaterial.Size = New Size(179, 22)
+        txtMaterial.Size = New Size(291, 22)
         txtMaterial.TabIndex = 24
         ' 
         ' btnAgregar
@@ -182,7 +182,7 @@ Partial Class GestionarInventarioGlobal
         btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
         btnAgregar.ForeColor = SystemColors.ActiveCaptionText
-        btnAgregar.Location = New Point(85, 337)
+        btnAgregar.Location = New Point(89, 327)
         btnAgregar.Name = "btnAgregar"
         btnAgregar.Size = New Size(179, 42)
         btnAgregar.TabIndex = 23

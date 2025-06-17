@@ -189,4 +189,5 @@ Public Class Compras
         ' Convertir el carácter presionado a mayúscula
         e.KeyChar = Char.ToUpper(e.KeyChar)
     End Sub
+
 End Class
