@@ -107,7 +107,7 @@ Partial Class GestionarInventarioGlobal
         ComboBox1.BackColor = Color.AliceBlue
         ComboBox1.Font = New Font("Arial", 7.8F)
         ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha", "", ""})
+        ComboBox1.Items.AddRange(New Object() {"UN", "MT", "ML", "M2", "M3", "GL", "KG", "TIRA", "ROLLO", "MALLA", "SACOS", "TINETA", "PIEZA", "PLANCHA"})
         ComboBox1.Location = New Point(189, 282)
         ComboBox1.Name = "ComboBox1"
         ComboBox1.Size = New Size(79, 24)

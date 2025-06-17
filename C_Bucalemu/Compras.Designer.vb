@@ -162,7 +162,7 @@ Partial Class Compras
         cbUnidad.BackColor = Color.AliceBlue
         cbUnidad.Font = New Font("Arial", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         cbUnidad.FormattingEnabled = True
-        cbUnidad.Items.AddRange(New Object() {"un", "mt", "ml", "m2", "m3", "gl", "kg", "tira", "rollo", "malla", "sacos", "tineta", "pieza", "plancha"})
+        cbUnidad.Items.AddRange(New Object() {"UN", "MT", "ML", "M2", "M3", "GL", "KG", "TIRA", "ROLLO", "MALLA", "SACOS", "TINETA", "PIEZA", "PLANCHA"})
         cbUnidad.Location = New Point(231, 96)
         cbUnidad.Margin = New Padding(3, 2, 3, 2)
         cbUnidad.Name = "cbUnidad"

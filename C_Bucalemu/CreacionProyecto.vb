@@ -44,6 +44,12 @@ Public Class CreacionProyecto
             Return
         End If
 
+        ' Validar que haya al menos un usuario agregado al proyecto
+        If dg_personal.Rows.Count = 0 Then
+            MessageBox.Show("Debe agregar al menos un usuario al proyecto.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         ' Verificar si ya existe el proyecto
         Dim proyectosResponse = client.Get("Proyectos")
         Dim proyectosExistentes = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(proyectosResponse.Body)

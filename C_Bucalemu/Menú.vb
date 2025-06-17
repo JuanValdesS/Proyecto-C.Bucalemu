@@ -79,7 +79,6 @@ Public Class Menú
             btn_reportes.Enabled = True
             btnVerInventario.Enabled = True
             btn_cubicacion.Enabled = True
-            btn_finalizar.Visible = True
         End If
 
         If rolUsuario = "Encargado de compras" Then
