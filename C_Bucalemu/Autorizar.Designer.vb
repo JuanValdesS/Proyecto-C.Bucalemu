@@ -36,7 +36,7 @@ Partial Class Autorizar
         btnAceptar.BackColor = Color.CornflowerBlue
         btnAceptar.Cursor = Cursors.Hand
         btnAceptar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnAceptar.Location = New Point(759, 77)
+        btnAceptar.Location = New Point(1099, 77)
         btnAceptar.Margin = New Padding(3, 4, 3, 4)
         btnAceptar.Name = "btnAceptar"
         btnAceptar.Size = New Size(97, 31)
@@ -49,7 +49,7 @@ Partial Class Autorizar
         btnRechazar.BackColor = Color.IndianRed
         btnRechazar.Cursor = Cursors.Hand
         btnRechazar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnRechazar.Location = New Point(759, 116)
+        btnRechazar.Location = New Point(1099, 116)
         btnRechazar.Margin = New Padding(3, 4, 3, 4)
         btnRechazar.Name = "btnRechazar"
         btnRechazar.Size = New Size(97, 31)
@@ -65,7 +65,7 @@ Partial Class Autorizar
         btnMenu.Cursor = Cursors.Hand
         btnMenu.FlatStyle = FlatStyle.Popup
         btnMenu.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
-        btnMenu.Location = New Point(776, 165)
+        btnMenu.Location = New Point(1116, 165)
         btnMenu.Margin = New Padding(3, 4, 3, 4)
         btnMenu.Name = "btnMenu"
         btnMenu.Size = New Size(68, 51)
@@ -80,7 +80,7 @@ Partial Class Autorizar
         dgAutorizar.Margin = New Padding(3, 4, 3, 4)
         dgAutorizar.Name = "dgAutorizar"
         dgAutorizar.RowHeadersWidth = 51
-        dgAutorizar.Size = New Size(678, 465)
+        dgAutorizar.Size = New Size(1020, 802)
         dgAutorizar.TabIndex = 4
         ' 
         ' Label1
@@ -102,7 +102,7 @@ Partial Class Autorizar
         BackColor = Color.AliceBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(906, 600)
+        ClientSize = New Size(1238, 923)
         Controls.Add(Label1)
         Controls.Add(dgAutorizar)
         Controls.Add(btnMenu)

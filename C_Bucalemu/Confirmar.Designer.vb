@@ -51,7 +51,7 @@ Partial Class Confirmar
         dgvConfirmar.Margin = New Padding(3, 4, 3, 4)
         dgvConfirmar.Name = "dgvConfirmar"
         dgvConfirmar.RowHeadersWidth = 51
-        dgvConfirmar.Size = New Size(735, 583)
+        dgvConfirmar.Size = New Size(1042, 787)
         dgvConfirmar.TabIndex = 1
         ' 
         ' btnConfirmar
@@ -60,7 +60,7 @@ Partial Class Confirmar
         btnConfirmar.Cursor = Cursors.Hand
         btnConfirmar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnConfirmar.ForeColor = Color.Black
-        btnConfirmar.Location = New Point(802, 88)
+        btnConfirmar.Location = New Point(1098, 88)
         btnConfirmar.Margin = New Padding(3, 4, 3, 4)
         btnConfirmar.Name = "btnConfirmar"
         btnConfirmar.Size = New Size(111, 41)
@@ -73,7 +73,7 @@ Partial Class Confirmar
         btnEliminar.BackColor = Color.IndianRed
         btnEliminar.Cursor = Cursors.Hand
         btnEliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEliminar.Location = New Point(802, 137)
+        btnEliminar.Location = New Point(1098, 137)
         btnEliminar.Margin = New Padding(3, 4, 3, 4)
         btnEliminar.Name = "btnEliminar"
         btnEliminar.Size = New Size(111, 41)
@@ -90,7 +90,7 @@ Partial Class Confirmar
         btnRegresar.FlatStyle = FlatStyle.Popup
         btnRegresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnRegresar.ForeColor = Color.Black
-        btnRegresar.Location = New Point(821, 193)
+        btnRegresar.Location = New Point(1117, 193)
         btnRegresar.Margin = New Padding(3, 4, 3, 4)
         btnRegresar.Name = "btnRegresar"
         btnRegresar.Size = New Size(67, 47)
@@ -105,7 +105,7 @@ Partial Class Confirmar
         BackColor = Color.CornflowerBlue
         BackgroundImage = My.Resources.Resources.Blur_background_of_modern_office_interior_design_for_creative_business___Premium_AI_generated_image
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(961, 710)
+        ClientSize = New Size(1238, 923)
         Controls.Add(btnRegresar)
         Controls.Add(btnEliminar)
         Controls.Add(btnConfirmar)
