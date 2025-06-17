@@ -241,7 +241,9 @@ Partial Class mod_material
         Controls.Add(btnAgregar)
         Font = New Font("Segoe UI Symbol", 7.8F)
         ForeColor = SystemColors.ActiveCaptionText
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "mod_material"
         Text = "Gestionar Inventario"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()

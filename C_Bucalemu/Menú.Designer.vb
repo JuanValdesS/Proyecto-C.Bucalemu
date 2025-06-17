@@ -185,7 +185,9 @@ Partial Class Menú
         Controls.Add(btn_inventario)
         Controls.Add(btn_cubicacion)
         Controls.Add(btn_Compras)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "Menú"
         Text = "Menú"
         ResumeLayout(False)

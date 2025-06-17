@@ -111,8 +111,10 @@ Partial Class Confirmar
         Controls.Add(btnConfirmar)
         Controls.Add(dgvConfirmar)
         Controls.Add(Label1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 4, 3, 4)
+        MaximizeBox = False
         Name = "Confirmar"
         Text = "Confirmar"
         CType(dgvConfirmar, ComponentModel.ISupportInitialize).EndInit()

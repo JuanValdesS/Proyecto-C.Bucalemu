@@ -107,6 +107,8 @@ Public Class Reportes
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cerrarTodo = False
+
         Dim sh As New Menú()
         Me.Close()
         sh.Show()
@@ -114,8 +116,16 @@ Public Class Reportes
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btn_greportes.Click
+        cerrarTodo = False
+
         Dim sh As New GestionarReportes()
         Me.Close()
         sh.Show()
+    End Sub
+
+    Private Sub Reportes_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
     End Sub
 End Class

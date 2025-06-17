@@ -133,8 +133,10 @@ Partial Class Login
         Controls.Add(Label2)
         Controls.Add(Label1)
         Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold Or FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 2, 3, 2)
+        MaximizeBox = False
         Name = "Login"
         Text = "Inicio de Sesión"
         ResumeLayout(False)

@@ -199,9 +199,15 @@ Public Class Cubicacion
         client = New FireSharp.FirebaseClient(fcon)
     End Sub
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
+        cerrarTodo = False
         Dim menu As New Menú
         Close()
         menu.Show()
     End Sub
 
+    Private Sub Cubicacion_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

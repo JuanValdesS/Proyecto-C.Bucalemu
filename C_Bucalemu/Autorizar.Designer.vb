@@ -109,8 +109,10 @@ Partial Class Autorizar
         Controls.Add(btnRechazar)
         Controls.Add(btnAceptar)
         Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 4, 3, 4)
+        MaximizeBox = False
         Name = "Autorizar"
         Text = "Autorizar"
         CType(dgAutorizar, ComponentModel.ISupportInitialize).EndInit()

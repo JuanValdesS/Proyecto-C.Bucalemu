@@ -221,8 +221,10 @@ Partial Class Compras
         Controls.Add(btnEliminar)
         Controls.Add(btnAgregar)
         Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 2, 3, 2)
+        MaximizeBox = False
         Name = "Compras"
         Text = "Compras"
         CType(nCantidad, ComponentModel.ISupportInitialize).EndInit()

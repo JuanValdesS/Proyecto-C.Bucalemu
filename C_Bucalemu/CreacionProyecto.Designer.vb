@@ -210,7 +210,9 @@ Partial Class CreacionProyecto
         Controls.Add(Label2)
         Controls.Add(txt_nombre)
         Controls.Add(Label1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "CreacionProyecto"
         Text = "CreacionProyecto"
         CType(dg_personal, ComponentModel.ISupportInitialize).EndInit()

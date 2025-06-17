@@ -144,4 +144,9 @@ Public Class Login
         End With
     End Sub
 
+    Private Sub Login_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

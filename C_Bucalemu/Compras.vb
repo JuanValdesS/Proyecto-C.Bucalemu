@@ -107,6 +107,7 @@ Public Class Compras
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cerrarTodo = False
         Menú.Show()
         Me.Close()
     End Sub
@@ -190,4 +191,9 @@ Public Class Compras
         e.KeyChar = Char.ToUpper(e.KeyChar)
     End Sub
 
+    Private Sub Compras_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

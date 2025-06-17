@@ -39,7 +39,7 @@ Partial Class Registro
         btn_registro.BackColor = Color.Moccasin
         btn_registro.Cursor = Cursors.Hand
         btn_registro.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_registro.Location = New Point(202, 367)
+        btn_registro.Location = New Point(256, 379)
         btn_registro.Name = "btn_registro"
         btn_registro.Size = New Size(86, 61)
         btn_registro.TabIndex = 0
@@ -114,14 +114,16 @@ Partial Class Registro
         ' 
         ' regresar
         ' 
-        regresar.BackColor = Color.Moccasin
+        regresar.BackColor = Color.Transparent
+        regresar.BackgroundImage = CType(resources.GetObject("regresar.BackgroundImage"), Image)
+        regresar.BackgroundImageLayout = ImageLayout.Stretch
         regresar.Cursor = Cursors.Hand
+        regresar.FlatStyle = FlatStyle.Popup
         regresar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        regresar.Location = New Point(306, 367)
+        regresar.Location = New Point(267, 446)
         regresar.Name = "regresar"
-        regresar.Size = New Size(94, 61)
+        regresar.Size = New Size(64, 50)
         regresar.TabIndex = 7
-        regresar.Text = "Regresar"
         regresar.UseVisualStyleBackColor = False
         ' 
         ' Label1
@@ -142,7 +144,7 @@ Partial Class Registro
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(604, 450)
+        ClientSize = New Size(604, 519)
         Controls.Add(Label1)
         Controls.Add(regresar)
         Controls.Add(visualizarpass)
@@ -152,7 +154,9 @@ Partial Class Registro
         Controls.Add(txtPassword)
         Controls.Add(txtEmail)
         Controls.Add(btn_registro)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "Registro"
         Text = "Registro"
         ResumeLayout(False)

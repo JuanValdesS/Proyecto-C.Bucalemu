@@ -360,6 +360,8 @@ Public Class mod_material
     End Sub
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
+        cerrarTodo = False
+
         Dim men As New Menú()
         Me.Close()
         men.Show()
@@ -374,6 +376,8 @@ Public Class mod_material
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cerrarTodo = False
+
         Dim inven As New Inventario()
 
         inven.Show()
@@ -383,5 +387,11 @@ Public Class mod_material
     Private Sub ComboBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles ComboBox1.KeyPress
         ' Convertir el carácter presionado a mayúscula
         e.KeyChar = Char.ToUpper(e.KeyChar)
+    End Sub
+
+    Private Sub mod_material_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
     End Sub
 End Class

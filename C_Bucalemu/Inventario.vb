@@ -159,12 +159,15 @@ Public Class Inventario
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        cerrarTodo = False
         Dim men As New Menú()
         men.Show()
         Me.Close()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        cerrarTodo = False
+
         Dim gestinven As New mod_material
 
         gestinven.Show()
@@ -430,5 +433,12 @@ Public Class Inventario
 
     Private Sub btn_consultar_Click(sender As Object, e As EventArgs) Handles btn_consultar.Click
         VerificarMaterialesBajoStockD()
+    End Sub
+
+    Private Sub Inventario_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+
     End Sub
 End Class

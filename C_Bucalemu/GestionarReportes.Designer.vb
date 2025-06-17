@@ -103,7 +103,9 @@ Partial Class GestionarReportes
         Controls.Add(btn_reporte)
         Controls.Add(Label1)
         Controls.Add(data_repo)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "GestionarReportes"
         Text = "GestionarReportes"
         CType(data_repo, ComponentModel.ISupportInitialize).EndInit()

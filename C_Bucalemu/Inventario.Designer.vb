@@ -161,8 +161,10 @@ Partial Class Inventario
         Controls.Add(Button1)
         Controls.Add(DataGridView1)
         Controls.Add(Prueba)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 4, 3, 4)
+        MaximizeBox = False
         Name = "Inventario"
         Text = "Inventario"
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()

@@ -18,6 +18,8 @@ Public Class Menú
 
     Private client As FireSharp.Interfaces.IFirebaseClient
     Private Sub btn_Compras_Click(sender As Object, e As EventArgs) Handles btn_Compras.Click
+        cerrarTodo = False
+
         compra.Show()
         Me.Close()
     End Sub
@@ -102,24 +104,24 @@ Public Class Menú
     End Sub
 
     Private Sub btn_logout_Click(sender As Object, e As EventArgs) Handles btn_logout.Click
-        Dim sh As New Login()
-        ' Mostrar cuadro de mensaje con opciones Sí y No
-        Dim resultado As DialogResult = MessageBox.Show("¿Estás seguro de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        cerrarTodo = False
+        Dim sh As New Proyectos()
+        Me.Close()
+        sh.Show()
 
-        ' Si el usuario selecciona "Sí", proceder a redirigir al login
-        If resultado = DialogResult.Yes Then
-            Me.Close() ' Oculta el formulario actual
-            sh.Show() ' Muestra el formulario de login
-        End If
     End Sub
 
     Private Sub btnVerInventario_Click(sender As Object, e As EventArgs) Handles btnVerInventario.Click
+        cerrarTodo = False
+
         VerInventario.Show()
         Me.Close()
 
     End Sub
 
     Private Sub btnAutorizar_Click(sender As Object, e As EventArgs) Handles btnAutorizar.Click
+        cerrarTodo = False
+
         Autorizar.Show()
         Me.Close()
     End Sub
@@ -182,6 +184,8 @@ Public Class Menú
                 MessageBox.Show("Proyecto finalizado correctamente. El inventario fue transferido al Inventario Global.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 Dim pro As New Proyectos()
+                cerrarTodo = False
+
                 Me.Close()
                 pro.Show()
 
@@ -193,8 +197,16 @@ Public Class Menú
     End Sub
 
     Private Sub btn_confirmar_Click(sender As Object, e As EventArgs) Handles btn_confirmar.Click
+        cerrarTodo = False
+
         Dim Confirmar As New Confirmar()
         Confirmar.Show()
         Me.Close()
+    End Sub
+
+    Private Sub Menú_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
     End Sub
 End Class

@@ -130,8 +130,10 @@ Partial Class Cubicacion
         Controls.Add(btnCargarArchivo)
         Controls.Add(btn_regresar)
         Font = New Font("Arial", 7.8F)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 2, 3, 2)
+        MaximizeBox = False
         Name = "Cubicacion"
         Text = "Cubicacion"
         CType(dgvMateriales, ComponentModel.ISupportInitialize).EndInit()

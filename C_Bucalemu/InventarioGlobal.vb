@@ -143,6 +143,7 @@ Public Class InventarioGlobal
     End Sub
 
     Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
+        cerrarTodo = False
         Dim proyecto As New Proyectos()
 
         Me.Close()
@@ -263,8 +264,17 @@ Public Class InventarioGlobal
     End Sub
 
     Private Sub btnGestionar_Click(sender As Object, e As EventArgs) Handles btnGestionar.Click
+        cerrarTodo = False
+
         Dim ges As New GestionarInventarioGlobal()
         Me.Hide()
         ges.Show()
+    End Sub
+
+    Private Sub InventarioGlobal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+
     End Sub
 End Class

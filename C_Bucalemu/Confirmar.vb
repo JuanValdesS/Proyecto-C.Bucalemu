@@ -246,6 +246,7 @@ Public Class Confirmar
     End Sub
 
     Private Sub btnRegresar_Click(sender As Object, e As EventArgs) Handles btnRegresar.Click
+        cerrarTodo = False
         Dim men As New Menú()
         Me.Close()
         men.Show()
@@ -283,5 +284,11 @@ Public Class Confirmar
             .RowHeadersVisible = False
             .SelectionMode = DataGridViewSelectionMode.FullRowSelect
         End With
+    End Sub
+
+    Private Sub Confirmar_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+        Application.Exit()
+    End If
     End Sub
 End Class

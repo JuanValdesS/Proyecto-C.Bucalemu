@@ -116,7 +116,9 @@ Partial Class Reportes
         Controls.Add(Button1)
         Controls.Add(txtObservacion)
         Controls.Add(btn_reporte)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        MaximizeBox = False
         Name = "Reportes"
         Text = "Reportes"
         ResumeLayout(False)

@@ -340,8 +340,16 @@ Public Class GestionarInventarioGlobal
     End Sub
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
+        cerrarTodo = False
+
         Dim invglo As New InventarioGlobal()
         Me.Close()
         invglo.Show()
+    End Sub
+
+    Private Sub GestionarInventarioGlobal_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
     End Sub
 End Class

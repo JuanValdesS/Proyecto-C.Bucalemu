@@ -117,6 +117,8 @@ Public Class GestionarReportes
         End With
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        cerrarTodo = False
+
         Dim sh As New Menú()
         Me.Close()
         sh.Show()
@@ -193,5 +195,12 @@ Public Class GestionarReportes
         Catch ex As Exception
             MsgBox("Error al eliminar el reporte: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
+    End Sub
+
+    Private Sub GestionarReportes_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+
     End Sub
 End Class

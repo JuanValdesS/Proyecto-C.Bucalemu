@@ -32,6 +32,8 @@ Public Class Proyectos
 
         ' Crear el formulario Menú, pasándole el proyecto
         If VerificarAccesoProyecto() Then
+            cerrarTodo = False
+
             Dim men As New Menú
             Me.Close()
             men.Show()
@@ -42,6 +44,8 @@ Public Class Proyectos
     End Sub
 
     Private Sub btn_crear_Click(sender As Object, e As EventArgs) Handles btn_crear.Click
+        cerrarTodo = False
+
         Dim crea As New CreacionProyecto()
 
         Me.Close()
@@ -228,6 +232,8 @@ Public Class Proyectos
 
 
     Private Sub btnInventario_Click(sender As Object, e As EventArgs) Handles btnInventario.Click
+        cerrarTodo = False
+
         Dim Inventario As New InventarioGlobal()
 
         Me.Close()
@@ -235,6 +241,8 @@ Public Class Proyectos
     End Sub
 
     Private Sub btnGestionarInventario_Click(sender As Object, e As EventArgs) Handles btnGestionarInventario.Click
+        cerrarTodo = False
+
         Dim Modificar_material As New GestionarInventarioGlobal()
         Me.Close()
         Modificar_material.Show()
@@ -269,6 +277,8 @@ Public Class Proyectos
     End Sub
 
     Private Sub btn_logout_Click(sender As Object, e As EventArgs) Handles btn_logout.Click
+        cerrarTodo = False
+
         Dim sh As New Login()
         ' Mostrar cuadro de mensaje con opciones Sí y No
         Dim resultado As DialogResult = MessageBox.Show("¿Estás seguro de que deseas cerrar sesión?", "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
@@ -281,11 +291,17 @@ Public Class Proyectos
     End Sub
 
     Private Sub btn_registro_Click(sender As Object, e As EventArgs) Handles btn_registro.Click
+        cerrarTodo = False
+
         Dim registro As New Registro()
 
         registro.Show()
         Me.Close()
     End Sub
 
-
+    Private Sub Proyectos_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

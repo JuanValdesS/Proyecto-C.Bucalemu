@@ -8,6 +8,7 @@ Public Class CreacionProyecto
     Dim client As IFirebaseClient
 
     Private Sub btn_regresar_Click(sender As Object, e As EventArgs) Handles btn_regresar.Click
+        cerrarTodo = False
         Dim Log As New Proyectos()
 
         Me.Close()
@@ -284,4 +285,9 @@ Public Class CreacionProyecto
         End If
     End Sub
 
+    Private Sub CreacionProyecto_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
+    End Sub
 End Class

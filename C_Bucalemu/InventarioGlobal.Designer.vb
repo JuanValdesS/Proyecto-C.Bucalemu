@@ -145,8 +145,10 @@ Partial Class InventarioGlobal
         Controls.Add(btnTotal)
         Controls.Add(btnRestablecer)
         Controls.Add(btnGestionar)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Margin = New Padding(3, 4, 3, 4)
+        MaximizeBox = False
         Name = "InventarioGlobal"
         Text = "InventarioGlobal"
         CType(dgvInventario, ComponentModel.ISupportInitialize).EndInit()

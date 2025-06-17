@@ -3,6 +3,7 @@ Imports Newtonsoft.Json.Linq
 Imports System.Net
 Imports System.Diagnostics.Eventing.Reader
 Imports System.Drawing
+Imports System.ComponentModel
 
 
 Public Class Autorizar
@@ -14,6 +15,7 @@ Public Class Autorizar
 
 
     Private Sub btnMenu_Cdjlick(sender As Object, e As EventArgs) Handles btnMenu.Click
+        cerrarTodo = False
         Menú.Show()
         Me.Close()
 
@@ -258,5 +260,11 @@ Public Class Autorizar
         Catch ex As Exception
             MsgBox("Error al obtener los datos: " & ex.Message, MsgBoxStyle.Critical, "Error")
         End Try
+    End Sub
+
+    Private Sub Autorizar_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If cerrarTodo AndAlso e.CloseReason = CloseReason.UserClosing Then
+            Application.Exit()
+        End If
     End Sub
 End Class
