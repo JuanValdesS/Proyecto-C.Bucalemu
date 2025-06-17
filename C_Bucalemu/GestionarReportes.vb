@@ -39,6 +39,10 @@ Public Class GestionarReportes
                     data_repo.Columns.Add("Reporte", "Descripción del reporte")
                     data_repo.Columns.Add("Estado", "Estado")
 
+                    data_repo.Columns("ID").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    data_repo.Columns("Titulo del reporte").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+                    data_repo.Columns("Reporte").AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells
+
                     ' Ocultar la columna del ID real
                     data_repo.Columns("FirebaseID").Visible = False
                 End If
@@ -97,7 +101,7 @@ Public Class GestionarReportes
             .DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
             ' Ajustar tamaño de columnas automáticamente
-            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells
+            .AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
             ' Deshabilitar la edición de celdas
             .ReadOnly = True

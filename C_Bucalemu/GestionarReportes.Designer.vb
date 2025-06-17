@@ -38,7 +38,7 @@ Partial Class GestionarReportes
         data_repo.Location = New Point(55, 79)
         data_repo.Name = "data_repo"
         data_repo.RowHeadersWidth = 51
-        data_repo.Size = New Size(505, 294)
+        data_repo.Size = New Size(696, 435)
         data_repo.TabIndex = 3
         ' 
         ' Label1
@@ -58,7 +58,7 @@ Partial Class GestionarReportes
         btn_reporte.BackColor = Color.CornflowerBlue
         btn_reporte.Cursor = Cursors.Hand
         btn_reporte.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_reporte.Location = New Point(601, 79)
+        btn_reporte.Location = New Point(789, 79)
         btn_reporte.Name = "btn_reporte"
         btn_reporte.Size = New Size(159, 47)
         btn_reporte.TabIndex = 6
@@ -70,7 +70,7 @@ Partial Class GestionarReportes
         btn_eliminar.BackColor = Color.IndianRed
         btn_eliminar.Cursor = Cursors.Hand
         btn_eliminar.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn_eliminar.Location = New Point(601, 132)
+        btn_eliminar.Location = New Point(789, 132)
         btn_eliminar.Name = "btn_eliminar"
         btn_eliminar.Size = New Size(159, 47)
         btn_eliminar.TabIndex = 7
@@ -84,7 +84,7 @@ Partial Class GestionarReportes
         Button2.BackgroundImageLayout = ImageLayout.Stretch
         Button2.Cursor = Cursors.Hand
         Button2.FlatStyle = FlatStyle.Popup
-        Button2.Location = New Point(638, 185)
+        Button2.Location = New Point(826, 185)
         Button2.Name = "Button2"
         Button2.Size = New Size(74, 51)
         Button2.TabIndex = 8
@@ -97,7 +97,7 @@ Partial Class GestionarReportes
         BackColor = Color.CornflowerBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(1000, 565)
         Controls.Add(Button2)
         Controls.Add(btn_eliminar)
         Controls.Add(btn_reporte)

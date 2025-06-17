@@ -63,7 +63,7 @@ Partial Class GestionarInventarioGlobal
         dgvInventario.Name = "dgvInventario"
         dgvInventario.ReadOnly = True
         dgvInventario.RowHeadersWidth = 51
-        dgvInventario.Size = New Size(914, 445)
+        dgvInventario.Size = New Size(952, 635)
         dgvInventario.TabIndex = 22
         ' 
         ' nCantidad
@@ -195,7 +195,7 @@ Partial Class GestionarInventarioGlobal
         AutoScaleMode = AutoScaleMode.Font
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(1330, 600)
+        ClientSize = New Size(1345, 802)
         Controls.Add(nCantidad)
         Controls.Add(btn_retirar)
         Controls.Add(txtbox1)

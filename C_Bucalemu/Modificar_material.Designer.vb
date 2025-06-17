@@ -103,7 +103,7 @@ Partial Class mod_material
         DataGridView1.Name = "DataGridView1"
         DataGridView1.ReadOnly = True
         DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(699, 445)
+        DataGridView1.Size = New Size(968, 590)
         DataGridView1.TabIndex = 5
         ' 
         ' btn_regresar
@@ -176,7 +176,7 @@ Partial Class mod_material
         Button1.BackColor = Color.CornflowerBlue
         Button1.Cursor = Cursors.Hand
         Button1.Font = New Font("Segoe UI Symbol", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Button1.Location = New Point(539, 557)
+        Button1.Location = New Point(678, 709)
         Button1.Name = "Button1"
         Button1.Size = New Size(291, 45)
         Button1.TabIndex = 11
@@ -212,7 +212,7 @@ Partial Class mod_material
         Prueba.FlatStyle = FlatStyle.Flat
         Prueba.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Prueba.ForeColor = SystemColors.HighlightText
-        Prueba.Location = New Point(469, 41)
+        Prueba.Location = New Point(613, 42)
         Prueba.Name = "Prueba"
         Prueba.Size = New Size(385, 35)
         Prueba.TabIndex = 20
@@ -225,7 +225,7 @@ Partial Class mod_material
         BackColor = Color.LightSteelBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(1076, 641)
+        ClientSize = New Size(1345, 802)
         Controls.Add(Prueba)
         Controls.Add(nCantidad)
         Controls.Add(Button1)

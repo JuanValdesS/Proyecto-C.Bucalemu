@@ -42,7 +42,7 @@ Partial Class Inventario
         Prueba.FlatStyle = FlatStyle.Flat
         Prueba.Font = New Font("Arial", 18F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Prueba.ForeColor = SystemColors.HighlightText
-        Prueba.Location = New Point(577, 45)
+        Prueba.Location = New Point(653, 45)
         Prueba.Name = "Prueba"
         Prueba.Size = New Size(385, 35)
         Prueba.TabIndex = 2
@@ -55,7 +55,7 @@ Partial Class Inventario
         DataGridView1.Location = New Point(379, 95)
         DataGridView1.Name = "DataGridView1"
         DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(764, 571)
+        DataGridView1.Size = New Size(910, 650)
         DataGridView1.TabIndex = 3
         ' 
         ' Button1
@@ -151,7 +151,7 @@ Partial Class Inventario
         BackColor = Color.CornflowerBlue
         BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), Image)
         BackgroundImageLayout = ImageLayout.Stretch
-        ClientSize = New Size(1192, 740)
+        ClientSize = New Size(1345, 802)
         Controls.Add(btn_consultar)
         Controls.Add(Label1)
         Controls.Add(txt_buscar)
